@@ -22,7 +22,7 @@ jobs:
         build_configuration: production
         base_href: /PalworldDataViewer/
         deploy_branch: gh-pages
-        angular_dist_build_folder: dist/palworld-data-viewer
+        angular_dist_build_folder: dist/palworld-data-viewer/browser
 
 permissions:
   contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.
