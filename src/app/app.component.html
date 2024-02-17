@@ -2,18 +2,24 @@
   <header class="text-bg-dark mb-5">
     <div class="container">
       <div class="d-flex align-items-center">
-        <div class="py-3 px-4 position-relative">
+        <div class="px-4 position-relative">
+          <img
+            class="object-fit-contain"
+            ngSrc="/assets/img/logo_white.png"
+            alt="Logo"
+            width="48"
+            height="48"
+            priority
+          />
+
           <a
             class="stretched-link fw-bold font-monospace fs-4 text-white text-decoration-none"
             routerLink="/home"
           >
-            PWC
           </a>
         </div>
 
-        <div class="vr"></div>
-
-        <ul class="nav nav-underline ps-5">
+        <ul class="nav nav-underline px-5">
           <ng-container
             [ngTemplateOutlet]="menuItem"
             [ngTemplateOutletContext]="{ name: 'Home', url: '/home' }"

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 
 @Component({
@@ -12,6 +12,7 @@ import { SharedModule } from './shared/shared.module';
     AsyncPipe,
     RouterLink,
     RouterLinkActive,
+    NgOptimizedImage,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
