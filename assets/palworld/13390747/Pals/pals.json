@@ -1,0 +1,781 @@
+{
+  "BlackGriffon": {
+    "icon": "BlackGriffon\\BlackGriffon.png",
+    "main": "BlackGriffon\\BlackGriffon.json",
+    "boss": "BlackGriffon\\BOSS_BlackGriffon.json",
+    "gym": "BlackGriffon\\GYM_BlackGriffon.json"
+  },
+  "ElecPanda": {
+    "icon": "ElecPanda\\ElecPanda.png",
+    "main": "ElecPanda\\ElecPanda.json",
+    "boss": "ElecPanda\\BOSS_ElecPanda.json",
+    "gym": "ElecPanda\\GYM_ElecPanda.json"
+  },
+  "Horus": {
+    "icon": "Horus\\Horus.png",
+    "main": "Horus\\Horus.json",
+    "boss": "Horus\\BOSS_Horus.json",
+    "gym": "Horus\\GYM_Horus.json"
+  },
+  "LilyQueen": {
+    "icon": "LilyQueen\\LilyQueen.png",
+    "main": "LilyQueen\\LilyQueen.json",
+    "boss": "LilyQueen\\BOSS_LilyQueen.json",
+    "gym": "LilyQueen\\GYM_LilyQueen.json"
+  },
+  "ThunderDragonMan": {
+    "icon": "ThunderDragonMan\\ThunderDragonMan.png",
+    "main": "ThunderDragonMan\\ThunderDragonMan.json",
+    "boss": "ThunderDragonMan\\BOSS_ThunderDragonMan.json",
+    "gym": "ThunderDragonMan\\GYM_ThunderDragonMan.json"
+  },
+  "BadCatgirl": {
+    "icon": "BadCatgirl\\BadCatgirl.png",
+    "main": "BadCatgirl\\BadCatgirl.json",
+    "boss": "BadCatgirl\\BOSS_BadCatgirl.json"
+  },
+  "BlueberryFairy": {
+    "icon": "BlueberryFairy\\BlueberryFairy.png",
+    "main": "BlueberryFairy\\BlueberryFairy.json",
+    "boss": "BlueberryFairy\\BOSS_BlueberryFairy.json"
+  },
+  "Alpaca": {
+    "icon": "Alpaca\\Alpaca.png",
+    "main": "Alpaca\\Alpaca.json",
+    "boss": "Alpaca\\BOSS_Alpaca.json"
+  },
+  "AmaterasuWolf": {
+    "icon": "AmaterasuWolf\\AmaterasuWolf.png",
+    "main": "AmaterasuWolf\\AmaterasuWolf.json",
+    "boss": "AmaterasuWolf\\BOSS_AmaterasuWolf.json"
+  },
+  "Anubis": {
+    "icon": "Anubis\\Anubis.png",
+    "main": "Anubis\\Anubis.json",
+    "boss": "Anubis\\Boss_Anubis.json"
+  },
+  "Baphomet": {
+    "icon": "Baphomet\\Baphomet.png",
+    "main": "Baphomet\\Baphomet.json",
+    "boss": "Baphomet\\BOSS_Baphomet.json"
+  },
+  "Baphomet_Dark": {
+    "icon": "Baphomet_Dark\\Baphomet_Dark.png",
+    "main": "Baphomet_Dark\\Baphomet_Dark.json",
+    "boss": "Baphomet_Dark\\BOSS_Baphomet_Dark.json"
+  },
+  "Bastet": {
+    "icon": "Bastet\\Bastet.png",
+    "main": "Bastet\\Bastet.json",
+    "boss": "Bastet\\BOSS_Bastet.json"
+  },
+  "Bastet_Ice": {
+    "icon": "Bastet_Ice\\Bastet_Ice.png",
+    "main": "Bastet_Ice\\Bastet_Ice.json",
+    "boss": "Bastet_Ice\\BOSS_Bastet_Ice.json"
+  },
+  "BeardedDragon": {
+    "icon": "BeardedDragon\\BeardedDragon.png",
+    "main": "BeardedDragon\\BeardedDragon.json",
+    "boss": "BeardedDragon\\BOSS_BeardedDragon.json"
+  },
+  "BerryGoat": {
+    "icon": "BerryGoat\\BerryGoat.png",
+    "main": "BerryGoat\\BerryGoat.json",
+    "boss": "BerryGoat\\BOSS_BerryGoat.json"
+  },
+  "BirdDragon": {
+    "icon": "BirdDragon\\BirdDragon.png",
+    "main": "BirdDragon\\BirdDragon.json",
+    "boss": "BirdDragon\\BOSS_BirdDragon.json"
+  },
+  "BirdDragon_Ice": {
+    "icon": "BirdDragon_Ice\\BirdDragon_Ice.png",
+    "main": "BirdDragon_Ice\\BirdDragon_Ice.json",
+    "boss": "BirdDragon_Ice\\BOSS_BirdDragon_Ice.json"
+  },
+  "BlackCentaur": {
+    "icon": "BlackCentaur\\BlackCentaur.png",
+    "main": "BlackCentaur\\BlackCentaur.json",
+    "boss": "BlackCentaur\\BOSS_BlackCentaur.json"
+  },
+  "BlackFurDragon": {
+    "icon": "BlackFurDragon\\BlackFurDragon.png",
+    "main": "BlackFurDragon\\BlackFurDragon.json",
+    "boss": "BlackFurDragon\\BOSS_BlackFurDragon.json"
+  },
+  "BlackMetalDragon": {
+    "icon": "BlackMetalDragon\\BlackMetalDragon.png",
+    "main": "BlackMetalDragon\\BlackMetalDragon.json",
+    "boss": "BlackMetalDragon\\BOSS_BlackMetalDragon.json"
+  },
+  "BlueDragon": {
+    "icon": "BlueDragon\\BlueDragon.png",
+    "main": "BlueDragon\\BlueDragon.json",
+    "boss": "BlueDragon\\BOSS_BlueDragon.json"
+  },
+  "Blueplatypus": {
+    "icon": "Blueplatypus\\Blueplatypus.png",
+    "main": "Blueplatypus\\BluePlatypus.json",
+    "boss": "Blueplatypus\\BOSS_BluePlatypus.json"
+  },
+  "Boar": {
+    "icon": "Boar\\Boar.png",
+    "main": "Boar\\Boar.json",
+    "boss": "Boar\\BOSS_Boar.json"
+  },
+  "BrownRabbit": {
+    "icon": "BrownRabbit\\BrownRabbit.png",
+    "main": "BrownRabbit\\BrownRabbit.json",
+    "boss": "BrownRabbit\\BOSS_BrownRabbit.json"
+  },
+  "CaptainPenguin": {
+    "icon": "CaptainPenguin\\CaptainPenguin.png",
+    "main": "CaptainPenguin\\CaptainPenguin.json",
+    "boss": "CaptainPenguin\\BOSS_CaptainPenguin.json"
+  },
+  "Carbunclo": {
+    "icon": "Carbunclo\\Carbunclo.png",
+    "main": "Carbunclo\\Carbunclo.json",
+    "boss": "Carbunclo\\BOSS_Carbunclo.json"
+  },
+  "CatBat": {
+    "icon": "CatBat\\CatBat.png",
+    "main": "CatBat\\CatBat.json",
+    "boss": "CatBat\\BOSS_CatBat.json"
+  },
+  "CatMage": {
+    "icon": "CatMage\\CatMage.png",
+    "main": "CatMage\\CatMage.json",
+    "boss": "CatMage\\BOSS_CatMage.json"
+  },
+  "CatVampire": {
+    "icon": "CatVampire\\CatVampire.png",
+    "main": "CatVampire\\CatVampire.json",
+    "boss": "CatVampire\\BOSS_CatVampire.json"
+  },
+  "ChickenPal": {
+    "icon": "ChickenPal\\ChickenPal.png",
+    "main": "ChickenPal\\ChickenPal.json",
+    "boss": "ChickenPal\\BOSS_ChickenPal.json"
+  },
+  "ColorfulBird": {
+    "icon": "ColorfulBird\\ColorfulBird.png",
+    "main": "ColorfulBird\\ColorfulBird.json",
+    "boss": "ColorfulBird\\BOSS_ColorfulBird.json"
+  },
+  "CowPal": {
+    "icon": "CowPal\\CowPal.png",
+    "main": "CowPal\\CowPal.json",
+    "boss": "CowPal\\BOSS_CowPal.json"
+  },
+  "CuteButterfly": {
+    "icon": "CuteButterfly\\CuteButterfly.png",
+    "main": "CuteButterfly\\CuteButterfly.json",
+    "boss": "CuteButterfly\\BOSS_CuteButterfly.json"
+  },
+  "CuteFox": {
+    "icon": "CuteFox\\CuteFox.png",
+    "main": "CuteFox\\CuteFox.json",
+    "boss": "CuteFox\\BOSS_CuteFox.json"
+  },
+  "CuteMole": {
+    "icon": "CuteMole\\CuteMole.png",
+    "main": "CuteMole\\CuteMole.json",
+    "boss": "CuteMole\\BOSS_CuteMole.json"
+  },
+  "DarkCrow": {
+    "icon": "DarkCrow\\DarkCrow.png",
+    "main": "DarkCrow\\DarkCrow.json",
+    "boss": "DarkCrow\\BOSS_DarkCrow.json"
+  },
+  "DarkMutant": {
+    "icon": "DarkMutant\\DarkMutant.png",
+    "main": "DarkMutant\\DarkMutant.json",
+    "boss": "DarkMutant\\BOSS_DarkMutant.json"
+  },
+  "DarkScorpion": {
+    "icon": "DarkScorpion\\DarkScorpion.png",
+    "main": "DarkScorpion\\DarkScorpion.json",
+    "boss": "DarkScorpion\\BOSS_DarkScorpion.json"
+  },
+  "Deer": {
+    "icon": "Deer\\Deer.png",
+    "main": "Deer\\Deer.json",
+    "boss": "Deer\\BOSS_Deer.json"
+  },
+  "Deer_Ground": {
+    "icon": "Deer_Ground\\Deer_Ground.png",
+    "main": "Deer_Ground\\Deer_Ground.json",
+    "boss": "Deer_Ground\\BOSS_Deer_Ground.json"
+  },
+  "DreamDemon": {
+    "icon": "DreamDemon\\DreamDemon.png",
+    "main": "DreamDemon\\DreamDemon.json",
+    "boss": "DreamDemon\\BOSS_DreamDemon.json"
+  },
+  "DrillGame": {
+    "icon": "DrillGame\\DrillGame.png",
+    "main": "DrillGame\\DrillGame.json",
+    "boss": "DrillGame\\BOSS_DrillGame.json"
+  },
+  "Eagle": {
+    "icon": "Eagle\\Eagle.png",
+    "main": "Eagle\\Eagle.json",
+    "boss": "Eagle\\BOSS_Eagle.json"
+  },
+  "ElecCat": {
+    "icon": "ElecCat\\ElecCat.png",
+    "main": "ElecCat\\ElecCat.json",
+    "boss": "ElecCat\\BOSS_ElecCat.json"
+  },
+  "ElecLion": {
+    "icon": "ElecLion\\ElecLion.png",
+    "main": "ElecLion\\ElecLion.json",
+    "boss": "ElecLion\\BOSS_ElecLion.json"
+  },
+  "FairyDragon": {
+    "icon": "FairyDragon\\FairyDragon.png",
+    "main": "FairyDragon\\FairyDragon.json",
+    "boss": "FairyDragon\\BOSS_FairyDragon.json"
+  },
+  "FairyDragon_Water": {
+    "icon": "FairyDragon_Water\\FairyDragon_Water.png",
+    "main": "FairyDragon_Water\\FairyDragon_Water.json",
+    "boss": "FairyDragon_Water\\BOSS_FairyDragon_Water.json"
+  },
+  "FeatherOstrich": {
+    "icon": "FeatherOstrich\\FeatherOstrich.png",
+    "main": "FeatherOstrich\\FeatherOstrich.json",
+    "boss": "FeatherOstrich\\BOSS_FeatherOstrich.json"
+  },
+  "FengyunDeeper": {
+    "icon": "FengyunDeeper\\FengyunDeeper.png",
+    "main": "FengyunDeeper\\FengyunDeeper.json",
+    "boss": "FengyunDeeper\\BOSS_FengyunDeeper.json"
+  },
+  "FireKirin": {
+    "icon": "FireKirin\\FireKirin.png",
+    "main": "FireKirin\\FireKirin.json",
+    "boss": "FireKirin\\BOSS_FireKirin.json"
+  },
+  "FireKirin_Dark": {
+    "icon": "FireKirin_Dark\\FireKirin_Dark.png",
+    "main": "FireKirin_Dark\\FireKirin_Dark.json",
+    "boss": "FireKirin_Dark\\BOSS_FireKirin_Dark.json"
+  },
+  "FlameBambi": {
+    "icon": "FlameBambi\\FlameBambi.png",
+    "main": "FlameBambi\\FlameBambi.json",
+    "boss": "FlameBambi\\BOSS_FlameBambi.json"
+  },
+  "FlameBuffalo": {
+    "icon": "FlameBuffalo\\FlameBuffalo.png",
+    "main": "FlameBuffalo\\FlameBuffalo.json",
+    "boss": "FlameBuffalo\\BOSS_FlameBuffalo.json"
+  },
+  "FlowerDinosaur": {
+    "icon": "FlowerDinosaur\\FlowerDinosaur.png",
+    "main": "FlowerDinosaur\\FlowerDinosaur.json",
+    "boss": "FlowerDinosaur\\BOSS_FlowerDinosaur.json"
+  },
+  "FlowerDinosaur_Electric": {
+    "icon": "FlowerDinosaur_Electric\\FlowerDinosaur_Electric.png",
+    "main": "FlowerDinosaur_Electric\\FlowerDinosaur_Electric.json",
+    "boss": "FlowerDinosaur_Electric\\BOSS_FlowerDinosaur_Electric.json"
+  },
+  "FlowerDoll": {
+    "icon": "FlowerDoll\\FlowerDoll.png",
+    "main": "FlowerDoll\\FlowerDoll.json",
+    "boss": "FlowerDoll\\BOSS_FlowerDoll.json"
+  },
+  "FlowerRabbit": {
+    "icon": "FlowerRabbit\\FlowerRabbit.png",
+    "main": "FlowerRabbit\\FlowerRabbit.json",
+    "boss": "FlowerRabbit\\BOSS_FlowerRabbit.json"
+  },
+  "FlyingManta": {
+    "icon": "FlyingManta\\FlyingManta.png",
+    "main": "FlyingManta\\FlyingManta.json",
+    "boss": "FlyingManta\\BOSS_FlyingManta.json"
+  },
+  "FoxMage": {
+    "icon": "FoxMage\\FoxMage.png",
+    "main": "FoxMage\\FoxMage.json",
+    "boss": "FoxMage\\BOSS_FoxMage.json"
+  },
+  "Ganesha": {
+    "icon": "Ganesha\\Ganesha.png",
+    "main": "Ganesha\\Ganesha.json",
+    "boss": "Ganesha\\BOSS_Ganesha.json"
+  },
+  "Garm": {
+    "icon": "Garm\\Garm.png",
+    "main": "Garm\\Garm.json",
+    "boss": "Garm\\BOSS_Garm.json"
+  },
+  "GhostBeast": {
+    "icon": "GhostBeast\\GhostBeast.png",
+    "main": "GhostBeast\\GhostBeast.json",
+    "boss": "GhostBeast\\BOSS_GhostBeast.json"
+  },
+  "GoldenHorse": {
+    "icon": "GoldenHorse\\GoldenHorse.png",
+    "main": "GoldenHorse\\GoldenHorse.json",
+    "boss": "GoldenHorse\\BOSS_GoldenHorse.json"
+  },
+  "Gorilla": {
+    "icon": "Gorilla\\Gorilla.png",
+    "main": "Gorilla\\Gorilla.json",
+    "boss": "Gorilla\\BOSS_Gorilla.json"
+  },
+  "GrassDragon": {
+    "icon": "GrassDragon\\GrassDragon.png",
+    "main": "GrassDragon\\GrassDragon.json",
+    "boss": "GrassDragon\\BOSS_GrassDragon.json"
+  },
+  "GrassMammoth": {
+    "icon": "GrassMammoth\\GrassMammoth.png",
+    "main": "GrassMammoth\\GrassMammoth.json",
+    "boss": "GrassMammoth\\BOSS_GrassMammoth.json"
+  },
+  "GrassMammoth_Ice": {
+    "icon": "GrassMammoth_Ice\\GrassMammoth_Ice.png",
+    "main": "GrassMammoth_Ice\\GrassMammoth_Ice.json",
+    "boss": "GrassMammoth_Ice\\BOSS_GrassMammoth_Ice.json"
+  },
+  "GrassPanda": {
+    "icon": "GrassPanda\\GrassPanda.png",
+    "main": "GrassPanda\\GrassPanda.json",
+    "boss": "GrassPanda\\BOSS_GrassPanda.json"
+  },
+  "GrassPanda_Electric": {
+    "icon": "GrassPanda_Electric\\GrassPanda_Electric.png",
+    "main": "GrassPanda_Electric\\GrassPanda_Electric.json",
+    "boss": "GrassPanda_Electric\\BOSS_GrassPanda_Electric.json"
+  },
+  "GrassRabbitMan": {
+    "icon": "GrassRabbitMan\\GrassRabbitMan.png",
+    "main": "GrassRabbitMan\\GrassRabbitMan.json",
+    "boss": "GrassRabbitMan\\BOSS_GrassRabbitMan.json"
+  },
+  "GuardianDog": {
+    "icon": "GuardianDog\\GuardianDog.png",
+    "main": "GuardianDog\\GuardianDog.json",
+    "boss": "GuardianDog\\BOSS_GuardianDog.json"
+  },
+  "HadesBird": {
+    "icon": "HadesBird\\HadesBird.png",
+    "main": "HadesBird\\HadesBird.json",
+    "boss": "HadesBird\\BOSS_HadesBird.json"
+  },
+  "HawkBird": {
+    "icon": "HawkBird\\HawkBird.png",
+    "main": "HawkBird\\HawkBird.json",
+    "boss": "HawkBird\\BOSS_HawkBird.json"
+  },
+  "Hedgehog": {
+    "icon": "Hedgehog\\Hedgehog.png",
+    "main": "Hedgehog\\Hedgehog.json",
+    "boss": "Hedgehog\\BOSS_Hedgehog.json"
+  },
+  "Hedgehog_Ice": {
+    "icon": "Hedgehog_Ice\\Hedgehog_Ice.png",
+    "main": "Hedgehog_Ice\\Hedgehog_Ice.json",
+    "boss": "Hedgehog_Ice\\BOSS_Hedgehog_Ice.json"
+  },
+  "HerculesBeetle": {
+    "icon": "HerculesBeetle\\HerculesBeetle.png",
+    "main": "HerculesBeetle\\HerculesBeetle.json",
+    "boss": "HerculesBeetle\\BOSS_HerculesBeetle.json"
+  },
+  "IceDeer": {
+    "icon": "IceDeer\\IceDeer.png",
+    "main": "IceDeer\\IceDeer.json",
+    "boss": "IceDeer\\BOSS_IceDeer.json"
+  },
+  "IceFox": {
+    "icon": "IceFox\\IceFox.png",
+    "main": "IceFox\\IceFox.json",
+    "boss": "IceFox\\BOSS_IceFox.json"
+  },
+  "IceHorse": {
+    "icon": "IceHorse\\IceHorse.png",
+    "main": "IceHorse\\IceHorse.json",
+    "boss": "IceHorse\\BOSS_IceHorse.json"
+  },
+  "IceHorse_Dark": {
+    "icon": "IceHorse_Dark\\IceHorse_Dark.png",
+    "main": "IceHorse_Dark\\IceHorse_Dark.json",
+    "boss": "IceHorse_Dark\\BOSS_IceHorse_Dark.json"
+  },
+  "JetDragon": {
+    "icon": "JetDragon\\JetDragon.png",
+    "main": "JetDragon\\JetDragon.json",
+    "boss": "JetDragon\\BOSS_JetDragon.json"
+  },
+  "Kelpie": {
+    "icon": "Kelpie\\Kelpie.png",
+    "main": "Kelpie\\Kelpie.json",
+    "boss": "Kelpie\\BOSS_Kelpie.json"
+  },
+  "Kelpie_Fire": {
+    "icon": "Kelpie_Fire\\Kelpie_Fire.png",
+    "main": "Kelpie_Fire\\Kelpie_Fire.json",
+    "boss": "Kelpie_Fire\\BOSS_Kelpie_Fire.json"
+  },
+  "KingAlpaca": {
+    "icon": "KingAlpaca\\KingAlpaca.png",
+    "main": "KingAlpaca\\KingAlpaca.json",
+    "boss": "KingAlpaca\\BOSS_KingAlpaca.json"
+  },
+  "KingAlpaca_Ice": {
+    "icon": "KingAlpaca_Ice\\KingAlpaca_Ice.png",
+    "main": "KingAlpaca_Ice\\KingAlpaca_Ice.json",
+    "boss": "KingAlpaca_Ice\\BOSS_KingAlpaca_Ice.json"
+  },
+  "KingBahamut": {
+    "icon": "KingBahamut\\KingBahamut.png",
+    "main": "KingBahamut\\KingBahamut.json",
+    "boss": "KingBahamut\\BOSS_KingBahamut.json"
+  },
+  "Kirin": {
+    "icon": "Kirin\\Kirin.png",
+    "main": "Kirin\\Kirin.json",
+    "boss": "Kirin\\BOSS_Kirin.json"
+  },
+  "Kitsunebi": {
+    "icon": "Kitsunebi\\Kitsunebi.png",
+    "main": "Kitsunebi\\Kitsunebi.json",
+    "boss": "Kitsunebi\\BOSS_Kitsunebi.json"
+  },
+  "LavaGirl": {
+    "icon": "LavaGirl\\LavaGirl.png",
+    "main": "LavaGirl\\LavaGirl.json",
+    "boss": "LavaGirl\\BOSS_LavaGirl.json"
+  },
+  "LazyCatfish": {
+    "icon": "LazyCatfish\\LazyCatfish.png",
+    "main": "LazyCatfish\\LazyCatfish.json",
+    "boss": "LazyCatfish\\BOSS_LazyCatfish.json"
+  },
+  "LazyDragon": {
+    "icon": "LazyDragon\\LazyDragon.png",
+    "main": "LazyDragon\\LazyDragon.json",
+    "boss": "LazyDragon\\BOSS_LazyDragon.json"
+  },
+  "LazyDragon_Electric": {
+    "icon": "LazyDragon_Electric\\LazyDragon_Electric.png",
+    "main": "LazyDragon_Electric\\LazyDragon_Electric.json",
+    "boss": "LazyDragon_Electric\\BOSS_LazyDragon_Electric.json"
+  },
+  "LilyQueen_Dark": {
+    "icon": "LilyQueen_Dark\\LilyQueen_Dark.png",
+    "main": "LilyQueen_Dark\\LilyQueen_Dark.json",
+    "boss": "LilyQueen_Dark\\BOSS_LilyQueen_Dark.json"
+  },
+  "LittleBriarRose": {
+    "icon": "LittleBriarRose\\LittleBriarRose.png",
+    "main": "LittleBriarRose\\LittleBriarRose.json",
+    "boss": "LittleBriarRose\\BOSS_LittleBriarRose.json"
+  },
+  "LizardMan": {
+    "icon": "LizardMan\\LizardMan.png",
+    "main": "LizardMan\\LizardMan.json",
+    "boss": "LizardMan\\BOSS_LizardMan.json"
+  },
+  "LizardMan_Fire": {
+    "icon": "LizardMan_Fire\\LizardMan_Fire.png",
+    "main": "LizardMan_Fire\\LizardMan_Fire.json",
+    "boss": "LizardMan_Fire\\BOSS_LizardMan_Fire.json"
+  },
+  "Manticore": {
+    "icon": "Manticore\\Manticore.png",
+    "main": "Manticore\\Manticore.json",
+    "boss": "Manticore\\BOSS_Manticore.json"
+  },
+  "Manticore_Dark": {
+    "icon": "Manticore_Dark\\Manticore_Dark.png",
+    "main": "Manticore_Dark\\Manticore_Dark.json",
+    "boss": "Manticore_Dark\\BOSS_Manticore_Dark.json"
+  },
+  "Monkey": {
+    "icon": "Monkey\\Monkey.png",
+    "main": "Monkey\\Monkey.json",
+    "boss": "Monkey\\BOSS_Monkey.json"
+  },
+  "MopBaby": {
+    "icon": "MopBaby\\MopBaby.png",
+    "main": "MopBaby\\MopBaby.json",
+    "boss": "MopBaby\\BOSS_MopBaby.json"
+  },
+  "MopKing": {
+    "icon": "MopKing\\MopKing.png",
+    "main": "MopKing\\MopKing.json",
+    "boss": "MopKing\\BOSS_MopKing.json"
+  },
+  "Mutant": {
+    "icon": "Mutant\\Mutant.png",
+    "main": "Mutant\\Mutant.json",
+    "boss": "Mutant\\BOSS_Mutant.json"
+  },
+  "NaughtyCat": {
+    "icon": "NaughtyCat\\NaughtyCat.png",
+    "main": "NaughtyCat\\NaughtyCat.json",
+    "boss": "NaughtyCat\\BOSS_NaughtyCat.json"
+  },
+  "NegativeKoala": {
+    "icon": "NegativeKoala\\NegativeKoala.png",
+    "main": "NegativeKoala\\NegativeKoala.json",
+    "boss": "NegativeKoala\\BOSS_NegativeKoala.json"
+  },
+  "NegativeOctopus": {
+    "icon": "NegativeOctopus\\NegativeOctopus.png",
+    "main": "NegativeOctopus\\NegativeOctopus.json",
+    "boss": "NegativeOctopus\\BOSS_NegativeOctopus.json"
+  },
+  "NightFox": {
+    "icon": "NightFox\\NightFox.png",
+    "main": "NightFox\\NightFox.json",
+    "boss": "NightFox\\BOSS_NightFox.json"
+  },
+  "Penguin": {
+    "icon": "Penguin\\Penguin.png",
+    "main": "Penguin\\Penguin.json",
+    "boss": "Penguin\\BOSS_Penguin.json"
+  },
+  "PinkCat": {
+    "icon": "PinkCat\\PinkCat.png",
+    "main": "PinkCat\\PinkCat.json",
+    "boss": "PinkCat\\BOSS_PinkCat.json"
+  },
+  "PinkKangaroo": {
+    "icon": "PinkKangaroo\\PinkKangaroo.png",
+    "main": "PinkKangaroo\\PinkKangaroo.json",
+    "boss": "PinkKangaroo\\BOSS_PinkKangaroo.json"
+  },
+  "PinkLizard": {
+    "icon": "PinkLizard\\PinkLizard.png",
+    "main": "PinkLizard\\PinkLizard.json",
+    "boss": "PinkLizard\\BOSS_PinkLizard.json"
+  },
+  "PinkRabbit": {
+    "icon": "PinkRabbit\\PinkRabbit.png",
+    "main": "PinkRabbit\\PinkRabbit.json",
+    "boss": "PinkRabbit\\BOSS_PinkRabbit.json"
+  },
+  "PlantSlime": {
+    "icon": "PlantSlime\\PlantSlime.png",
+    "main": "PlantSlime\\PlantSlime.json",
+    "boss": "PlantSlime\\BOSS_PlantSlime.json",
+    "otherVariants": [
+      "PlantSlime\\BOSS_PlantSlime_Flower.json",
+      "PlantSlime\\PlantSlime_Flower.json"
+    ]
+  },
+  "QueenBee": {
+    "icon": "QueenBee\\QueenBee.png",
+    "main": "QueenBee\\QueenBee.json",
+    "boss": "QueenBee\\BOSS_QueenBee.json"
+  },
+  "RaijinDaughter": {
+    "icon": "RaijinDaughter\\RaijinDaughter.png",
+    "main": "RaijinDaughter\\RaijinDaughter.json",
+    "boss": "RaijinDaughter\\BOSS_RaijinDaughter.json"
+  },
+  "RedArmorBird": {
+    "icon": "RedArmorBird\\RedArmorBird.png",
+    "main": "RedArmorBird\\RedArmorBird.json",
+    "boss": "RedArmorBird\\BOSS_RedArmorBird.json"
+  },
+  "RobinHood": {
+    "icon": "RobinHood\\RobinHood.png",
+    "main": "RobinHood\\RobinHood.json",
+    "boss": "RobinHood\\BOSS_RobinHood.json"
+  },
+  "RobinHood_Ground": {
+    "icon": "RobinHood_Ground\\RobinHood_Ground.png",
+    "main": "RobinHood_Ground\\RobinHood_Ground.json",
+    "boss": "RobinHood_Ground\\BOSS_RobinHood_Ground.json"
+  },
+  "Ronin": {
+    "icon": "Ronin\\Ronin.png",
+    "main": "Ronin\\Ronin.json",
+    "boss": "Ronin\\BOSS_Ronin.json"
+  },
+  "SaintCentaur": {
+    "icon": "SaintCentaur\\SaintCentaur.png",
+    "main": "SaintCentaur\\SaintCentaur.json",
+    "boss": "SaintCentaur\\BOSS_SaintCentaur.json"
+  },
+  "SakuraSaurus": {
+    "icon": "SakuraSaurus\\SakuraSaurus.png",
+    "main": "SakuraSaurus\\SakuraSaurus.json",
+    "boss": "SakuraSaurus\\BOSS_SakuraSaurus.json"
+  },
+  "SakuraSaurus_Water": {
+    "icon": "SakuraSaurus_Water\\SakuraSaurus_Water.png",
+    "main": "SakuraSaurus_Water\\SakuraSaurus_Water.json",
+    "boss": "SakuraSaurus_Water\\BOSS_SakuraSaurus_Water.json"
+  },
+  "ScorpionMan": {
+    "icon": "ScorpionMan\\ScorpionMan.png",
+    "main": "ScorpionMan\\ScorpionMan.json",
+    "boss": "ScorpionMan\\BOSS_ScorpionMan.json"
+  },
+  "Serpent": {
+    "icon": "Serpent\\Serpent.png",
+    "main": "Serpent\\Serpent.json",
+    "boss": "Serpent\\BOSS_Serpent.json"
+  },
+  "Serpent_Ground": {
+    "icon": "Serpent_Ground\\Serpent_Ground.png",
+    "main": "Serpent_Ground\\Serpent_Ground.json",
+    "boss": "Serpent_Ground\\BOSS_Serpent_Ground.json"
+  },
+  "SharkKid": {
+    "icon": "SharkKid\\SharkKid.png",
+    "main": "SharkKid\\SharkKid.json",
+    "boss": "SharkKid\\BOSS_SharkKid.json"
+  },
+  "SharkKid_Fire": {
+    "icon": "SharkKid_Fire\\SharkKid_Fire.png",
+    "main": "SharkKid_Fire\\SharkKid_Fire.json",
+    "boss": "SharkKid_Fire\\BOSS_SharkKid_Fire.json"
+  },
+  "SheepBall": {
+    "icon": "SheepBall\\SheepBall.png",
+    "main": "SheepBall\\SheepBall.json",
+    "boss": "SheepBall\\BOSS_SheepBall.json"
+  },
+  "SifuDog": {
+    "icon": "SifuDog\\SifuDog.png",
+    "main": "SifuDog\\SifuDog.json",
+    "boss": "SifuDog\\BOSS_SifuDog.json"
+  },
+  "SkyDragon": {
+    "icon": "SkyDragon\\SkyDragon.png",
+    "main": "SkyDragon\\SkyDragon.json",
+    "boss": "SkyDragon\\BOSS_SkyDragon.json"
+  },
+  "SoldierBee": {
+    "icon": "SoldierBee\\SoldierBee.png",
+    "main": "SoldierBee\\SoldierBee.json",
+    "boss": "SoldierBee\\BOSS_SoldierBee.json"
+  },
+  "Suzaku": {
+    "icon": "Suzaku\\Suzaku.png",
+    "main": "Suzaku\\Suzaku.json",
+    "boss": "Suzaku\\BOSS_Suzaku.json"
+  },
+  "Suzaku_Water": {
+    "icon": "Suzaku_Water\\Suzaku_Water.png",
+    "main": "Suzaku_Water\\Suzaku_Water.json",
+    "boss": "Suzaku_Water\\BOSS_Suzaku_Water.json"
+  },
+  "SweetsSheep": {
+    "icon": "SweetsSheep\\SweetsSheep.png",
+    "main": "SweetsSheep\\SweetsSheep.json",
+    "boss": "SweetsSheep\\BOSS_SweetsSheep.json"
+  },
+  "TentacleTurtle": {
+    "icon": "TentacleTurtle\\TentacleTurtle.png",
+    "main": "TentacleTurtle\\TentacleTurtle.json",
+    "boss": "TentacleTurtle\\BOSS_TentacleTurtle.json"
+  },
+  "ThunderBird": {
+    "icon": "ThunderBird\\ThunderBird.png",
+    "main": "ThunderBird\\ThunderBird.json",
+    "boss": "ThunderBird\\BOSS_ThunderBird.json"
+  },
+  "ThunderDog": {
+    "icon": "ThunderDog\\ThunderDog.png",
+    "main": "ThunderDog\\ThunderDog.json",
+    "boss": "ThunderDog\\BOSS_ThunderDog.json"
+  },
+  "Umihebi": {
+    "icon": "Umihebi\\Umihebi.png",
+    "main": "Umihebi\\Umihebi.json",
+    "boss": "Umihebi\\BOSS_Umihebi.json"
+  },
+  "Umihebi_Fire": {
+    "icon": "Umihebi_Fire\\Umihebi_Fire.png",
+    "main": "Umihebi_Fire\\Umihebi_Fire.json",
+    "boss": "Umihebi_Fire\\BOSS_Umihebi_Fire.json"
+  },
+  "VioletFairy": {
+    "icon": "VioletFairy\\VioletFairy.png",
+    "main": "VioletFairy\\VioletFairy.json",
+    "boss": "VioletFairy\\BOSS_VioletFairy.json"
+  },
+  "VolcanicMonster": {
+    "icon": "VolcanicMonster\\VolcanicMonster.png",
+    "main": "VolcanicMonster\\VolcanicMonster.json",
+    "boss": "VolcanicMonster\\BOSS_VolcanicMonster.json"
+  },
+  "VolcanicMonster_Ice": {
+    "icon": "VolcanicMonster_Ice\\VolcanicMonster_Ice.png",
+    "main": "VolcanicMonster_Ice\\VolcanicMonster_Ice.json",
+    "boss": "VolcanicMonster_Ice\\BOSS_VolcanicMonster_Ice.json"
+  },
+  "WaterLizard": {
+    "icon": "WaterLizard\\WaterLizard.png",
+    "main": "WaterLizard\\WaterLizard.json",
+    "boss": "WaterLizard\\BOSS_WaterLizard.json"
+  },
+  "WeaselDragon": {
+    "icon": "WeaselDragon\\WeaselDragon.png",
+    "main": "WeaselDragon\\WeaselDragon.json",
+    "boss": "WeaselDragon\\BOSS_WeaselDragon.json"
+  },
+  "Werewolf": {
+    "icon": "Werewolf\\Werewolf.png",
+    "main": "Werewolf\\Werewolf.json",
+    "boss": "Werewolf\\BOSS_Werewolf.json"
+  },
+  "WhiteMoth": {
+    "icon": "WhiteMoth\\WhiteMoth.png",
+    "main": "WhiteMoth\\WhiteMoth.json",
+    "boss": "WhiteMoth\\BOSS_WhiteMoth.json"
+  },
+  "WhiteTiger": {
+    "icon": "WhiteTiger\\WhiteTiger.png",
+    "main": "WhiteTiger\\WhiteTiger.json",
+    "boss": "WhiteTiger\\BOSS_WhiteTiger.json"
+  },
+  "WindChimes": {
+    "icon": "WindChimes\\WindChimes.png",
+    "main": "WindChimes\\WindChimes.json",
+    "boss": "WindChimes\\BOSS_WindChimes.json"
+  },
+  "WindChimes_Ice": {
+    "icon": "WindChimes_Ice\\WindChimes_Ice.png",
+    "main": "WindChimes_Ice\\WindChimes_Ice.json",
+    "boss": "WindChimes_Ice\\BOSS_WindChimes_Ice.json"
+  },
+  "WingGolem": {
+    "icon": "WingGolem\\WingGolem.png",
+    "main": "WingGolem\\WingGolem.json",
+    "boss": "WingGolem\\BOSS_WingGolem.json"
+  },
+  "WizardOwl": {
+    "icon": "WizardOwl\\WizardOwl.png",
+    "main": "WizardOwl\\WizardOwl.json",
+    "boss": "WizardOwl\\BOSS_WizardOwl.json"
+  },
+  "WoolFox": {
+    "icon": "WoolFox\\WoolFox.png",
+    "main": "WoolFox\\WoolFox.json",
+    "boss": "WoolFox\\BOSS_WoolFox.json"
+  },
+  "Yeti": {
+    "icon": "Yeti\\Yeti.png",
+    "main": "Yeti\\Yeti.json",
+    "boss": "Yeti\\BOSS_Yeti.json"
+  },
+  "Yeti_Grass": {
+    "icon": "Yeti_Grass\\Yeti_Grass.png",
+    "main": "Yeti_Grass\\Yeti_Grass.json",
+    "boss": "Yeti_Grass\\BOSS_Yeti_Grass.json"
+  }
+}
