@@ -14,6 +14,7 @@ export class BrowsePalsFiltersComponent implements OnInit {
   @Output() filter: EventEmitter<TribesSearchFilter> = new EventEmitter<TribesSearchFilter>();
 
   protected elementTypes: string[] = [];
+  protected rarities: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   protected form = new FormGroup({
     size: new FormControl<string[] | undefined>(undefined, { nonNullable: true }),
