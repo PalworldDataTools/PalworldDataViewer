@@ -30,12 +30,10 @@
     "gym": "ThunderDragonMan\\GYM_ThunderDragonMan.json"
   },
   "BadCatgirl": {
-    "icon": "BadCatgirl\\BadCatgirl.png",
     "main": "BadCatgirl\\BadCatgirl.json",
     "boss": "BadCatgirl\\BOSS_BadCatgirl.json"
   },
   "BlueberryFairy": {
-    "icon": "BlueberryFairy\\BlueberryFairy.png",
     "main": "BlueberryFairy\\BlueberryFairy.json",
     "boss": "BlueberryFairy\\BOSS_BlueberryFairy.json"
   },
@@ -125,7 +123,6 @@
     "boss": "Boar\\BOSS_Boar.json"
   },
   "BrownRabbit": {
-    "icon": "BrownRabbit\\BrownRabbit.png",
     "main": "BrownRabbit\\BrownRabbit.json",
     "boss": "BrownRabbit\\BOSS_BrownRabbit.json"
   },
@@ -165,7 +162,6 @@
     "boss": "ColorfulBird\\BOSS_ColorfulBird.json"
   },
   "CowPal": {
-    "icon": "CowPal\\CowPal.png",
     "main": "CowPal\\CowPal.json",
     "boss": "CowPal\\BOSS_CowPal.json"
   },
@@ -245,7 +241,6 @@
     "boss": "FairyDragon_Water\\BOSS_FairyDragon_Water.json"
   },
   "FeatherOstrich": {
-    "icon": "FeatherOstrich\\FeatherOstrich.png",
     "main": "FeatherOstrich\\FeatherOstrich.json",
     "boss": "FeatherOstrich\\BOSS_FeatherOstrich.json"
   },
@@ -320,7 +315,6 @@
     "boss": "GhostBeast\\BOSS_GhostBeast.json"
   },
   "GoldenHorse": {
-    "icon": "GoldenHorse\\GoldenHorse.png",
     "main": "GoldenHorse\\GoldenHorse.json",
     "boss": "GoldenHorse\\BOSS_GoldenHorse.json"
   },
@@ -430,7 +424,6 @@
     "boss": "KingAlpaca\\BOSS_KingAlpaca.json"
   },
   "KingAlpaca_Ice": {
-    "icon": "KingAlpaca_Ice\\KingAlpaca_Ice.png",
     "main": "KingAlpaca_Ice\\KingAlpaca_Ice.json",
     "boss": "KingAlpaca_Ice\\BOSS_KingAlpaca_Ice.json"
   },
@@ -619,7 +612,6 @@
     "boss": "SakuraSaurus_Water\\BOSS_SakuraSaurus_Water.json"
   },
   "ScorpionMan": {
-    "icon": "ScorpionMan\\ScorpionMan.png",
     "main": "ScorpionMan\\ScorpionMan.json",
     "boss": "ScorpionMan\\BOSS_ScorpionMan.json"
   },
@@ -649,7 +641,6 @@
     "boss": "SheepBall\\BOSS_SheepBall.json"
   },
   "SifuDog": {
-    "icon": "SifuDog\\SifuDog.png",
     "main": "SifuDog\\SifuDog.json",
     "boss": "SifuDog\\BOSS_SifuDog.json"
   },
@@ -679,7 +670,6 @@
     "boss": "SweetsSheep\\BOSS_SweetsSheep.json"
   },
   "TentacleTurtle": {
-    "icon": "TentacleTurtle\\TentacleTurtle.png",
     "main": "TentacleTurtle\\TentacleTurtle.json",
     "boss": "TentacleTurtle\\BOSS_TentacleTurtle.json"
   },
@@ -709,7 +699,6 @@
     "boss": "VioletFairy\\BOSS_VioletFairy.json"
   },
   "VolcanicMonster": {
-    "icon": "VolcanicMonster\\VolcanicMonster.png",
     "main": "VolcanicMonster\\VolcanicMonster.json",
     "boss": "VolcanicMonster\\BOSS_VolcanicMonster.json"
   },
@@ -754,7 +743,6 @@
     "boss": "WindChimes_Ice\\BOSS_WindChimes_Ice.json"
   },
   "WingGolem": {
-    "icon": "WingGolem\\WingGolem.png",
     "main": "WingGolem\\WingGolem.json",
     "boss": "WingGolem\\BOSS_WingGolem.json"
   },

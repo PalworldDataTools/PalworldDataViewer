@@ -1,0 +1,46 @@
+<h1>Pals</h1>
+
+@if (result) {
+  <div class="mb-4">
+    <h5>Filters</h5>
+    <div class="ps-2">
+      <app-browse-pals-filters (filter)="onFilterChange($event); refresh()"></app-browse-pals-filters>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    @if (result) {
+      @if (result.data.length < result.totalResults) {
+        {{ result.data.length }} / {{ result.totalResults }} results
+      } @else {
+        {{ result.data.length }} results
+      }
+    }
+  </div>
+
+  <div class="list-group list-group-flush">
+    @for (tribe of result.data; track tribe.main.tribeName) {
+      <a class="list-group-item list-group-item-action" [routerLink]="['..', tribe.name]">
+        <app-pal-nav-list-item [tribe]="tribe"></app-pal-nav-list-item>
+      </a>
+    }
+  </div>
+
+  @if (result.totalPages > 1) {
+    <nav class="mt-4">
+      <ul class="pagination align-items-center justify-content-center">
+        <li class="page-item" [class.disabled]="result.pageNumber <= 1">
+          <a class="page-link user-select-none" (click)="previousPage()" role="button">Previous</a>
+        </li>
+        <li class="page-link">
+          {{ result.pageNumber }}
+          /
+          {{ result.totalPages }}
+        </li>
+        <li class="page-item" [class.disabled]="result.pageNumber >= result.totalPages">
+          <a class="page-link user-select-none" (click)="nextPage()" role="button">Next</a>
+        </li>
+      </ul>
+    </nav>
+  }
+}

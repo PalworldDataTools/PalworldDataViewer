@@ -1,0 +1,89 @@
+<form [formGroup]="form">
+  <div class="row mb-3" [class.text-secondary]="!form.value.elementTypes || form.value.elementTypes.length == 0">
+    <label class="col-1 col-form-label">Elements</label>
+
+    @for (elementType of elementTypes; track elementType) {
+      <div class="col">
+        <input
+          type="checkbox"
+          class="btn-check"
+          id="{{ elementType }}-check"
+          [checked]="form.value.elementTypes && form.value.elementTypes.includes(elementType)"
+          (change)="setElement(elementType, $any($event.target).checked)"
+          autocomplete="off"
+        />
+        <label class="w-100 btn btn-outline-secondary" for="{{ elementType }}-check">{{ elementType }}</label>
+      </div>
+    }
+  </div>
+
+  <div class="row mb-3" [class.text-secondary]="!form.value.minRarity && !form.value.maxRarity">
+    <label class="col-1 col-form-label">Rarity</label>
+
+    <div class="col">
+      <input type="checkbox" class="btn-check" id="rarity-1-check" [checked]="form.value.minRarity == 1" (change)="setRarity(1, $any($event.target).checked)" autocomplete="off" />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-1-check">1</label>
+    </div>
+
+    <div class="col">
+      <input type="checkbox" class="btn-check" id="rarity-2-check" [checked]="form.value.minRarity == 2" (change)="setRarity(2, $any($event.target).checked)" autocomplete="off" />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-2-check">2</label>
+    </div>
+
+    <div class="col">
+      <input type="checkbox" class="btn-check" id="rarity-3-check" [checked]="form.value.minRarity == 3" (change)="setRarity(3, $any($event.target).checked)" autocomplete="off" />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-3-check">3</label>
+    </div>
+
+    <div class="col">
+      <input type="checkbox" class="btn-check" id="rarity-4-check" [checked]="form.value.minRarity == 4" (change)="setRarity(4, $any($event.target).checked)" autocomplete="off" />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-4-check">4</label>
+    </div>
+
+    <div class="col">
+      <input type="checkbox" class="btn-check" id="rarity-5-check" [checked]="form.value.minRarity == 5" (change)="setRarity(5, $any($event.target).checked)" autocomplete="off" />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-5-check">5</label>
+    </div>
+
+    <div class="col">
+      <input type="checkbox" class="btn-check" id="rarity-6-check" [checked]="form.value.minRarity == 6" (change)="setRarity(6, $any($event.target).checked)" autocomplete="off" />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-6-check">6</label>
+    </div>
+
+    <div class="col">
+      <input type="checkbox" class="btn-check" id="rarity-7-check" [checked]="form.value.minRarity == 7" (change)="setRarity(7, $any($event.target).checked)" autocomplete="off" />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-7-check">7</label>
+    </div>
+
+    <div class="col">
+      <input type="checkbox" class="btn-check" id="rarity-8-check" [checked]="form.value.minRarity == 8" (change)="setRarity(8, $any($event.target).checked)" autocomplete="off" />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-8-check">8</label>
+    </div>
+
+    <div class="col">
+      <input type="checkbox" class="btn-check" id="rarity-9-check" [checked]="form.value.minRarity == 9" (change)="setRarity(9, $any($event.target).checked)" autocomplete="off" />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-9-check">9</label>
+    </div>
+
+    <div class="col">
+      <input
+        type="checkbox"
+        class="btn-check"
+        id="rarity-10-check"
+        [checked]="form.value.minRarity == 10"
+        (change)="setRarity(10, $any($event.target).checked)"
+        autocomplete="off"
+      />
+      <label class="w-100 btn btn-outline-secondary" for="rarity-10-check">10</label>
+    </div>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="nocturnal-check" formControlName="isNocturnal" />
+    <label class="form-check-label" [class.text-secondary]="!form.value.isNocturnal" for="nocturnal-check">Nocturnal</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="gym-check" formControlName="isTowerBoss" />
+    <label class="form-check-label" [class.text-secondary]="!form.value.isTowerBoss" for="gym-check">GYM</label>
+  </div>
+</form>
