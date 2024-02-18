@@ -3,12 +3,14 @@ import { PalworldVersionService } from './palworld-version.service';
 import { HttpClient } from '@angular/common/http';
 import { first, forkJoin, map, Observable, of, ReplaySubject, switchMap } from 'rxjs';
 import { TribesSearcher, TribesSearchRequest, TribesSearchResult } from './tribes-searcher';
+import { LocationStrategy } from '@angular/common';
 
 @Injectable()
 export class PalsService {
   private tribesSubject: ReplaySubject<{ [name: string]: PalTribe }> = new ReplaySubject<{
     [name: string]: PalTribe;
   }>();
+  private baseHref: string;
 
   get tribeNames$(): Observable<string[]> {
     return this.tribesSubject.pipe(map((tribes) => Object.keys(tribes)));
@@ -17,7 +19,9 @@ export class PalsService {
   constructor(
     private palworldVersionService: PalworldVersionService,
     private httpClient: HttpClient,
+    locationStrategy: LocationStrategy,
   ) {
+    this.baseHref = locationStrategy.getBaseHref();
     this.palworldVersionService.version$.pipe(switchMap((v) => this.loadVersion(v))).subscribe();
   }
 
@@ -95,7 +99,7 @@ export class PalsService {
   }
 
   private getPalAssetUrl(version: string, path: string) {
-    return `/assets/palworld/${version}/Pals/${path}`;
+    return `${this.baseHref}assets/palworld/${version}/Pals/${path}`;
   }
 }
 
