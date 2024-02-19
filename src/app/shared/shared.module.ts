@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PalworldDataModule } from '../palworld-data/palworld-data.module';
+import { ApiModule } from '../api/api.module';
 
 @NgModule({
-  imports: [CommonModule, PalworldDataModule],
-  exports: [CommonModule, PalworldDataModule],
+  imports: [CommonModule, ApiModule.forRoot()],
+  exports: [CommonModule, ApiModule],
 })
 export class SharedModule {}

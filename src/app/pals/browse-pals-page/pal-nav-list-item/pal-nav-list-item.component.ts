@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { PalTribe } from '../../../palworld-data/pals.service';
 import { NgOptimizedImage } from '@angular/common';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { PalElement, PalsApi, PalTribe } from '../../../api/api-clients';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { catchError, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-pal-nav-list-item',
@@ -19,34 +21,51 @@ export class PalNavListItemComponent {
 
   set tribe(value: PalTribe) {
     this._tribe = value;
-    this.tribeDisplayValue = computeDisplayValue(value);
+    this.update(value);
   }
 
   protected _tribe: PalTribe = null!;
-  protected tribeDisplayValue: TribeDisplayValue = null!;
-}
+  protected icon?: SafeUrl;
+  protected name: string = '';
+  protected elements: [PalElement, PalElement?][] = [];
+  protected rarityRange: [number, number] = [0, 0];
+  protected hasNocturnalVariant: boolean = false;
+  protected hasBossVariant: boolean = false;
+  protected hasGymBossVariant: boolean = false;
 
-const computeDisplayValue = (tribe: PalTribe): TribeDisplayValue => {
-  const allVariants = [tribe.main, tribe.boss, tribe.gym, ...(tribe.otherVariants ?? [])].filter(Boolean).map((p) => p!);
-  const rarities = allVariants.map((v) => v.rarity);
+  constructor(
+    private palsApi: PalsApi,
+    private sanitizer: DomSanitizer,
+  ) {}
 
-  return {
-    icon: tribe.iconPath,
-    name: tribe.name,
-    elements: allVariants.map((v) => [v.elementType1, v.elementType2]),
-    rarityRange: [Math.min(...rarities), Math.max(...rarities)],
-    hasNocturnalVariant: allVariants.some((v) => v.isNocturnal),
-    hasBossVariant: allVariants.some((v) => v.isBoss),
-    hasTowerBossVariant: allVariants.some((v) => v.isTowerBoss),
-  };
-};
+  private update(tribe: PalTribe) {
+    const allVariants = tribe.pals;
+    const rarities = allVariants.map((v) => v.statistics.rarity);
 
-interface TribeDisplayValue {
-  readonly icon?: string;
-  readonly name: string;
-  readonly elements: [string, string][];
-  readonly rarityRange: [number, number];
-  readonly hasNocturnalVariant: boolean;
-  readonly hasBossVariant: boolean;
-  readonly hasTowerBossVariant: boolean;
+    this.name = tribe.name;
+    this.elements = allVariants.map((v) => [v.element1, v.element2]);
+    this.rarityRange = [Math.min(...rarities), Math.max(...rarities)];
+    this.hasNocturnalVariant = allVariants.some((v) => v.isNocturnal);
+    this.hasBossVariant = allVariants.some((v) => v.isBoss);
+    this.hasGymBossVariant = allVariants.some((v) => v.isGymBoss);
+
+    this.icon = undefined;
+    this.palsApi
+      .getIcon(tribe.name)
+      .pipe(
+        map((file) => file.data),
+        catchError((err) => {
+          console.error(err);
+          return of(undefined);
+        }),
+      )
+      .subscribe((icon) => {
+        if (icon) {
+          const iconUrl = URL.createObjectURL(icon);
+          this.icon = this.sanitizer.bypassSecurityTrustUrl(iconUrl);
+        } else {
+          this.icon = undefined;
+        }
+      });
+  }
 }

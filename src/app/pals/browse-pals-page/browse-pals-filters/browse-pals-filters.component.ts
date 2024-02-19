@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TribesSearchFilter } from '../../../palworld-data/tribes-searcher';
-import { PalwordEnumsService } from '../../../palworld-data/palword-enums.service';
+import { TribesSearchFilter } from '../browse-pals-page.component';
+import { getEnumValues } from '../../../shared/utils/enum-utils';
+import { PalElement, PalSize } from '../../../api/api-clients';
 
 @Component({
   selector: 'app-browse-pals-filters',
@@ -13,12 +14,12 @@ import { PalwordEnumsService } from '../../../palworld-data/palword-enums.servic
 export class BrowsePalsFiltersComponent implements OnInit {
   @Output() filter: EventEmitter<TribesSearchFilter> = new EventEmitter<TribesSearchFilter>();
 
-  protected elementTypes: string[] = [];
+  protected elementTypes: PalElement[] = [];
   protected rarities: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   protected form = new FormGroup({
-    size: new FormControl<string[] | undefined>(undefined, { nonNullable: true }),
-    elementTypes: new FormControl<string[] | undefined>(undefined, { nonNullable: true }),
+    size: new FormControl<PalSize[] | undefined>(undefined, { nonNullable: true }),
+    elementTypes: new FormControl<PalElement[] | undefined>(undefined, { nonNullable: true }),
     isNocturnal: new FormControl<boolean | undefined>(undefined, { nonNullable: true }),
     isBoss: new FormControl<boolean | undefined>(undefined, { nonNullable: true }),
     isTowerBoss: new FormControl<boolean | undefined>(undefined, { nonNullable: true }),
@@ -52,15 +53,15 @@ export class BrowsePalsFiltersComponent implements OnInit {
     monsterFarmMaxLevel: new FormControl<number | undefined>(undefined, { nonNullable: true }),
   });
 
-  constructor(private palworldEnumsService: PalwordEnumsService) {
-    this.palworldEnumsService.elementTypes$.subscribe((elementTypes) => (this.elementTypes = elementTypes.filter((e) => e !== 'None')));
+  constructor() {
+    this.elementTypes = getEnumValues(PalElement);
   }
 
   ngOnInit() {
     this.form.valueChanges.subscribe((value) => this.filter.emit(value));
   }
 
-  protected setElement(elementType: string, checked: boolean) {
+  protected setElement(elementType: PalElement, checked: boolean) {
     if (checked && (!this.form.controls.elementTypes.value || !this.form.controls.elementTypes.value.includes(elementType))) {
       const newValue = [...(this.form.controls.elementTypes.value ?? []), elementType];
       this.form.controls.elementTypes.setValue(newValue);

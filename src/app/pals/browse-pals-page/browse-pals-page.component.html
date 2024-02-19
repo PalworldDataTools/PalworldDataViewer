@@ -19,7 +19,7 @@
   </div>
 
   <div class="list-group list-group-flush">
-    @for (tribe of result.data; track tribe.main.tribeName) {
+    @for (tribe of result.data; track tribe.name) {
       <a class="list-group-item list-group-item-action" [routerLink]="['..', tribe.name]">
         <app-pal-nav-list-item [tribe]="tribe"></app-pal-nav-list-item>
       </a>
