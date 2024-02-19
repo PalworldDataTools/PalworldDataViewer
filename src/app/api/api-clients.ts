@@ -33,7 +33,6 @@ export class PalsApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -99,7 +98,6 @@ export class PalsApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -158,7 +156,6 @@ export class PalsApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/octet-stream"
             })
@@ -221,7 +218,6 @@ export class PalsApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -280,7 +276,6 @@ export class PalsApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -339,7 +334,6 @@ export class PalsApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -407,7 +401,6 @@ export class PalworldDataApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -475,7 +468,6 @@ export class PalworldSteamApplicationApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -532,7 +524,6 @@ export class PalworldSteamApplicationApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -589,7 +580,6 @@ export class PalworldSteamApplicationApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -646,7 +636,6 @@ export class PalworldSteamApplicationApi {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
-            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
