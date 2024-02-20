@@ -4,40 +4,40 @@
   <div class="mb-4">
     <h5>Filters</h5>
     <div class="ps-2">
-      <app-browse-pals-filters (filter)="onFilterChange($event); refresh()"></app-browse-pals-filters>
+      <app-browse-pals-filters (filtersChange)="onFiltersChange($event); refresh()"></app-browse-pals-filters>
     </div>
   </div>
 
   <div class="mb-2">
     @if (result) {
-      @if (result.data.length < result.totalResults) {
-        {{ result.data.length }} / {{ result.totalResults }} results
+      @if (result.results.length < result.pagination.totalCount) {
+        {{ result.results.length }} / {{ result.pagination.totalCount }} results
       } @else {
-        {{ result.data.length }} results
+        {{ result.results.length }} results
       }
     }
   </div>
 
   <div class="list-group list-group-flush">
-    @for (tribe of result.data; track tribe.name) {
+    @for (tribe of result.results; track tribe.name) {
       <a class="list-group-item list-group-item-action" [routerLink]="['..', tribe.name]">
         <app-pal-nav-list-item [tribe]="tribe"></app-pal-nav-list-item>
       </a>
     }
   </div>
 
-  @if (result.totalPages > 1) {
+  @if (result.pagination.totalPages > 1) {
     <nav class="mt-4">
       <ul class="pagination align-items-center justify-content-center">
-        <li class="page-item" [class.disabled]="result.pageNumber <= 1">
+        <li class="page-item" [class.disabled]="result.pagination.pageNumber <= 1">
           <a class="page-link user-select-none" (click)="previousPage()" role="button">Previous</a>
         </li>
         <li class="page-link">
-          {{ result.pageNumber }}
+          {{ result.pagination.pageNumber }}
           /
-          {{ result.totalPages }}
+          {{ result.pagination.totalPages }}
         </li>
-        <li class="page-item" [class.disabled]="result.pageNumber >= result.totalPages">
+        <li class="page-item" [class.disabled]="result.pagination.pageNumber >= result.pagination.totalPages">
           <a class="page-link user-select-none" (click)="nextPage()" role="button">Next</a>
         </li>
       </ul>

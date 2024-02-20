@@ -26,8 +26,122 @@ export class PalsApi {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7020";
     }
 
-    getTribeNames(): Observable<string[]> {
-        let url_ = this.baseUrl + "/v1/pals";
+    /**
+     * Get tribe names
+     * @param filter_Sizes (optional) The sizes of the resulting pals.
+     * @param filter_Elements (optional) The elements that the resulting pals can have, either as first or second element.
+     * @param filter_HasNocturnalVariant (optional) Should the resulting pals have a nocturnal variant.
+     * @param filter_HasEdibleVariant (optional) Should the resulting pals have a edible variant.
+     * @param filter_HasPredatorVariant (optional) Should the resulting pals have a predator variant.
+     * @param filter_HasBossVariant (optional) Should the resulting pals have a boss variant.
+     * @param filter_HasGymBossVariant (optional) Should the resulting pals have a gym boss variant.
+     * @param filter_Rarity_FromInclusive (optional) Lower bound of the range
+     * @param filter_Rarity_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Kindling_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Kindling_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Watering_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Watering_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Planting_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Planting_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_GeneratingElectricity_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_GeneratingElectricity_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Handwork_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Handwork_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Gathering_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Gathering_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Lumbering_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Lumbering_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Mining_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Mining_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_OilExtraction_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_OilExtraction_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_MedicineProduction_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_MedicineProduction_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Cooling_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Cooling_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Transporting_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Transporting_ToInclusive (optional) Upper bound of the range
+     * @param filter_WorkSuitability_Farming_FromInclusive (optional) Lower bound of the range
+     * @param filter_WorkSuitability_Farming_ToInclusive (optional) Upper bound of the range
+     * @param pagination_PageNumber (optional) The number of the page that is requested
+     * @param pagination_PageSize (optional) The number of results per page
+     */
+    searchTribes(filter_Sizes: PalSize[] | null | undefined, filter_Elements: PalElement[] | null | undefined, filter_HasNocturnalVariant: boolean | null | undefined, filter_HasEdibleVariant: boolean | null | undefined, filter_HasPredatorVariant: boolean | null | undefined, filter_HasBossVariant: boolean | null | undefined, filter_HasGymBossVariant: boolean | null | undefined, filter_Rarity_FromInclusive: number | null | undefined, filter_Rarity_ToInclusive: number | null | undefined, filter_WorkSuitability_Kindling_FromInclusive: number | null | undefined, filter_WorkSuitability_Kindling_ToInclusive: number | null | undefined, filter_WorkSuitability_Watering_FromInclusive: number | null | undefined, filter_WorkSuitability_Watering_ToInclusive: number | null | undefined, filter_WorkSuitability_Planting_FromInclusive: number | null | undefined, filter_WorkSuitability_Planting_ToInclusive: number | null | undefined, filter_WorkSuitability_GeneratingElectricity_FromInclusive: number | null | undefined, filter_WorkSuitability_GeneratingElectricity_ToInclusive: number | null | undefined, filter_WorkSuitability_Handwork_FromInclusive: number | null | undefined, filter_WorkSuitability_Handwork_ToInclusive: number | null | undefined, filter_WorkSuitability_Gathering_FromInclusive: number | null | undefined, filter_WorkSuitability_Gathering_ToInclusive: number | null | undefined, filter_WorkSuitability_Lumbering_FromInclusive: number | null | undefined, filter_WorkSuitability_Lumbering_ToInclusive: number | null | undefined, filter_WorkSuitability_Mining_FromInclusive: number | null | undefined, filter_WorkSuitability_Mining_ToInclusive: number | null | undefined, filter_WorkSuitability_OilExtraction_FromInclusive: number | null | undefined, filter_WorkSuitability_OilExtraction_ToInclusive: number | null | undefined, filter_WorkSuitability_MedicineProduction_FromInclusive: number | null | undefined, filter_WorkSuitability_MedicineProduction_ToInclusive: number | null | undefined, filter_WorkSuitability_Cooling_FromInclusive: number | null | undefined, filter_WorkSuitability_Cooling_ToInclusive: number | null | undefined, filter_WorkSuitability_Transporting_FromInclusive: number | null | undefined, filter_WorkSuitability_Transporting_ToInclusive: number | null | undefined, filter_WorkSuitability_Farming_FromInclusive: number | null | undefined, filter_WorkSuitability_Farming_ToInclusive: number | null | undefined, pagination_PageNumber: number | null | undefined, pagination_PageSize: number | null | undefined): Observable<SearchResultOfPalTribe> {
+        let url_ = this.baseUrl + "/v1/pals?";
+        if (filter_Sizes !== undefined && filter_Sizes !== null)
+            filter_Sizes && filter_Sizes.forEach(item => { url_ += "Filter.Sizes=" + encodeURIComponent("" + item) + "&"; });
+        if (filter_Elements !== undefined && filter_Elements !== null)
+            filter_Elements && filter_Elements.forEach(item => { url_ += "Filter.Elements=" + encodeURIComponent("" + item) + "&"; });
+        if (filter_HasNocturnalVariant !== undefined && filter_HasNocturnalVariant !== null)
+            url_ += "Filter.HasNocturnalVariant=" + encodeURIComponent("" + filter_HasNocturnalVariant) + "&";
+        if (filter_HasEdibleVariant !== undefined && filter_HasEdibleVariant !== null)
+            url_ += "Filter.HasEdibleVariant=" + encodeURIComponent("" + filter_HasEdibleVariant) + "&";
+        if (filter_HasPredatorVariant !== undefined && filter_HasPredatorVariant !== null)
+            url_ += "Filter.HasPredatorVariant=" + encodeURIComponent("" + filter_HasPredatorVariant) + "&";
+        if (filter_HasBossVariant !== undefined && filter_HasBossVariant !== null)
+            url_ += "Filter.HasBossVariant=" + encodeURIComponent("" + filter_HasBossVariant) + "&";
+        if (filter_HasGymBossVariant !== undefined && filter_HasGymBossVariant !== null)
+            url_ += "Filter.HasGymBossVariant=" + encodeURIComponent("" + filter_HasGymBossVariant) + "&";
+        if (filter_Rarity_FromInclusive !== undefined && filter_Rarity_FromInclusive !== null)
+            url_ += "Filter.Rarity.FromInclusive=" + encodeURIComponent("" + filter_Rarity_FromInclusive) + "&";
+        if (filter_Rarity_ToInclusive !== undefined && filter_Rarity_ToInclusive !== null)
+            url_ += "Filter.Rarity.ToInclusive=" + encodeURIComponent("" + filter_Rarity_ToInclusive) + "&";
+        if (filter_WorkSuitability_Kindling_FromInclusive !== undefined && filter_WorkSuitability_Kindling_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Kindling.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Kindling_FromInclusive) + "&";
+        if (filter_WorkSuitability_Kindling_ToInclusive !== undefined && filter_WorkSuitability_Kindling_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Kindling.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Kindling_ToInclusive) + "&";
+        if (filter_WorkSuitability_Watering_FromInclusive !== undefined && filter_WorkSuitability_Watering_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Watering.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Watering_FromInclusive) + "&";
+        if (filter_WorkSuitability_Watering_ToInclusive !== undefined && filter_WorkSuitability_Watering_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Watering.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Watering_ToInclusive) + "&";
+        if (filter_WorkSuitability_Planting_FromInclusive !== undefined && filter_WorkSuitability_Planting_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Planting.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Planting_FromInclusive) + "&";
+        if (filter_WorkSuitability_Planting_ToInclusive !== undefined && filter_WorkSuitability_Planting_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Planting.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Planting_ToInclusive) + "&";
+        if (filter_WorkSuitability_GeneratingElectricity_FromInclusive !== undefined && filter_WorkSuitability_GeneratingElectricity_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.GeneratingElectricity.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_GeneratingElectricity_FromInclusive) + "&";
+        if (filter_WorkSuitability_GeneratingElectricity_ToInclusive !== undefined && filter_WorkSuitability_GeneratingElectricity_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.GeneratingElectricity.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_GeneratingElectricity_ToInclusive) + "&";
+        if (filter_WorkSuitability_Handwork_FromInclusive !== undefined && filter_WorkSuitability_Handwork_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Handwork.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Handwork_FromInclusive) + "&";
+        if (filter_WorkSuitability_Handwork_ToInclusive !== undefined && filter_WorkSuitability_Handwork_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Handwork.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Handwork_ToInclusive) + "&";
+        if (filter_WorkSuitability_Gathering_FromInclusive !== undefined && filter_WorkSuitability_Gathering_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Gathering.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Gathering_FromInclusive) + "&";
+        if (filter_WorkSuitability_Gathering_ToInclusive !== undefined && filter_WorkSuitability_Gathering_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Gathering.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Gathering_ToInclusive) + "&";
+        if (filter_WorkSuitability_Lumbering_FromInclusive !== undefined && filter_WorkSuitability_Lumbering_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Lumbering.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Lumbering_FromInclusive) + "&";
+        if (filter_WorkSuitability_Lumbering_ToInclusive !== undefined && filter_WorkSuitability_Lumbering_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Lumbering.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Lumbering_ToInclusive) + "&";
+        if (filter_WorkSuitability_Mining_FromInclusive !== undefined && filter_WorkSuitability_Mining_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Mining.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Mining_FromInclusive) + "&";
+        if (filter_WorkSuitability_Mining_ToInclusive !== undefined && filter_WorkSuitability_Mining_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Mining.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Mining_ToInclusive) + "&";
+        if (filter_WorkSuitability_OilExtraction_FromInclusive !== undefined && filter_WorkSuitability_OilExtraction_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.OilExtraction.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_OilExtraction_FromInclusive) + "&";
+        if (filter_WorkSuitability_OilExtraction_ToInclusive !== undefined && filter_WorkSuitability_OilExtraction_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.OilExtraction.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_OilExtraction_ToInclusive) + "&";
+        if (filter_WorkSuitability_MedicineProduction_FromInclusive !== undefined && filter_WorkSuitability_MedicineProduction_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.MedicineProduction.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_MedicineProduction_FromInclusive) + "&";
+        if (filter_WorkSuitability_MedicineProduction_ToInclusive !== undefined && filter_WorkSuitability_MedicineProduction_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.MedicineProduction.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_MedicineProduction_ToInclusive) + "&";
+        if (filter_WorkSuitability_Cooling_FromInclusive !== undefined && filter_WorkSuitability_Cooling_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Cooling.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Cooling_FromInclusive) + "&";
+        if (filter_WorkSuitability_Cooling_ToInclusive !== undefined && filter_WorkSuitability_Cooling_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Cooling.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Cooling_ToInclusive) + "&";
+        if (filter_WorkSuitability_Transporting_FromInclusive !== undefined && filter_WorkSuitability_Transporting_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Transporting.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Transporting_FromInclusive) + "&";
+        if (filter_WorkSuitability_Transporting_ToInclusive !== undefined && filter_WorkSuitability_Transporting_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Transporting.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Transporting_ToInclusive) + "&";
+        if (filter_WorkSuitability_Farming_FromInclusive !== undefined && filter_WorkSuitability_Farming_FromInclusive !== null)
+            url_ += "Filter.WorkSuitability.Farming.FromInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Farming_FromInclusive) + "&";
+        if (filter_WorkSuitability_Farming_ToInclusive !== undefined && filter_WorkSuitability_Farming_ToInclusive !== null)
+            url_ += "Filter.WorkSuitability.Farming.ToInclusive=" + encodeURIComponent("" + filter_WorkSuitability_Farming_ToInclusive) + "&";
+        if (pagination_PageNumber !== undefined && pagination_PageNumber !== null)
+            url_ += "Pagination.PageNumber=" + encodeURIComponent("" + pagination_PageNumber) + "&";
+        if (pagination_PageSize !== undefined && pagination_PageSize !== null)
+            url_ += "Pagination.PageSize=" + encodeURIComponent("" + pagination_PageSize) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -39,20 +153,20 @@ export class PalsApi {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetTribeNames(response_);
+            return this.processSearchTribes(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetTribeNames(response_ as any);
+                    return this.processSearchTribes(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<string[]>;
+                    return _observableThrow(e) as any as Observable<SearchResultOfPalTribe>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<string[]>;
+                return _observableThrow(response_) as any as Observable<SearchResultOfPalTribe>;
         }));
     }
 
-    protected processGetTribeNames(response: HttpResponseBase): Observable<string[]> {
+    protected processSearchTribes(response: HttpResponseBase): Observable<SearchResultOfPalTribe> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -63,14 +177,7 @@ export class PalsApi {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(item);
-            }
-            else {
-                result200 = <any>null;
-            }
+            result200 = SearchResultOfPalTribe.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 404) {
@@ -88,6 +195,11 @@ export class PalsApi {
         return _observableOf(null as any);
     }
 
+    /**
+     * Get Tribe
+     * @param tribeName The name of the tribe to get
+     * @return The tribe of pals with the given name
+     */
     getTribe(tribeName: string): Observable<PalTribe> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}";
         if (tribeName === undefined || tribeName === null)
@@ -146,6 +258,11 @@ export class PalsApi {
         return _observableOf(null as any);
     }
 
+    /**
+     * Get Pal Icon
+     * @param tribeName The name of the tribe to get
+     * @return The icon of the given tribe
+     */
     getIcon(tribeName: string): Observable<FileResponse> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}/icon";
         if (tribeName === undefined || tribeName === null)
@@ -208,6 +325,11 @@ export class PalsApi {
         return _observableOf(null as any);
     }
 
+    /**
+     * Get Pal
+     * @param tribeName The name of the tribe to get
+     * @return The main pal of the requested tribe
+     */
     getPal(tribeName: string): Observable<Pal> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}/main";
         if (tribeName === undefined || tribeName === null)
@@ -266,6 +388,11 @@ export class PalsApi {
         return _observableOf(null as any);
     }
 
+    /**
+     * Get BOSS Pal
+     * @param tribeName The name of the tribe to get
+     * @return The boss pal of the requested tribe
+     */
     getBossPal(tribeName: string): Observable<Pal> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}/boss";
         if (tribeName === undefined || tribeName === null)
@@ -324,6 +451,11 @@ export class PalsApi {
         return _observableOf(null as any);
     }
 
+    /**
+     * Get GYM Pal
+     * @param tribeName The name of the tribe to get
+     * @return The gym pal of the requested tribe
+     */
     getGymPal(tribeName: string): Observable<Pal> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}/gym";
         if (tribeName === undefined || tribeName === null)
@@ -384,7 +516,7 @@ export class PalsApi {
 }
 
 @Injectable()
-export class PalworldDataApi {
+export class PalworldApiApi {
     private http: HttpClient;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -394,6 +526,9 @@ export class PalworldDataApi {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7020";
     }
 
+    /**
+     * Get available versions
+     */
     getPalworldVersions(): Observable<string[]> {
         let url_ = this.baseUrl + "/v1/palworld/versions";
         url_ = url_.replace(/[?&]$/, "");
@@ -461,6 +596,10 @@ export class PalworldSteamApplicationApi {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7020";
     }
 
+    /**
+     * Get steam application id
+     * @return The ID of the steam application of the game
+     */
     getSteamApplicationId(): Observable<string> {
         let url_ = this.baseUrl + "/v1/application/steam/id";
         url_ = url_.replace(/[?&]$/, "");
@@ -517,6 +656,10 @@ export class PalworldSteamApplicationApi {
         return _observableOf(null as any);
     }
 
+    /**
+     * Get steam application name
+     * @return The name of the steam application of the game
+     */
     getSteamApplicationName(): Observable<string> {
         let url_ = this.baseUrl + "/v1/application/steam/name";
         url_ = url_.replace(/[?&]$/, "");
@@ -573,6 +716,10 @@ export class PalworldSteamApplicationApi {
         return _observableOf(null as any);
     }
 
+    /**
+     * Get steam application build id
+     * @return The build id of the steam application of the game
+     */
     getSteamBuildId(): Observable<string> {
         let url_ = this.baseUrl + "/v1/application/steam/build-id";
         url_ = url_.replace(/[?&]$/, "");
@@ -629,6 +776,10 @@ export class PalworldSteamApplicationApi {
         return _observableOf(null as any);
     }
 
+    /**
+     * Get steam application size
+     * @return The size of the steam application of the game
+     */
     getSteamApplicationSize(): Observable<number> {
         let url_ = this.baseUrl + "/v1/application/steam/size";
         url_ = url_.replace(/[?&]$/, "");
@@ -684,6 +835,944 @@ export class PalworldSteamApplicationApi {
         }
         return _observableOf(null as any);
     }
+}
+
+/** The result of a search */
+export class SearchResultOfPalTribe implements ISearchResultOfPalTribe {
+    /** The current page of results
+             */
+    results!: PalTribe[];
+    /** The pagination information of the result
+             */
+    pagination!: PaginationResult;
+
+    constructor(data?: ISearchResultOfPalTribe) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.results = [];
+            this.pagination = new PaginationResult();
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["results"])) {
+                this.results = [] as any;
+                for (let item of _data["results"])
+                    this.results!.push(PalTribe.fromJS(item));
+            }
+            this.pagination = _data["pagination"] ? PaginationResult.fromJS(_data["pagination"]) : new PaginationResult();
+        }
+    }
+
+    static fromJS(data: any): SearchResultOfPalTribe {
+        data = typeof data === 'object' ? data : {};
+        let result = new SearchResultOfPalTribe();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.results)) {
+            data["results"] = [];
+            for (let item of this.results)
+                data["results"].push(item.toJSON());
+        }
+        data["pagination"] = this.pagination ? this.pagination.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+/** The result of a search */
+export interface ISearchResultOfPalTribe {
+    /** The current page of results
+             */
+    results: PalTribe[];
+    /** The pagination information of the result
+             */
+    pagination: PaginationResult;
+}
+
+/** Tribe of pals. A tribe is a collection of pal variants that look the same but vary in statistics. For example, there might be a pal, its boss variant and its gym boss variant in the same tribe. There could also be variants of different elements with different spells that are meant to live in different biomes. */
+export class PalTribe implements IPalTribe {
+    /** The name of the tribe
+             */
+    name!: string;
+    /** The pals in the tribe
+             */
+    pals!: Pal[];
+
+    constructor(data?: IPalTribe) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.pals = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            if (Array.isArray(_data["pals"])) {
+                this.pals = [] as any;
+                for (let item of _data["pals"])
+                    this.pals!.push(Pal.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PalTribe {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalTribe();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        if (Array.isArray(this.pals)) {
+            data["pals"] = [];
+            for (let item of this.pals)
+                data["pals"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+/** Tribe of pals. A tribe is a collection of pal variants that look the same but vary in statistics. For example, there might be a pal, its boss variant and its gym boss variant in the same tribe. There could also be variants of different elements with different spells that are meant to live in different biomes. */
+export interface IPalTribe {
+    /** The name of the tribe
+             */
+    name: string;
+    /** The pals in the tribe
+             */
+    pals: Pal[];
+}
+
+/** Pals are the main entities of Palworld. They are the creatures that can be captured and used to fight or work. */
+export class Pal implements IPal {
+    /** The identity of the pal
+             */
+    identity!: PalIdentity;
+    /** Is the pal a boss. Bosses can be found in specific locations in the world or in gyms
+             */
+    isBoss!: boolean;
+    /** Is the pal the boss of a gym
+             */
+    isGymBoss!: boolean;
+    /** Is the pal active at night time
+             */
+    isNocturnal!: boolean;
+    /** Is the pal edible. If the pal is edible, there remains will be eaten by nearby predator pals when they die
+             */
+    isEdible!: boolean;
+    /** Is the pal a predator. If the pal is a predator, they will eat the remains of nearby edible pals after they die
+             */
+    isPredator!: boolean;
+    /** The first element type of the pal
+             */
+    element1!: PalElement;
+    /** The second element type of the pal, if any
+             */
+    element2?: PalElement | undefined;
+    /** The statistics of the pal
+             */
+    statistics!: PalStatistics;
+    /** The sensors of the pal
+             */
+    sensors!: PalSensors;
+    /** The nutrition statistics of the pal
+             */
+    nutrition!: PalNutrition;
+    /** The combat statistics of the pal
+             */
+    combat!: PalCombat;
+    /** The breeding statistics of the pal
+             */
+    breeding!: PalBreeding;
+    /** The work statistics of the pal
+             */
+    workSuitability!: PalWorkSuitability;
+
+    constructor(data?: IPal) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.identity = new PalIdentity();
+            this.statistics = new PalStatistics();
+            this.sensors = new PalSensors();
+            this.nutrition = new PalNutrition();
+            this.combat = new PalCombat();
+            this.breeding = new PalBreeding();
+            this.workSuitability = new PalWorkSuitability();
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.identity = _data["identity"] ? PalIdentity.fromJS(_data["identity"]) : new PalIdentity();
+            this.isBoss = _data["isBoss"];
+            this.isGymBoss = _data["isGymBoss"];
+            this.isNocturnal = _data["isNocturnal"];
+            this.isEdible = _data["isEdible"];
+            this.isPredator = _data["isPredator"];
+            this.element1 = _data["element1"];
+            this.element2 = _data["element2"];
+            this.statistics = _data["statistics"] ? PalStatistics.fromJS(_data["statistics"]) : new PalStatistics();
+            this.sensors = _data["sensors"] ? PalSensors.fromJS(_data["sensors"]) : new PalSensors();
+            this.nutrition = _data["nutrition"] ? PalNutrition.fromJS(_data["nutrition"]) : new PalNutrition();
+            this.combat = _data["combat"] ? PalCombat.fromJS(_data["combat"]) : new PalCombat();
+            this.breeding = _data["breeding"] ? PalBreeding.fromJS(_data["breeding"]) : new PalBreeding();
+            this.workSuitability = _data["workSuitability"] ? PalWorkSuitability.fromJS(_data["workSuitability"]) : new PalWorkSuitability();
+        }
+    }
+
+    static fromJS(data: any): Pal {
+        data = typeof data === 'object' ? data : {};
+        let result = new Pal();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["identity"] = this.identity ? this.identity.toJSON() : <any>undefined;
+        data["isBoss"] = this.isBoss;
+        data["isGymBoss"] = this.isGymBoss;
+        data["isNocturnal"] = this.isNocturnal;
+        data["isEdible"] = this.isEdible;
+        data["isPredator"] = this.isPredator;
+        data["element1"] = this.element1;
+        data["element2"] = this.element2;
+        data["statistics"] = this.statistics ? this.statistics.toJSON() : <any>undefined;
+        data["sensors"] = this.sensors ? this.sensors.toJSON() : <any>undefined;
+        data["nutrition"] = this.nutrition ? this.nutrition.toJSON() : <any>undefined;
+        data["combat"] = this.combat ? this.combat.toJSON() : <any>undefined;
+        data["breeding"] = this.breeding ? this.breeding.toJSON() : <any>undefined;
+        data["workSuitability"] = this.workSuitability ? this.workSuitability.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+/** Pals are the main entities of Palworld. They are the creatures that can be captured and used to fight or work. */
+export interface IPal {
+    /** The identity of the pal
+             */
+    identity: PalIdentity;
+    /** Is the pal a boss. Bosses can be found in specific locations in the world or in gyms
+             */
+    isBoss: boolean;
+    /** Is the pal the boss of a gym
+             */
+    isGymBoss: boolean;
+    /** Is the pal active at night time
+             */
+    isNocturnal: boolean;
+    /** Is the pal edible. If the pal is edible, there remains will be eaten by nearby predator pals when they die
+             */
+    isEdible: boolean;
+    /** Is the pal a predator. If the pal is a predator, they will eat the remains of nearby edible pals after they die
+             */
+    isPredator: boolean;
+    /** The first element type of the pal
+             */
+    element1: PalElement;
+    /** The second element type of the pal, if any
+             */
+    element2?: PalElement | undefined;
+    /** The statistics of the pal
+             */
+    statistics: PalStatistics;
+    /** The sensors of the pal
+             */
+    sensors: PalSensors;
+    /** The nutrition statistics of the pal
+             */
+    nutrition: PalNutrition;
+    /** The combat statistics of the pal
+             */
+    combat: PalCombat;
+    /** The breeding statistics of the pal
+             */
+    breeding: PalBreeding;
+    /** The work statistics of the pal
+             */
+    workSuitability: PalWorkSuitability;
+}
+
+/** Identity of a pal */
+export class PalIdentity implements IPalIdentity {
+    /** The name of the tribe to which the pal belongs
+             */
+    tribeName!: string;
+    /** The unique ID of the pal
+             */
+    name!: string;
+    /** The nice representation of the name of the pal
+             */
+    displayName!: string;
+
+    constructor(data?: IPalIdentity) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.tribeName = _data["tribeName"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+        }
+    }
+
+    static fromJS(data: any): PalIdentity {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalIdentity();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["tribeName"] = this.tribeName;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        return data;
+    }
+}
+
+/** Identity of a pal */
+export interface IPalIdentity {
+    /** The name of the tribe to which the pal belongs
+             */
+    tribeName: string;
+    /** The unique ID of the pal
+             */
+    name: string;
+    /** The nice representation of the name of the pal
+             */
+    displayName: string;
+}
+
+/** Elements that pals or skills can have */
+export enum PalElement {
+    Unknown = "Unknown",
+    Dark = "Dark",
+    Dragon = "Dragon",
+    Earth = "Earth",
+    Electricity = "Electricity",
+    Fire = "Fire",
+    Ice = "Ice",
+    Leaf = "Leaf",
+    Normal = "Normal",
+    Water = "Water",
+}
+
+/** Statistics of a pal */
+export class PalStatistics implements IPalStatistics {
+    /** The size of the pal
+             */
+    size!: PalSize;
+    /** The rarity of the pal, from 1 to 10
+             */
+    rarity!: number;
+    /** The multiplier applied to the experience gained by the pal
+             */
+    expRatio!: number;
+    /** The stamina of the pal. It affects how long a pal can perform actions.
+             */
+    stamina!: number;
+    /** The speed of the pal when they walk slowly
+             */
+    slowWalkSpeed!: number;
+    /** The speed of the pal when they walk at a normal pace
+             */
+    walkSpeed!: number;
+    /** The speed of the pal when they run
+             */
+    runSpeed!: number;
+    /** The speed of the pal when they are used as a ride
+             */
+    rideSprintSpeed!: number;
+    /** The capture rate of the pal
+             */
+    captureRate!: number;
+    /** The price of the pal when they are being sold by a merchant
+             */
+    price!: number;
+
+    constructor(data?: IPalStatistics) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.size = _data["size"];
+            this.rarity = _data["rarity"];
+            this.expRatio = _data["expRatio"];
+            this.stamina = _data["stamina"];
+            this.slowWalkSpeed = _data["slowWalkSpeed"];
+            this.walkSpeed = _data["walkSpeed"];
+            this.runSpeed = _data["runSpeed"];
+            this.rideSprintSpeed = _data["rideSprintSpeed"];
+            this.captureRate = _data["captureRate"];
+            this.price = _data["price"];
+        }
+    }
+
+    static fromJS(data: any): PalStatistics {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalStatistics();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["size"] = this.size;
+        data["rarity"] = this.rarity;
+        data["expRatio"] = this.expRatio;
+        data["stamina"] = this.stamina;
+        data["slowWalkSpeed"] = this.slowWalkSpeed;
+        data["walkSpeed"] = this.walkSpeed;
+        data["runSpeed"] = this.runSpeed;
+        data["rideSprintSpeed"] = this.rideSprintSpeed;
+        data["captureRate"] = this.captureRate;
+        data["price"] = this.price;
+        return data;
+    }
+}
+
+/** Statistics of a pal */
+export interface IPalStatistics {
+    /** The size of the pal
+             */
+    size: PalSize;
+    /** The rarity of the pal, from 1 to 10
+             */
+    rarity: number;
+    /** The multiplier applied to the experience gained by the pal
+             */
+    expRatio: number;
+    /** The stamina of the pal. It affects how long a pal can perform actions.
+             */
+    stamina: number;
+    /** The speed of the pal when they walk slowly
+             */
+    slowWalkSpeed: number;
+    /** The speed of the pal when they walk at a normal pace
+             */
+    walkSpeed: number;
+    /** The speed of the pal when they run
+             */
+    runSpeed: number;
+    /** The speed of the pal when they are used as a ride
+             */
+    rideSprintSpeed: number;
+    /** The capture rate of the pal
+             */
+    captureRate: number;
+    /** The price of the pal when they are being sold by a merchant
+             */
+    price: number;
+}
+
+/** Sizes that the pals can have */
+export enum PalSize {
+    Unknown = "Unknown",
+    XS = "XS",
+    S = "S",
+    M = "M",
+    L = "L",
+    XL = "XL",
+}
+
+/** Sensors statistics of a pal */
+export class PalSensors implements IPalSensors {
+    /** The distance at which the pal can view other entities
+             */
+    viewingDistance!: number;
+    /** The angle at which the pal can view other entities
+             */
+    viewingAngle!: number;
+    /** The hearing rate of the pal
+             */
+    hearingRate!: number;
+
+    constructor(data?: IPalSensors) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.viewingDistance = _data["viewingDistance"];
+            this.viewingAngle = _data["viewingAngle"];
+            this.hearingRate = _data["hearingRate"];
+        }
+    }
+
+    static fromJS(data: any): PalSensors {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalSensors();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["viewingDistance"] = this.viewingDistance;
+        data["viewingAngle"] = this.viewingAngle;
+        data["hearingRate"] = this.hearingRate;
+        return data;
+    }
+}
+
+/** Sensors statistics of a pal */
+export interface IPalSensors {
+    /** The distance at which the pal can view other entities
+             */
+    viewingDistance: number;
+    /** The angle at which the pal can view other entities
+             */
+    viewingAngle: number;
+    /** The hearing rate of the pal
+             */
+    hearingRate: number;
+}
+
+/** Nutrition statistics of a pal */
+export class PalNutrition implements IPalNutrition {
+    /** The size of the stomach of the pal
+             */
+    maxFullStomach!: number;
+    /** The rate at which the stomach of the pal empties when it is full
+             */
+    fullStomachDecreaseRate!: number;
+    /** The food amount of the pal
+             */
+    foodAmount!: number;
+
+    constructor(data?: IPalNutrition) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxFullStomach = _data["maxFullStomach"];
+            this.fullStomachDecreaseRate = _data["fullStomachDecreaseRate"];
+            this.foodAmount = _data["foodAmount"];
+        }
+    }
+
+    static fromJS(data: any): PalNutrition {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalNutrition();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxFullStomach"] = this.maxFullStomach;
+        data["fullStomachDecreaseRate"] = this.fullStomachDecreaseRate;
+        data["foodAmount"] = this.foodAmount;
+        return data;
+    }
+}
+
+/** Nutrition statistics of a pal */
+export interface IPalNutrition {
+    /** The size of the stomach of the pal
+             */
+    maxFullStomach: number;
+    /** The rate at which the stomach of the pal empties when it is full
+             */
+    fullStomachDecreaseRate: number;
+    /** The food amount of the pal
+             */
+    foodAmount: number;
+}
+
+/** Combat statistics of a pal */
+export class PalCombat implements IPalCombat {
+    /** The HPs of the pal
+             */
+    hp!: number;
+    /** The melee attack of the pal
+             */
+    meleeAttack!: number;
+    /** The shot attack of the pal
+             */
+    shotAttack!: number;
+    /** The defense of the pal
+             */
+    defense!: number;
+    /** The support of the pal
+             */
+    support!: number;
+
+    constructor(data?: IPalCombat) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hp = _data["hp"];
+            this.meleeAttack = _data["meleeAttack"];
+            this.shotAttack = _data["shotAttack"];
+            this.defense = _data["defense"];
+            this.support = _data["support"];
+        }
+    }
+
+    static fromJS(data: any): PalCombat {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalCombat();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hp"] = this.hp;
+        data["meleeAttack"] = this.meleeAttack;
+        data["shotAttack"] = this.shotAttack;
+        data["defense"] = this.defense;
+        data["support"] = this.support;
+        return data;
+    }
+}
+
+/** Combat statistics of a pal */
+export interface IPalCombat {
+    /** The HPs of the pal
+             */
+    hp: number;
+    /** The melee attack of the pal
+             */
+    meleeAttack: number;
+    /** The shot attack of the pal
+             */
+    shotAttack: number;
+    /** The defense of the pal
+             */
+    defense: number;
+    /** The support of the pal
+             */
+    support: number;
+}
+
+/** Breeding statistics of a pal */
+export class PalBreeding implements IPalBreeding {
+    /** The probability of getting a male when breeding the pal
+             */
+    maleProbability!: number;
+    /** The breeding rank of the pal.
+The breeding rank is used to find the result of breeding two pals together. The child of two pals is the pal whose breeding rank is the closest to the average rank of
+its parents.
+             */
+    breedingRank!: number;
+
+    constructor(data?: IPalBreeding) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maleProbability = _data["maleProbability"];
+            this.breedingRank = _data["breedingRank"];
+        }
+    }
+
+    static fromJS(data: any): PalBreeding {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalBreeding();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maleProbability"] = this.maleProbability;
+        data["breedingRank"] = this.breedingRank;
+        return data;
+    }
+}
+
+/** Breeding statistics of a pal */
+export interface IPalBreeding {
+    /** The probability of getting a male when breeding the pal
+             */
+    maleProbability: number;
+    /** The breeding rank of the pal.
+The breeding rank is used to find the result of breeding two pals together. The child of two pals is the pal whose breeding rank is the closest to the average rank of
+its parents.
+             */
+    breedingRank: number;
+}
+
+/** Work suitability of a pal */
+export class PalWorkSuitability implements IPalWorkSuitability {
+    /** The craft speed of the pal
+             */
+    craftSpeed!: number;
+    /** The speed of the pal when they transport object in a base
+             */
+    transportSpeed!: number;
+    /** The level of the kindling role of the pal
+             */
+    kindling!: number;
+    /** The level of the watering role of the pal
+             */
+    watering!: number;
+    /** The level of the planting role of the pal
+             */
+    planting!: number;
+    /** The level of the generating electricity role of the pal
+             */
+    generatingElectricity!: number;
+    /** The level of the handwork role of the pal
+             */
+    handwork!: number;
+    /** The level of the gathering role of the pal
+             */
+    gathering!: number;
+    /** The level of the lumbering role of the pal
+             */
+    lumbering!: number;
+    /** The level of the mining role of the pal
+             */
+    mining!: number;
+    /** The level of the oil extraction role of the pal
+             */
+    oilExtraction!: number;
+    /** The level of the medicine production role of the pal
+             */
+    medicineProduction!: number;
+    /** The level of the cooling role of the pal
+             */
+    cooling!: number;
+    /** The level of the transporting role of the pal
+             */
+    transporting!: number;
+    /** The level of the farming role of the pal
+             */
+    farming!: number;
+
+    constructor(data?: IPalWorkSuitability) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.craftSpeed = _data["craftSpeed"];
+            this.transportSpeed = _data["transportSpeed"];
+            this.kindling = _data["kindling"];
+            this.watering = _data["watering"];
+            this.planting = _data["planting"];
+            this.generatingElectricity = _data["generatingElectricity"];
+            this.handwork = _data["handwork"];
+            this.gathering = _data["gathering"];
+            this.lumbering = _data["lumbering"];
+            this.mining = _data["mining"];
+            this.oilExtraction = _data["oilExtraction"];
+            this.medicineProduction = _data["medicineProduction"];
+            this.cooling = _data["cooling"];
+            this.transporting = _data["transporting"];
+            this.farming = _data["farming"];
+        }
+    }
+
+    static fromJS(data: any): PalWorkSuitability {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalWorkSuitability();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["craftSpeed"] = this.craftSpeed;
+        data["transportSpeed"] = this.transportSpeed;
+        data["kindling"] = this.kindling;
+        data["watering"] = this.watering;
+        data["planting"] = this.planting;
+        data["generatingElectricity"] = this.generatingElectricity;
+        data["handwork"] = this.handwork;
+        data["gathering"] = this.gathering;
+        data["lumbering"] = this.lumbering;
+        data["mining"] = this.mining;
+        data["oilExtraction"] = this.oilExtraction;
+        data["medicineProduction"] = this.medicineProduction;
+        data["cooling"] = this.cooling;
+        data["transporting"] = this.transporting;
+        data["farming"] = this.farming;
+        return data;
+    }
+}
+
+/** Work suitability of a pal */
+export interface IPalWorkSuitability {
+    /** The craft speed of the pal
+             */
+    craftSpeed: number;
+    /** The speed of the pal when they transport object in a base
+             */
+    transportSpeed: number;
+    /** The level of the kindling role of the pal
+             */
+    kindling: number;
+    /** The level of the watering role of the pal
+             */
+    watering: number;
+    /** The level of the planting role of the pal
+             */
+    planting: number;
+    /** The level of the generating electricity role of the pal
+             */
+    generatingElectricity: number;
+    /** The level of the handwork role of the pal
+             */
+    handwork: number;
+    /** The level of the gathering role of the pal
+             */
+    gathering: number;
+    /** The level of the lumbering role of the pal
+             */
+    lumbering: number;
+    /** The level of the mining role of the pal
+             */
+    mining: number;
+    /** The level of the oil extraction role of the pal
+             */
+    oilExtraction: number;
+    /** The level of the medicine production role of the pal
+             */
+    medicineProduction: number;
+    /** The level of the cooling role of the pal
+             */
+    cooling: number;
+    /** The level of the transporting role of the pal
+             */
+    transporting: number;
+    /** The level of the farming role of the pal
+             */
+    farming: number;
+}
+
+/** Pagination information of a search result */
+export class PaginationResult implements IPaginationResult {
+    /** The current page number
+             */
+    pageNumber!: number;
+    /** The number of results per page
+             */
+    pageSize!: number;
+    /** The total number of results
+             */
+    totalCount!: number;
+    /** The total number of pages
+             */
+    totalPages!: number;
+
+    constructor(data?: IPaginationResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.pageNumber = _data["pageNumber"];
+            this.pageSize = _data["pageSize"];
+            this.totalCount = _data["totalCount"];
+            this.totalPages = _data["totalPages"];
+        }
+    }
+
+    static fromJS(data: any): PaginationResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new PaginationResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["pageNumber"] = this.pageNumber;
+        data["pageSize"] = this.pageSize;
+        data["totalCount"] = this.totalCount;
+        data["totalPages"] = this.totalPages;
+        return data;
+    }
+}
+
+/** Pagination information of a search result */
+export interface IPaginationResult {
+    /** The current page number
+             */
+    pageNumber: number;
+    /** The number of results per page
+             */
+    pageSize: number;
+    /** The total number of results
+             */
+    totalCount: number;
+    /** The total number of pages
+             */
+    totalPages: number;
 }
 
 export class ProblemDetails implements IProblemDetails {
@@ -750,160 +1839,37 @@ export interface IProblemDetails {
     [key: string]: any;
 }
 
-export class PalTribe implements IPalTribe {
-    name!: string;
-    pals!: Pal[];
+/** Filter parameters used to search pals */
+export class PalsFilters implements IPalsFilters {
+    /** The sizes of the resulting pals.
+             */
+    sizes?: PalSize[] | undefined;
+    /** The elements that the resulting pals can have, either as first or second element.
+             */
+    elements?: PalElement[] | undefined;
+    /** Should the resulting pals have a nocturnal variant.
+             */
+    hasNocturnalVariant?: boolean | undefined;
+    /** Should the resulting pals have a edible variant.
+             */
+    hasEdibleVariant?: boolean | undefined;
+    /** Should the resulting pals have a predator variant.
+             */
+    hasPredatorVariant?: boolean | undefined;
+    /** Should the resulting pals have a boss variant.
+             */
+    hasBossVariant?: boolean | undefined;
+    /** Should the resulting pals have a gym boss variant.
+             */
+    hasGymBossVariant?: boolean | undefined;
+    /** The range of rarities of the resulting pals.
+             */
+    rarity?: IntRangeFilter | undefined;
+    /** The work suitability filter parameters
+             */
+    workSuitability?: PalsWorkSuitabilityFilters | undefined;
 
-    constructor(data?: IPalTribe) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.pals = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.name = _data["name"];
-            if (Array.isArray(_data["pals"])) {
-                this.pals = [] as any;
-                for (let item of _data["pals"])
-                    this.pals!.push(Pal.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PalTribe {
-        data = typeof data === 'object' ? data : {};
-        let result = new PalTribe();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        if (Array.isArray(this.pals)) {
-            data["pals"] = [];
-            for (let item of this.pals)
-                data["pals"].push(item.toJSON());
-        }
-        return data;
-    }
-}
-
-export interface IPalTribe {
-    name: string;
-    pals: Pal[];
-}
-
-export class Pal implements IPal {
-    identity!: PalIdentity;
-    isBoss!: boolean;
-    isGymBoss!: boolean;
-    isNocturnal!: boolean;
-    isEdible!: boolean;
-    isPredator!: boolean;
-    element1!: PalElement;
-    element2?: PalElement | undefined;
-    statistics!: PalStatistics;
-    sensors!: PalSensors;
-    nutrition!: PalNutrition;
-    combat!: PalCombat;
-    breeding!: PalBreeding;
-    work!: PalWork;
-
-    constructor(data?: IPal) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.identity = new PalIdentity();
-            this.statistics = new PalStatistics();
-            this.sensors = new PalSensors();
-            this.nutrition = new PalNutrition();
-            this.combat = new PalCombat();
-            this.breeding = new PalBreeding();
-            this.work = new PalWork();
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.identity = _data["identity"] ? PalIdentity.fromJS(_data["identity"]) : new PalIdentity();
-            this.isBoss = _data["isBoss"];
-            this.isGymBoss = _data["isGymBoss"];
-            this.isNocturnal = _data["isNocturnal"];
-            this.isEdible = _data["isEdible"];
-            this.isPredator = _data["isPredator"];
-            this.element1 = _data["element1"];
-            this.element2 = _data["element2"];
-            this.statistics = _data["statistics"] ? PalStatistics.fromJS(_data["statistics"]) : new PalStatistics();
-            this.sensors = _data["sensors"] ? PalSensors.fromJS(_data["sensors"]) : new PalSensors();
-            this.nutrition = _data["nutrition"] ? PalNutrition.fromJS(_data["nutrition"]) : new PalNutrition();
-            this.combat = _data["combat"] ? PalCombat.fromJS(_data["combat"]) : new PalCombat();
-            this.breeding = _data["breeding"] ? PalBreeding.fromJS(_data["breeding"]) : new PalBreeding();
-            this.work = _data["work"] ? PalWork.fromJS(_data["work"]) : new PalWork();
-        }
-    }
-
-    static fromJS(data: any): Pal {
-        data = typeof data === 'object' ? data : {};
-        let result = new Pal();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["identity"] = this.identity ? this.identity.toJSON() : <any>undefined;
-        data["isBoss"] = this.isBoss;
-        data["isGymBoss"] = this.isGymBoss;
-        data["isNocturnal"] = this.isNocturnal;
-        data["isEdible"] = this.isEdible;
-        data["isPredator"] = this.isPredator;
-        data["element1"] = this.element1;
-        data["element2"] = this.element2;
-        data["statistics"] = this.statistics ? this.statistics.toJSON() : <any>undefined;
-        data["sensors"] = this.sensors ? this.sensors.toJSON() : <any>undefined;
-        data["nutrition"] = this.nutrition ? this.nutrition.toJSON() : <any>undefined;
-        data["combat"] = this.combat ? this.combat.toJSON() : <any>undefined;
-        data["breeding"] = this.breeding ? this.breeding.toJSON() : <any>undefined;
-        data["work"] = this.work ? this.work.toJSON() : <any>undefined;
-        return data;
-    }
-}
-
-export interface IPal {
-    identity: PalIdentity;
-    isBoss: boolean;
-    isGymBoss: boolean;
-    isNocturnal: boolean;
-    isEdible: boolean;
-    isPredator: boolean;
-    element1: PalElement;
-    element2?: PalElement | undefined;
-    statistics: PalStatistics;
-    sensors: PalSensors;
-    nutrition: PalNutrition;
-    combat: PalCombat;
-    breeding: PalBreeding;
-    work: PalWork;
-}
-
-export class PalIdentity implements IPalIdentity {
-    tribeName!: string;
-    name!: string;
-    displayName!: string;
-
-    constructor(data?: IPalIdentity) {
+    constructor(data?: IPalsFilters) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -914,60 +1880,97 @@ export class PalIdentity implements IPalIdentity {
 
     init(_data?: any) {
         if (_data) {
-            this.tribeName = _data["tribeName"];
-            this.name = _data["name"];
-            this.displayName = _data["displayName"];
+            if (Array.isArray(_data["sizes"])) {
+                this.sizes = [] as any;
+                for (let item of _data["sizes"])
+                    this.sizes!.push(item);
+            }
+            if (Array.isArray(_data["elements"])) {
+                this.elements = [] as any;
+                for (let item of _data["elements"])
+                    this.elements!.push(item);
+            }
+            this.hasNocturnalVariant = _data["hasNocturnalVariant"];
+            this.hasEdibleVariant = _data["hasEdibleVariant"];
+            this.hasPredatorVariant = _data["hasPredatorVariant"];
+            this.hasBossVariant = _data["hasBossVariant"];
+            this.hasGymBossVariant = _data["hasGymBossVariant"];
+            this.rarity = _data["rarity"] ? IntRangeFilter.fromJS(_data["rarity"]) : <any>undefined;
+            this.workSuitability = _data["workSuitability"] ? PalsWorkSuitabilityFilters.fromJS(_data["workSuitability"]) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): PalIdentity {
+    static fromJS(data: any): PalsFilters {
         data = typeof data === 'object' ? data : {};
-        let result = new PalIdentity();
+        let result = new PalsFilters();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["tribeName"] = this.tribeName;
-        data["name"] = this.name;
-        data["displayName"] = this.displayName;
+        if (Array.isArray(this.sizes)) {
+            data["sizes"] = [];
+            for (let item of this.sizes)
+                data["sizes"].push(item);
+        }
+        if (Array.isArray(this.elements)) {
+            data["elements"] = [];
+            for (let item of this.elements)
+                data["elements"].push(item);
+        }
+        data["hasNocturnalVariant"] = this.hasNocturnalVariant;
+        data["hasEdibleVariant"] = this.hasEdibleVariant;
+        data["hasPredatorVariant"] = this.hasPredatorVariant;
+        data["hasBossVariant"] = this.hasBossVariant;
+        data["hasGymBossVariant"] = this.hasGymBossVariant;
+        data["rarity"] = this.rarity ? this.rarity.toJSON() : <any>undefined;
+        data["workSuitability"] = this.workSuitability ? this.workSuitability.toJSON() : <any>undefined;
         return data;
     }
 }
 
-export interface IPalIdentity {
-    tribeName: string;
-    name: string;
-    displayName: string;
+/** Filter parameters used to search pals */
+export interface IPalsFilters {
+    /** The sizes of the resulting pals.
+             */
+    sizes?: PalSize[] | undefined;
+    /** The elements that the resulting pals can have, either as first or second element.
+             */
+    elements?: PalElement[] | undefined;
+    /** Should the resulting pals have a nocturnal variant.
+             */
+    hasNocturnalVariant?: boolean | undefined;
+    /** Should the resulting pals have a edible variant.
+             */
+    hasEdibleVariant?: boolean | undefined;
+    /** Should the resulting pals have a predator variant.
+             */
+    hasPredatorVariant?: boolean | undefined;
+    /** Should the resulting pals have a boss variant.
+             */
+    hasBossVariant?: boolean | undefined;
+    /** Should the resulting pals have a gym boss variant.
+             */
+    hasGymBossVariant?: boolean | undefined;
+    /** The range of rarities of the resulting pals.
+             */
+    rarity?: IntRangeFilter | undefined;
+    /** The work suitability filter parameters
+             */
+    workSuitability?: PalsWorkSuitabilityFilters | undefined;
 }
 
-export enum PalElement {
-    Unknown = 0,
-    Dark = 1,
-    Dragon = 2,
-    Earth = 3,
-    Electricity = 4,
-    Fire = 5,
-    Ice = 6,
-    Leaf = 7,
-    Normal = 8,
-    Water = 9,
-}
+/** Range of integers used in search requests */
+export class IntRangeFilter implements IIntRangeFilter {
+    /** Lower bound of the range
+             */
+    fromInclusive?: number | undefined;
+    /** Upper bound of the range
+             */
+    toInclusive?: number | undefined;
 
-export class PalStatistics implements IPalStatistics {
-    size!: PalSize;
-    rarity!: number;
-    expRatio!: number;
-    stamina!: number;
-    slowWalkSpeed!: number;
-    walkSpeed!: number;
-    runSpeed!: number;
-    rideSprintSpeed!: number;
-    captureRate!: number;
-    price!: number;
-
-    constructor(data?: IPalStatistics) {
+    constructor(data?: IIntRangeFilter) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -978,70 +1981,79 @@ export class PalStatistics implements IPalStatistics {
 
     init(_data?: any) {
         if (_data) {
-            this.size = _data["size"];
-            this.rarity = _data["rarity"];
-            this.expRatio = _data["expRatio"];
-            this.stamina = _data["stamina"];
-            this.slowWalkSpeed = _data["slowWalkSpeed"];
-            this.walkSpeed = _data["walkSpeed"];
-            this.runSpeed = _data["runSpeed"];
-            this.rideSprintSpeed = _data["rideSprintSpeed"];
-            this.captureRate = _data["captureRate"];
-            this.price = _data["price"];
+            this.fromInclusive = _data["fromInclusive"];
+            this.toInclusive = _data["toInclusive"];
         }
     }
 
-    static fromJS(data: any): PalStatistics {
+    static fromJS(data: any): IntRangeFilter {
         data = typeof data === 'object' ? data : {};
-        let result = new PalStatistics();
+        let result = new IntRangeFilter();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["size"] = this.size;
-        data["rarity"] = this.rarity;
-        data["expRatio"] = this.expRatio;
-        data["stamina"] = this.stamina;
-        data["slowWalkSpeed"] = this.slowWalkSpeed;
-        data["walkSpeed"] = this.walkSpeed;
-        data["runSpeed"] = this.runSpeed;
-        data["rideSprintSpeed"] = this.rideSprintSpeed;
-        data["captureRate"] = this.captureRate;
-        data["price"] = this.price;
+        data["fromInclusive"] = this.fromInclusive;
+        data["toInclusive"] = this.toInclusive;
         return data;
     }
 }
 
-export interface IPalStatistics {
-    size: PalSize;
-    rarity: number;
-    expRatio: number;
-    stamina: number;
-    slowWalkSpeed: number;
-    walkSpeed: number;
-    runSpeed: number;
-    rideSprintSpeed: number;
-    captureRate: number;
-    price: number;
+/** Range of integers used in search requests */
+export interface IIntRangeFilter {
+    /** Lower bound of the range
+             */
+    fromInclusive?: number | undefined;
+    /** Upper bound of the range
+             */
+    toInclusive?: number | undefined;
 }
 
-export enum PalSize {
-    Unknown = 0,
-    XS = 1,
-    S = 2,
-    M = 3,
-    L = 4,
-    XL = 5,
-}
+/** Work suitability filter parameters used to search pals */
+export class PalsWorkSuitabilityFilters implements IPalsWorkSuitabilityFilters {
+    /** The range of kindling role of the resulting pals.
+             */
+    kindling?: IntRangeFilter | undefined;
+    /** The range of watering role of the resulting pals.
+             */
+    watering?: IntRangeFilter | undefined;
+    /** The range of planting role of the resulting pals.
+             */
+    planting?: IntRangeFilter | undefined;
+    /** The range of generating electricity role of the resulting pals.
+             */
+    generatingElectricity?: IntRangeFilter | undefined;
+    /** The range of handwork role of the resulting pals.
+             */
+    handwork?: IntRangeFilter | undefined;
+    /** The range of gathering role of the resulting pals.
+             */
+    gathering?: IntRangeFilter | undefined;
+    /** The range of lumbering role of the resulting pals.
+             */
+    lumbering?: IntRangeFilter | undefined;
+    /** The range of mining role of the resulting pals.
+             */
+    mining?: IntRangeFilter | undefined;
+    /** The range of oil extraction role of the resulting pals.
+             */
+    oilExtraction?: IntRangeFilter | undefined;
+    /** The range of medicine production role of the resulting pals.
+             */
+    medicineProduction?: IntRangeFilter | undefined;
+    /** The range of cooling role of the resulting pals.
+             */
+    cooling?: IntRangeFilter | undefined;
+    /** The range of transporting role of the resulting pals.
+             */
+    transporting?: IntRangeFilter | undefined;
+    /** The range of farming role of the resulting pals.
+             */
+    farming?: IntRangeFilter | undefined;
 
-export class PalSensors implements IPalSensors {
-    viewingDistance!: number;
-    viewingAngle!: number;
-    hearingRate!: number;
-
-    constructor(data?: IPalSensors) {
+    constructor(data?: IPalsWorkSuitabilityFilters) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -1052,40 +2064,101 @@ export class PalSensors implements IPalSensors {
 
     init(_data?: any) {
         if (_data) {
-            this.viewingDistance = _data["viewingDistance"];
-            this.viewingAngle = _data["viewingAngle"];
-            this.hearingRate = _data["hearingRate"];
+            this.kindling = _data["kindling"] ? IntRangeFilter.fromJS(_data["kindling"]) : <any>undefined;
+            this.watering = _data["watering"] ? IntRangeFilter.fromJS(_data["watering"]) : <any>undefined;
+            this.planting = _data["planting"] ? IntRangeFilter.fromJS(_data["planting"]) : <any>undefined;
+            this.generatingElectricity = _data["generatingElectricity"] ? IntRangeFilter.fromJS(_data["generatingElectricity"]) : <any>undefined;
+            this.handwork = _data["handwork"] ? IntRangeFilter.fromJS(_data["handwork"]) : <any>undefined;
+            this.gathering = _data["gathering"] ? IntRangeFilter.fromJS(_data["gathering"]) : <any>undefined;
+            this.lumbering = _data["lumbering"] ? IntRangeFilter.fromJS(_data["lumbering"]) : <any>undefined;
+            this.mining = _data["mining"] ? IntRangeFilter.fromJS(_data["mining"]) : <any>undefined;
+            this.oilExtraction = _data["oilExtraction"] ? IntRangeFilter.fromJS(_data["oilExtraction"]) : <any>undefined;
+            this.medicineProduction = _data["medicineProduction"] ? IntRangeFilter.fromJS(_data["medicineProduction"]) : <any>undefined;
+            this.cooling = _data["cooling"] ? IntRangeFilter.fromJS(_data["cooling"]) : <any>undefined;
+            this.transporting = _data["transporting"] ? IntRangeFilter.fromJS(_data["transporting"]) : <any>undefined;
+            this.farming = _data["farming"] ? IntRangeFilter.fromJS(_data["farming"]) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): PalSensors {
+    static fromJS(data: any): PalsWorkSuitabilityFilters {
         data = typeof data === 'object' ? data : {};
-        let result = new PalSensors();
+        let result = new PalsWorkSuitabilityFilters();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["viewingDistance"] = this.viewingDistance;
-        data["viewingAngle"] = this.viewingAngle;
-        data["hearingRate"] = this.hearingRate;
+        data["kindling"] = this.kindling ? this.kindling.toJSON() : <any>undefined;
+        data["watering"] = this.watering ? this.watering.toJSON() : <any>undefined;
+        data["planting"] = this.planting ? this.planting.toJSON() : <any>undefined;
+        data["generatingElectricity"] = this.generatingElectricity ? this.generatingElectricity.toJSON() : <any>undefined;
+        data["handwork"] = this.handwork ? this.handwork.toJSON() : <any>undefined;
+        data["gathering"] = this.gathering ? this.gathering.toJSON() : <any>undefined;
+        data["lumbering"] = this.lumbering ? this.lumbering.toJSON() : <any>undefined;
+        data["mining"] = this.mining ? this.mining.toJSON() : <any>undefined;
+        data["oilExtraction"] = this.oilExtraction ? this.oilExtraction.toJSON() : <any>undefined;
+        data["medicineProduction"] = this.medicineProduction ? this.medicineProduction.toJSON() : <any>undefined;
+        data["cooling"] = this.cooling ? this.cooling.toJSON() : <any>undefined;
+        data["transporting"] = this.transporting ? this.transporting.toJSON() : <any>undefined;
+        data["farming"] = this.farming ? this.farming.toJSON() : <any>undefined;
         return data;
     }
 }
 
-export interface IPalSensors {
-    viewingDistance: number;
-    viewingAngle: number;
-    hearingRate: number;
+/** Work suitability filter parameters used to search pals */
+export interface IPalsWorkSuitabilityFilters {
+    /** The range of kindling role of the resulting pals.
+             */
+    kindling?: IntRangeFilter | undefined;
+    /** The range of watering role of the resulting pals.
+             */
+    watering?: IntRangeFilter | undefined;
+    /** The range of planting role of the resulting pals.
+             */
+    planting?: IntRangeFilter | undefined;
+    /** The range of generating electricity role of the resulting pals.
+             */
+    generatingElectricity?: IntRangeFilter | undefined;
+    /** The range of handwork role of the resulting pals.
+             */
+    handwork?: IntRangeFilter | undefined;
+    /** The range of gathering role of the resulting pals.
+             */
+    gathering?: IntRangeFilter | undefined;
+    /** The range of lumbering role of the resulting pals.
+             */
+    lumbering?: IntRangeFilter | undefined;
+    /** The range of mining role of the resulting pals.
+             */
+    mining?: IntRangeFilter | undefined;
+    /** The range of oil extraction role of the resulting pals.
+             */
+    oilExtraction?: IntRangeFilter | undefined;
+    /** The range of medicine production role of the resulting pals.
+             */
+    medicineProduction?: IntRangeFilter | undefined;
+    /** The range of cooling role of the resulting pals.
+             */
+    cooling?: IntRangeFilter | undefined;
+    /** The range of transporting role of the resulting pals.
+             */
+    transporting?: IntRangeFilter | undefined;
+    /** The range of farming role of the resulting pals.
+             */
+    farming?: IntRangeFilter | undefined;
 }
 
-export class PalNutrition implements IPalNutrition {
-    maxFullStomach!: number;
-    fullStomachDecreaseRate!: number;
-    foodAmount!: number;
+/** Pagination parameters of a search */
+export class PaginationRequest implements IPaginationRequest {
+    /** The number of the page that is requested
+             */
+    pageNumber?: number | undefined;
+    /** The number of results per page
+             */
+    pageSize?: number | undefined;
 
-    constructor(data?: IPalNutrition) {
+    constructor(data?: IPaginationRequest) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -1096,216 +2169,34 @@ export class PalNutrition implements IPalNutrition {
 
     init(_data?: any) {
         if (_data) {
-            this.maxFullStomach = _data["maxFullStomach"];
-            this.fullStomachDecreaseRate = _data["fullStomachDecreaseRate"];
-            this.foodAmount = _data["foodAmount"];
+            this.pageNumber = _data["pageNumber"];
+            this.pageSize = _data["pageSize"];
         }
     }
 
-    static fromJS(data: any): PalNutrition {
+    static fromJS(data: any): PaginationRequest {
         data = typeof data === 'object' ? data : {};
-        let result = new PalNutrition();
+        let result = new PaginationRequest();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["maxFullStomach"] = this.maxFullStomach;
-        data["fullStomachDecreaseRate"] = this.fullStomachDecreaseRate;
-        data["foodAmount"] = this.foodAmount;
+        data["pageNumber"] = this.pageNumber;
+        data["pageSize"] = this.pageSize;
         return data;
     }
 }
 
-export interface IPalNutrition {
-    maxFullStomach: number;
-    fullStomachDecreaseRate: number;
-    foodAmount: number;
-}
-
-export class PalCombat implements IPalCombat {
-    hp!: number;
-    meleeAttack!: number;
-    shotAttack!: number;
-    defense!: number;
-    support!: number;
-
-    constructor(data?: IPalCombat) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hp = _data["hp"];
-            this.meleeAttack = _data["meleeAttack"];
-            this.shotAttack = _data["shotAttack"];
-            this.defense = _data["defense"];
-            this.support = _data["support"];
-        }
-    }
-
-    static fromJS(data: any): PalCombat {
-        data = typeof data === 'object' ? data : {};
-        let result = new PalCombat();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hp"] = this.hp;
-        data["meleeAttack"] = this.meleeAttack;
-        data["shotAttack"] = this.shotAttack;
-        data["defense"] = this.defense;
-        data["support"] = this.support;
-        return data;
-    }
-}
-
-export interface IPalCombat {
-    hp: number;
-    meleeAttack: number;
-    shotAttack: number;
-    defense: number;
-    support: number;
-}
-
-export class PalBreeding implements IPalBreeding {
-    maleProbability!: number;
-    breedingRank!: number;
-
-    constructor(data?: IPalBreeding) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.maleProbability = _data["maleProbability"];
-            this.breedingRank = _data["breedingRank"];
-        }
-    }
-
-    static fromJS(data: any): PalBreeding {
-        data = typeof data === 'object' ? data : {};
-        let result = new PalBreeding();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["maleProbability"] = this.maleProbability;
-        data["breedingRank"] = this.breedingRank;
-        return data;
-    }
-}
-
-export interface IPalBreeding {
-    maleProbability: number;
-    breedingRank: number;
-}
-
-export class PalWork implements IPalWork {
-    craftSpeed!: number;
-    transportSpeed!: number;
-    kindling!: number;
-    watering!: number;
-    planting!: number;
-    generatingElectricity!: number;
-    handwork!: number;
-    gathering!: number;
-    lumbering!: number;
-    mining!: number;
-    oilExtraction!: number;
-    medicineProduction!: number;
-    cooling!: number;
-    transporting!: number;
-    farming!: number;
-
-    constructor(data?: IPalWork) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.craftSpeed = _data["craftSpeed"];
-            this.transportSpeed = _data["transportSpeed"];
-            this.kindling = _data["kindling"];
-            this.watering = _data["watering"];
-            this.planting = _data["planting"];
-            this.generatingElectricity = _data["generatingElectricity"];
-            this.handwork = _data["handwork"];
-            this.gathering = _data["gathering"];
-            this.lumbering = _data["lumbering"];
-            this.mining = _data["mining"];
-            this.oilExtraction = _data["oilExtraction"];
-            this.medicineProduction = _data["medicineProduction"];
-            this.cooling = _data["cooling"];
-            this.transporting = _data["transporting"];
-            this.farming = _data["farming"];
-        }
-    }
-
-    static fromJS(data: any): PalWork {
-        data = typeof data === 'object' ? data : {};
-        let result = new PalWork();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["craftSpeed"] = this.craftSpeed;
-        data["transportSpeed"] = this.transportSpeed;
-        data["kindling"] = this.kindling;
-        data["watering"] = this.watering;
-        data["planting"] = this.planting;
-        data["generatingElectricity"] = this.generatingElectricity;
-        data["handwork"] = this.handwork;
-        data["gathering"] = this.gathering;
-        data["lumbering"] = this.lumbering;
-        data["mining"] = this.mining;
-        data["oilExtraction"] = this.oilExtraction;
-        data["medicineProduction"] = this.medicineProduction;
-        data["cooling"] = this.cooling;
-        data["transporting"] = this.transporting;
-        data["farming"] = this.farming;
-        return data;
-    }
-}
-
-export interface IPalWork {
-    craftSpeed: number;
-    transportSpeed: number;
-    kindling: number;
-    watering: number;
-    planting: number;
-    generatingElectricity: number;
-    handwork: number;
-    gathering: number;
-    lumbering: number;
-    mining: number;
-    oilExtraction: number;
-    medicineProduction: number;
-    cooling: number;
-    transporting: number;
-    farming: number;
+/** Pagination parameters of a search */
+export interface IPaginationRequest {
+    /** The number of the page that is requested
+             */
+    pageNumber?: number | undefined;
+    /** The number of results per page
+             */
+    pageSize?: number | undefined;
 }
 
 export interface FileResponse {

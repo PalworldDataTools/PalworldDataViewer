@@ -17,30 +17,20 @@
     }
   </div>
 
-  <div class="row mb-3" [class.text-secondary]="!form.value.minRarity && !form.value.maxRarity">
-    <label class="col-1 col-form-label">Rarity</label>
+  <app-radio-row-control [formControl]="form.controls.rarity" label="Rarity" [values]="rarities"></app-radio-row-control>
 
-    @for (rarity of rarities; track rarity) {
-      <div class="col">
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="rarity-{{ rarity }}-check"
-          [checked]="form.value.minRarity == rarity"
-          (change)="setRarity(rarity, $any($event.target).checked)"
-          autocomplete="off"
-        />
-        <label class="w-100 btn btn-outline-secondary" for="rarity-{{ rarity }}-check">{{ rarity }}</label>
-      </div>
-    }
-  </div>
-
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="checkbox" id="nocturnal-check" formControlName="isNocturnal" />
-    <label class="form-check-label" [class.text-secondary]="!form.value.isNocturnal" for="nocturnal-check">Nocturnal</label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="checkbox" id="gym-check" formControlName="isTowerBoss" />
-    <label class="form-check-label" [class.text-secondary]="!form.value.isTowerBoss" for="gym-check">GYM</label>
+  <div class="row">
+    <div class="col">
+      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasNocturnalVariant" label="Nocturnal" [labelCols]="4" [values]="ternary"></app-radio-row-control>
+    </div>
+    <div class="col">
+      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasEdibleVariant" label="Edible" [labelCols]="4" [values]="ternary"></app-radio-row-control>
+    </div>
+    <div class="col">
+      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasPredatorVariant" label="Predator" [labelCols]="4" [values]="ternary"></app-radio-row-control>
+    </div>
+    <div class="col">
+      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasGymBossVariant" label="GYM" [labelCols]="4" [values]="ternary"></app-radio-row-control>
+    </div>
   </div>
 </form>

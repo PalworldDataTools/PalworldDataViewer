@@ -1,0 +1,38 @@
+<div class="row mb-3">
+  @switch (skin) {
+    @case ('buttons') {
+      <label class="col-{{ labelCols }} col-form-label" [class.text-secondary]="formControl.value === undefined">{{ label }}</label>
+
+      @for (value of values; track value) {
+        <div class="col">
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="{{ label }}-{{ value.value }}-check"
+            [checked]="formControl.value === value.value"
+            (change)="formControl.setValue($any($event.target)?.checked ? value.value : undefined)"
+            autocomplete="off"
+          />
+          <label class="w-100 btn btn-outline-secondary" for="{{ label }}-{{ value.value }}-check">{{ value.label }}</label>
+        </div>
+      }
+    }
+    @case ('input-group') {
+      <div class="input-group justify-content-center">
+        <span class="col-{{ labelCols }} input-group-text" [class.text-secondary]="formControl.value === undefined">{{ label }}</span>
+
+        @for (value of values; track value) {
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="{{ label }}-{{ value.value }}-check"
+            [checked]="formControl.value === value.value"
+            (change)="formControl.setValue($any($event.target)?.checked ? value.value : undefined)"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-secondary button-group-append" for="{{ label }}-{{ value.value }}-check">{{ value.label }}</label>
+        }
+      </div>
+    }
+  }
+</div>

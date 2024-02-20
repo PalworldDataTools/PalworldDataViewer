@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { debounceTime, forkJoin, Subject, switchMap } from 'rxjs';
+import { debounceTime, Observable, Subject, switchMap } from 'rxjs';
 import { SharedModule } from '../../shared/shared.module';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PalNavListItemComponent } from './pal-nav-list-item/pal-nav-list-item.component';
 import { BrowsePalsFiltersComponent } from './browse-pals-filters/browse-pals-filters.component';
-import { PalElement, PalsApi, PalSize, PalTribe } from '../../api/api-clients';
+import { IPaginationRequest, IPalsFilters, PalsApi, PalsFilters, SearchResultOfPalTribe } from '../../api/api-clients';
 
 @Component({
   selector: 'app-browse-pals-page',
@@ -14,10 +14,10 @@ import { PalElement, PalsApi, PalSize, PalTribe } from '../../api/api-clients';
   templateUrl: './browse-pals-page.component.html',
 })
 export class BrowsePalsPageComponent implements OnInit {
-  protected result: { data: PalTribe[]; pageNumber: number; totalResults: number; totalPages: number } | undefined;
+  protected result: SearchResultOfPalTribe | undefined;
 
-  private searchRequest: TribesSearchRequest = { pagination: { pageSize: 500 } };
-  private searchRequestSubject = new Subject<TribesSearchRequest>();
+  private searchRequest: SearchRequest = { pagination: { pageNumber: 1, pageSize: 10 } };
+  private searchRequestSubject = new Subject<SearchRequest>();
 
   constructor(protected palsApi: PalsApi) {}
 
@@ -27,11 +27,11 @@ export class BrowsePalsPageComponent implements OnInit {
         debounceTime(250),
         switchMap((request) => {
           // TODO: use request when search is implemented
-          return this.palsApi.getTribeNames().pipe(switchMap((names) => forkJoin(names.map((name) => this.palsApi.getTribe(name)))));
+          return this.search(request.filters, request.pagination);
         }),
       )
       .subscribe((result) => {
-        this.result = { data: result, pageNumber: 1, totalResults: result.length, totalPages: 1 };
+        this.result = result;
       });
 
     this.refresh();
@@ -43,7 +43,7 @@ export class BrowsePalsPageComponent implements OnInit {
 
   nextPage() {
     const pageNumber = this.searchRequest.pagination.pageNumber ?? 1;
-    if (this.result && pageNumber >= this.result.totalPages) {
+    if (this.result?.pagination && pageNumber >= this.result.pagination.pageNumber) {
       return;
     }
 
@@ -61,53 +61,51 @@ export class BrowsePalsPageComponent implements OnInit {
     this.refresh();
   }
 
-  protected onFilterChange(filter: TribesSearchFilter) {
-    this.searchRequest.filter = filter;
+  protected onFiltersChange(filters: PalsFilters) {
+    this.searchRequest.filters = filters;
+  }
+
+  private search(filters: IPalsFilters | undefined, pagination: IPaginationRequest): Observable<SearchResultOfPalTribe> {
+    return this.palsApi.searchTribes(
+      filters?.sizes,
+      filters?.elements,
+      filters?.hasNocturnalVariant,
+      filters?.hasEdibleVariant,
+      filters?.hasPredatorVariant,
+      filters?.hasBossVariant,
+      filters?.hasGymBossVariant,
+      filters?.rarity?.fromInclusive,
+      filters?.rarity?.toInclusive,
+      filters?.workSuitability?.kindling?.fromInclusive,
+      filters?.workSuitability?.kindling?.toInclusive,
+      filters?.workSuitability?.watering?.fromInclusive,
+      filters?.workSuitability?.watering?.toInclusive,
+      filters?.workSuitability?.planting?.fromInclusive,
+      filters?.workSuitability?.planting?.toInclusive,
+      filters?.workSuitability?.generatingElectricity?.fromInclusive,
+      filters?.workSuitability?.generatingElectricity?.toInclusive,
+      filters?.workSuitability?.handwork?.fromInclusive,
+      filters?.workSuitability?.handwork?.toInclusive,
+      filters?.workSuitability?.gathering?.fromInclusive,
+      filters?.workSuitability?.gathering?.toInclusive,
+      filters?.workSuitability?.lumbering?.fromInclusive,
+      filters?.workSuitability?.lumbering?.toInclusive,
+      filters?.workSuitability?.mining?.fromInclusive,
+      filters?.workSuitability?.mining?.toInclusive,
+      filters?.workSuitability?.oilExtraction?.fromInclusive,
+      filters?.workSuitability?.oilExtraction?.toInclusive,
+      filters?.workSuitability?.medicineProduction?.fromInclusive,
+      filters?.workSuitability?.medicineProduction?.toInclusive,
+      filters?.workSuitability?.cooling?.fromInclusive,
+      filters?.workSuitability?.cooling?.toInclusive,
+      filters?.workSuitability?.transporting?.fromInclusive,
+      filters?.workSuitability?.transporting?.toInclusive,
+      filters?.workSuitability?.farming?.fromInclusive,
+      filters?.workSuitability?.farming?.toInclusive,
+      pagination.pageNumber,
+      pagination.pageSize,
+    );
   }
 }
 
-export interface TribesSearchFilter {
-  size?: PalSize[];
-  elementTypes?: PalElement[];
-  isNocturnal?: boolean;
-  isBoss?: boolean;
-  isTowerBoss?: boolean;
-  minRarity?: number;
-  maxRarity?: number;
-  emitFlameMinLevel?: number;
-  emitFlameMaxLevel?: number;
-  wateringMinLevel?: number;
-  wateringMaxLevel?: number;
-  seedingMinLevel?: number;
-  seedingMaxLevel?: number;
-  generateElectricityMinLevel?: number;
-  generateElectricityMaxLevel?: number;
-  handcraftMinLevel?: number;
-  handcraftMaxLevel?: number;
-  collectionMinLevel?: number;
-  collectionMaxLevel?: number;
-  deforestMinLevel?: number;
-  deforestMaxLevel?: number;
-  miningMinLevel?: number;
-  miningMaxLevel?: number;
-  oilExtractionMinLevel?: number;
-  oilExtractionMaxLevel?: number;
-  produceMedicineMinLevel?: number;
-  produceMedicineMaxLevel?: number;
-  coolMinLevel?: number;
-  coolMaxLevel?: number;
-  transportMinLevel?: number;
-  transportMaxLevel?: number;
-  monsterFarmMinLevel?: number;
-  monsterFarmMaxLevel?: number;
-}
-
-export interface TribesSearchPagination {
-  pageNumber?: number;
-  pageSize: number;
-}
-
-export interface TribesSearchRequest {
-  filter?: TribesSearchFilter;
-  pagination: TribesSearchPagination;
-}
+type SearchRequest = { filters?: IPalsFilters; pagination: IPaginationRequest };
