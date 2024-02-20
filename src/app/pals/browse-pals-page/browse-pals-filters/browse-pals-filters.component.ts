@@ -14,7 +14,7 @@ import { RadioRowControlComponent } from '../../../shared/radio-row-control/radi
 export class BrowsePalsFiltersComponent implements OnInit {
   @Output() filtersChange: EventEmitter<PalsFilters> = new EventEmitter<PalsFilters>();
 
-  protected elementTypes: PalElement[] = [];
+  protected elementTypes: { label: string; value: PalElement }[] = [];
   protected rarities = [
     { label: '1', value: 1 },
     { label: '2', value: 2 },
@@ -70,7 +70,9 @@ export class BrowsePalsFiltersComponent implements OnInit {
   });
 
   constructor() {
-    this.elementTypes = getEnumValues<PalElement>(PalElement).filter((v) => v != PalElement.Unknown);
+    this.elementTypes = getEnumValues<PalElement>(PalElement)
+      .filter((v) => v != PalElement.Unknown)
+      .map((elt) => ({ label: elt, value: elt }));
   }
 
   ngOnInit() {
@@ -103,19 +105,5 @@ export class BrowsePalsFiltersComponent implements OnInit {
         }),
       ),
     );
-  }
-
-  protected setElement(elementType: PalElement, checked: boolean) {
-    if (checked && (!this.form.controls.elementTypes.value || !this.form.controls.elementTypes.value.includes(elementType))) {
-      const newValue = [...(this.form.controls.elementTypes.value ?? []), elementType];
-      this.form.controls.elementTypes.setValue(newValue);
-    } else if (!checked && this.form.controls.elementTypes.value && this.form.controls.elementTypes.value.includes(elementType)) {
-      const newValue = this.form.controls.elementTypes.value.filter((v) => v != elementType);
-      this.form.controls.elementTypes.setValue(newValue.length == 0 ? undefined : newValue);
-    }
-  }
-
-  protected setNocturnal(value: boolean | undefined) {
-    this.form.controls.hasNocturnalVariant.setValue(value);
   }
 }

@@ -1,36 +1,63 @@
 <div class="row mb-3">
   @switch (skin) {
     @case ('buttons') {
-      <label class="col-{{ labelCols }} col-form-label" [class.text-secondary]="formControl.value === undefined">{{ label }}</label>
+      <label class="col-{{ labelCols }} col-form-label" [class.text-secondary]="value == undefined" [class.text-primary]="value != undefined">
+        {{ label }}
+      </label>
 
-      @for (value of values; track value) {
+      @for (v of values; track value) {
         <div class="col">
           <input
             type="checkbox"
             class="btn-check"
-            id="{{ label }}-{{ value.value }}-check"
-            [checked]="formControl.value === value.value"
-            (change)="formControl.setValue($any($event.target)?.checked ? value.value : undefined)"
+            id="{{ label }}-{{ v.value }}-check"
+            [disabled]="isDisabled"
+            [checked]="isChecked(v.value)"
+            (change)="check(v.value, $any($event.target)?.checked)"
             autocomplete="off"
           />
-          <label class="w-100 btn btn-outline-secondary" for="{{ label }}-{{ value.value }}-check">{{ value.label }}</label>
+          <label
+            class="w-100 btn btn-outline-secondary"
+            for="{{ label }}-{{ v.value }}-check"
+            [class.border-primary]="value != undefined"
+            [class.btn-outline-secondary]="value == undefined"
+            [class.btn-outline-primary]="value != undefined"
+          >
+            {{ v.label }}
+          </label>
         </div>
       }
     }
     @case ('input-group') {
       <div class="input-group justify-content-center">
-        <span class="col-{{ labelCols }} input-group-text" [class.text-secondary]="formControl.value === undefined">{{ label }}</span>
+        <span
+          class="col-{{ labelCols }} input-group-text"
+          [class.text-secondary]="value == undefined"
+          [class.text-primary]="value != undefined"
+          [class.border-primary]="value != undefined"
+        >
+          {{ label }}
+        </span>
 
-        @for (value of values; track value) {
+        @for (v of values; track value) {
           <input
             type="checkbox"
             class="btn-check"
-            id="{{ label }}-{{ value.value }}-check"
-            [checked]="formControl.value === value.value"
-            (change)="formControl.setValue($any($event.target)?.checked ? value.value : undefined)"
+            id="{{ label }}-{{ v.value }}-check"
+            [disabled]="isDisabled"
+            [checked]="isChecked(v.value)"
+            (change)="check(v.value, $any($event.target)?.checked)"
             autocomplete="off"
           />
-          <label class="btn btn-outline-secondary button-group-append" for="{{ label }}-{{ value.value }}-check">{{ value.label }}</label>
+          <label
+            class="btn"
+            for="{{ label }}-{{ v.value }}-check"
+            [class.border-primary]="value != undefined"
+            [class.btn-outline-secondary]="value == undefined"
+            [class.btn-outline-primary]="value != undefined"
+          >
+            {{ v.label }}
+          </label>
         }
       </div>
     }

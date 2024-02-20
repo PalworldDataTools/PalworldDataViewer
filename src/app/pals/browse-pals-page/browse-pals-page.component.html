@@ -11,7 +11,7 @@
   <div class="mb-2">
     @if (result) {
       @if (result.results.length < result.pagination.totalCount) {
-        {{ result.results.length }} / {{ result.pagination.totalCount }} results
+        {{ currentPageRange[0] }}..{{ currentPageRange[1] }} / {{ result.pagination.totalCount }} results
       } @else {
         {{ result.results.length }} results
       }

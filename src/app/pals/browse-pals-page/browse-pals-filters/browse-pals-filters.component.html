@@ -1,36 +1,20 @@
 <form [formGroup]="form">
-  <div class="row mb-3" [class.text-secondary]="!form.value.elementTypes || form.value.elementTypes.length == 0">
-    <label class="col-1 col-form-label">Elements</label>
-
-    @for (elementType of elementTypes; track elementType) {
-      <div class="col">
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="{{ elementType }}-check"
-          [checked]="form.value.elementTypes && form.value.elementTypes.includes(elementType)"
-          (change)="setElement(elementType, $any($event.target).checked)"
-          autocomplete="off"
-        />
-        <label class="w-100 btn btn-outline-secondary" for="{{ elementType }}-check">{{ elementType }}</label>
-      </div>
-    }
-  </div>
-
+  <app-radio-row-control [formControl]="form.controls.elementTypes" label="Elements" [values]="elementTypes" multiple></app-radio-row-control>
   <app-radio-row-control [formControl]="form.controls.rarity" label="Rarity" [values]="rarities"></app-radio-row-control>
 
   <div class="row">
     <div class="col">
-      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasNocturnalVariant" label="Nocturnal" [labelCols]="4" [values]="ternary"></app-radio-row-control>
+      <app-radio-row-control
+        skin="input-group"
+        [formControl]="form.controls.hasNocturnalVariant"
+        label="Nocturnal"
+        [labelCols]="4"
+        [values]="ternary"
+        multiple
+      ></app-radio-row-control>
     </div>
     <div class="col">
-      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasEdibleVariant" label="Edible" [labelCols]="4" [values]="ternary"></app-radio-row-control>
-    </div>
-    <div class="col">
-      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasPredatorVariant" label="Predator" [labelCols]="4" [values]="ternary"></app-radio-row-control>
-    </div>
-    <div class="col">
-      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasGymBossVariant" label="GYM" [labelCols]="4" [values]="ternary"></app-radio-row-control>
+      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasGymBossVariant" label="GYM" labelCols="4" [values]="ternary"></app-radio-row-control>
     </div>
   </div>
 </form>

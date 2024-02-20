@@ -15,6 +15,7 @@ import { IPaginationRequest, IPalsFilters, PalsApi, PalsFilters, SearchResultOfP
 })
 export class BrowsePalsPageComponent implements OnInit {
   protected result: SearchResultOfPalTribe | undefined;
+  protected currentPageRange: [number, number] = [0, 0];
 
   private searchRequest: SearchRequest = { pagination: { pageNumber: 1, pageSize: 10 } };
   private searchRequestSubject = new Subject<SearchRequest>();
@@ -32,6 +33,10 @@ export class BrowsePalsPageComponent implements OnInit {
       )
       .subscribe((result) => {
         this.result = result;
+        this.currentPageRange = [
+          (result.pagination.pageNumber - 1) * result.pagination.pageSize + 1,
+          Math.min(result.pagination.pageNumber * result.pagination.pageSize, result.pagination.totalCount),
+        ];
       });
 
     this.refresh();
@@ -42,8 +47,9 @@ export class BrowsePalsPageComponent implements OnInit {
   }
 
   nextPage() {
+    console.log(this.result, this.searchRequest);
     const pageNumber = this.searchRequest.pagination.pageNumber ?? 1;
-    if (this.result?.pagination && pageNumber >= this.result.pagination.pageNumber) {
+    if (this.result?.pagination && pageNumber >= this.result.pagination.totalPages) {
       return;
     }
 
@@ -63,6 +69,7 @@ export class BrowsePalsPageComponent implements OnInit {
 
   protected onFiltersChange(filters: PalsFilters) {
     this.searchRequest.filters = filters;
+    this.searchRequest.pagination.pageNumber = 1;
   }
 
   private search(filters: IPalsFilters | undefined, pagination: IPaginationRequest): Observable<SearchResultOfPalTribe> {
