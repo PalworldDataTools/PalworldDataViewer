@@ -1150,6 +1150,9 @@ export class PalIdentity implements IPalIdentity {
     /** The unique ID of the pal
              */
     name!: string;
+    /** The localized name of the pal
+             */
+    localizedName?: string | undefined;
 
     constructor(data?: IPalIdentity) {
         if (data) {
@@ -1166,6 +1169,7 @@ export class PalIdentity implements IPalIdentity {
             this.paldexIndex = _data["paldexIndex"];
             this.paldexIndexSuffix = _data["paldexIndexSuffix"];
             this.name = _data["name"];
+            this.localizedName = _data["localizedName"];
         }
     }
 
@@ -1182,6 +1186,7 @@ export class PalIdentity implements IPalIdentity {
         data["paldexIndex"] = this.paldexIndex;
         data["paldexIndexSuffix"] = this.paldexIndexSuffix;
         data["name"] = this.name;
+        data["localizedName"] = this.localizedName;
         return data;
     }
 }
@@ -1200,6 +1205,9 @@ export interface IPalIdentity {
     /** The unique ID of the pal
              */
     name: string;
+    /** The localized name of the pal
+             */
+    localizedName?: string | undefined;
 }
 
 /** Elements that pals or skills can have */
@@ -1923,6 +1931,9 @@ export class PalTribe implements IPalTribe {
     /** The name of the tribe
              */
     name!: string;
+    /** The localized name of the tribe
+             */
+    localizedName?: string | undefined;
     /** The pals in the tribe
              */
     pals!: Pal[];
@@ -1942,6 +1953,7 @@ export class PalTribe implements IPalTribe {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            this.localizedName = _data["localizedName"];
             if (Array.isArray(_data["pals"])) {
                 this.pals = [] as any;
                 for (let item of _data["pals"])
@@ -1960,6 +1972,7 @@ export class PalTribe implements IPalTribe {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["localizedName"] = this.localizedName;
         if (Array.isArray(this.pals)) {
             data["pals"] = [];
             for (let item of this.pals)
@@ -1974,6 +1987,9 @@ export interface IPalTribe {
     /** The name of the tribe
              */
     name: string;
+    /** The localized name of the tribe
+             */
+    localizedName?: string | undefined;
     /** The pals in the tribe
              */
     pals: Pal[];

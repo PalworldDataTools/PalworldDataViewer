@@ -45,7 +45,7 @@ export class PalNavListItemComponent {
     const paldexIndexes = allVariants.filter((p) => p.identity.paldexIndex > 0).map((p) => ({ index: p.identity.paldexIndex, suffix: p.identity.paldexIndexSuffix }));
     const rarities = allVariants.map((v) => v.statistics.rarity).filter((r) => r > 0);
 
-    this.name = tribe.name;
+    this.name = tribe.localizedName ?? tribe.name;
     this.paldexIndex = paldexIndexes.find((i) => !i.suffix) ?? paldexIndexes[0];
     this.variantsPaldexIndexes = paldexIndexes.filter((i) => i != this.paldexIndex);
     this.elements = allVariants.map((v) => [v.element1, v.element2]);
