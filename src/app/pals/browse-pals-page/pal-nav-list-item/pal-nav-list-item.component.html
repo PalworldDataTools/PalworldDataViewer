@@ -9,7 +9,10 @@
 
   <div class="d-flex flex-column">
     <div class="d-flex align-items-center">
-      <span class="fs-4 pe-2">{{ name }}</span>
+      <div>
+        <span class="fs-6">No.{{ paldexIndex }}</span>
+        <span class="fs-4 pe-2"> {{ name }}</span>
+      </div>
 
       @if (hasNocturnalVariant) {
         <i class="bi bi-moon-fill fs-5 text-secondary" ngbTooltip="Nocturnal"></i>

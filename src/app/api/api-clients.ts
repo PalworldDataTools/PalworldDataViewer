@@ -16,6 +16,150 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angula
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
 @Injectable()
+export class PalBreedingApi {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7020";
+    }
+
+    /**
+     * Get breeding result
+     * @param palNameA (optional) The name of the first pal
+     * @param palNameB (optional) The name of the second pal
+     * @return The name of the tribe that is the result of the breeding
+     */
+    getBreedingResult(palNameA: string | undefined, palNameB: string | undefined): Observable<Pal> {
+        let url_ = this.baseUrl + "/v1/pals/breed?";
+        if (palNameA === null)
+            throw new Error("The parameter 'palNameA' cannot be null.");
+        else if (palNameA !== undefined)
+            url_ += "palNameA=" + encodeURIComponent("" + palNameA) + "&";
+        if (palNameB === null)
+            throw new Error("The parameter 'palNameB' cannot be null.");
+        else if (palNameB !== undefined)
+            url_ += "palNameB=" + encodeURIComponent("" + palNameB) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetBreedingResult(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetBreedingResult(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Pal>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Pal>;
+        }));
+    }
+
+    protected processGetBreedingResult(response: HttpResponseBase): Observable<Pal> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Pal.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 404) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result404: any = null;
+            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result404 = ProblemDetails.fromJS(resultData404);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * Get parents
+     * @param palName The name of the pal
+     * @return The name of the tribe that is the result of the breeding
+     */
+    getParents(palName: string): Observable<PalCouple> {
+        let url_ = this.baseUrl + "/v1/pals/{palName}/parents";
+        if (palName === undefined || palName === null)
+            throw new Error("The parameter 'palName' must be defined.");
+        url_ = url_.replace("{palName}", encodeURIComponent("" + palName));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetParents(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetParents(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<PalCouple>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<PalCouple>;
+        }));
+    }
+
+    protected processGetParents(response: HttpResponseBase): Observable<PalCouple> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PalCouple.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 404) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result404: any = null;
+            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result404 = ProblemDetails.fromJS(resultData404);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
 export class PalsApi {
     private http: HttpClient;
     private baseUrl: string;
@@ -27,7 +171,7 @@ export class PalsApi {
     }
 
     /**
-     * Get tribe names
+     * Search tribes
      * @param filter_Sizes (optional) The sizes of the resulting pals.
      * @param filter_Elements (optional) The elements that the resulting pals can have, either as first or second element.
      * @param filter_HasNocturnalVariant (optional) Should the resulting pals have a nocturnal variant.
@@ -196,7 +340,7 @@ export class PalsApi {
     }
 
     /**
-     * Get Tribe
+     * Get tribe
      * @param tribeName The name of the tribe to get
      * @return The tribe of pals with the given name
      */
@@ -259,7 +403,7 @@ export class PalsApi {
     }
 
     /**
-     * Get Pal Icon
+     * Get tribe icon
      * @param tribeName The name of the tribe to get
      * @return The icon of the given tribe
      */
@@ -326,7 +470,7 @@ export class PalsApi {
     }
 
     /**
-     * Get Pal
+     * Get pal
      * @param tribeName The name of the tribe to get
      * @return The main pal of the requested tribe
      */
@@ -389,7 +533,7 @@ export class PalsApi {
     }
 
     /**
-     * Get BOSS Pal
+     * Get BOSS pal
      * @param tribeName The name of the tribe to get
      * @return The boss pal of the requested tribe
      */
@@ -452,7 +596,7 @@ export class PalsApi {
     }
 
     /**
-     * Get GYM Pal
+     * Get GYM pal
      * @param tribeName The name of the tribe to get
      * @return The gym pal of the requested tribe
      */
@@ -837,129 +981,6 @@ export class PalworldSteamApplicationApi {
     }
 }
 
-/** The result of a search */
-export class SearchResultOfPalTribe implements ISearchResultOfPalTribe {
-    /** The current page of results
-             */
-    results!: PalTribe[];
-    /** The pagination information of the result
-             */
-    pagination!: PaginationResult;
-
-    constructor(data?: ISearchResultOfPalTribe) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.results = [];
-            this.pagination = new PaginationResult();
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["results"])) {
-                this.results = [] as any;
-                for (let item of _data["results"])
-                    this.results!.push(PalTribe.fromJS(item));
-            }
-            this.pagination = _data["pagination"] ? PaginationResult.fromJS(_data["pagination"]) : new PaginationResult();
-        }
-    }
-
-    static fromJS(data: any): SearchResultOfPalTribe {
-        data = typeof data === 'object' ? data : {};
-        let result = new SearchResultOfPalTribe();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.results)) {
-            data["results"] = [];
-            for (let item of this.results)
-                data["results"].push(item.toJSON());
-        }
-        data["pagination"] = this.pagination ? this.pagination.toJSON() : <any>undefined;
-        return data;
-    }
-}
-
-/** The result of a search */
-export interface ISearchResultOfPalTribe {
-    /** The current page of results
-             */
-    results: PalTribe[];
-    /** The pagination information of the result
-             */
-    pagination: PaginationResult;
-}
-
-/** Tribe of pals. A tribe is a collection of pal variants that look the same but vary in statistics. For example, there might be a pal, its boss variant and its gym boss variant in the same tribe. There could also be variants of different elements with different spells that are meant to live in different biomes. */
-export class PalTribe implements IPalTribe {
-    /** The name of the tribe
-             */
-    name!: string;
-    /** The pals in the tribe
-             */
-    pals!: Pal[];
-
-    constructor(data?: IPalTribe) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.pals = [];
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.name = _data["name"];
-            if (Array.isArray(_data["pals"])) {
-                this.pals = [] as any;
-                for (let item of _data["pals"])
-                    this.pals!.push(Pal.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PalTribe {
-        data = typeof data === 'object' ? data : {};
-        let result = new PalTribe();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        if (Array.isArray(this.pals)) {
-            data["pals"] = [];
-            for (let item of this.pals)
-                data["pals"].push(item.toJSON());
-        }
-        return data;
-    }
-}
-
-/** Tribe of pals. A tribe is a collection of pal variants that look the same but vary in statistics. For example, there might be a pal, its boss variant and its gym boss variant in the same tribe. There could also be variants of different elements with different spells that are meant to live in different biomes. */
-export interface IPalTribe {
-    /** The name of the tribe
-             */
-    name: string;
-    /** The pals in the tribe
-             */
-    pals: Pal[];
-}
-
 /** Pals are the main entities of Palworld. They are the creatures that can be captured and used to fight or work. */
 export class Pal implements IPal {
     /** The identity of the pal
@@ -1120,12 +1141,15 @@ export class PalIdentity implements IPalIdentity {
     /** The name of the tribe to which the pal belongs
              */
     tribeName!: string;
+    /** The index of the pal in the paldex
+             */
+    paldexIndex!: number;
+    /** The suffix appended to the paldex index. This suffix is used to identify variants of the same pal.
+             */
+    paldexIndexSuffix!: string;
     /** The unique ID of the pal
              */
     name!: string;
-    /** The nice representation of the name of the pal
-             */
-    displayName!: string;
 
     constructor(data?: IPalIdentity) {
         if (data) {
@@ -1139,8 +1163,9 @@ export class PalIdentity implements IPalIdentity {
     init(_data?: any) {
         if (_data) {
             this.tribeName = _data["tribeName"];
+            this.paldexIndex = _data["paldexIndex"];
+            this.paldexIndexSuffix = _data["paldexIndexSuffix"];
             this.name = _data["name"];
-            this.displayName = _data["displayName"];
         }
     }
 
@@ -1154,8 +1179,9 @@ export class PalIdentity implements IPalIdentity {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["tribeName"] = this.tribeName;
+        data["paldexIndex"] = this.paldexIndex;
+        data["paldexIndexSuffix"] = this.paldexIndexSuffix;
         data["name"] = this.name;
-        data["displayName"] = this.displayName;
         return data;
     }
 }
@@ -1165,12 +1191,15 @@ export interface IPalIdentity {
     /** The name of the tribe to which the pal belongs
              */
     tribeName: string;
+    /** The index of the pal in the paldex
+             */
+    paldexIndex: number;
+    /** The suffix appended to the paldex index. This suffix is used to identify variants of the same pal.
+             */
+    paldexIndexSuffix: string;
     /** The unique ID of the pal
              */
     name: string;
-    /** The nice representation of the name of the pal
-             */
-    displayName: string;
 }
 
 /** Elements that pals or skills can have */
@@ -1709,6 +1738,247 @@ export interface IPalWorkSuitability {
     farming: number;
 }
 
+export class ProblemDetails implements IProblemDetails {
+    type?: string | undefined;
+    title?: string | undefined;
+    status?: number | undefined;
+    detail?: string | undefined;
+    instance?: string | undefined;
+
+    [key: string]: any;
+
+    constructor(data?: IProblemDetails) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.type = _data["type"];
+            this.title = _data["title"];
+            this.status = _data["status"];
+            this.detail = _data["detail"];
+            this.instance = _data["instance"];
+        }
+    }
+
+    static fromJS(data: any): ProblemDetails {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProblemDetails();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["type"] = this.type;
+        data["title"] = this.title;
+        data["status"] = this.status;
+        data["detail"] = this.detail;
+        data["instance"] = this.instance;
+        return data;
+    }
+}
+
+export interface IProblemDetails {
+    type?: string | undefined;
+    title?: string | undefined;
+    status?: number | undefined;
+    detail?: string | undefined;
+    instance?: string | undefined;
+
+    [key: string]: any;
+}
+
+/** Couple of pals */
+export class PalCouple implements IPalCouple {
+    /** The first pal of the couple
+             */
+    palA!: Pal;
+    /** The second pal of the couple
+             */
+    palB!: Pal;
+
+    constructor(data?: IPalCouple) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.palA = new Pal();
+            this.palB = new Pal();
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.palA = _data["palA"] ? Pal.fromJS(_data["palA"]) : new Pal();
+            this.palB = _data["palB"] ? Pal.fromJS(_data["palB"]) : new Pal();
+        }
+    }
+
+    static fromJS(data: any): PalCouple {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalCouple();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["palA"] = this.palA ? this.palA.toJSON() : <any>undefined;
+        data["palB"] = this.palB ? this.palB.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+/** Couple of pals */
+export interface IPalCouple {
+    /** The first pal of the couple
+             */
+    palA: Pal;
+    /** The second pal of the couple
+             */
+    palB: Pal;
+}
+
+/** The result of a search */
+export class SearchResultOfPalTribe implements ISearchResultOfPalTribe {
+    /** The current page of results
+             */
+    results!: PalTribe[];
+    /** The pagination information of the result
+             */
+    pagination!: PaginationResult;
+
+    constructor(data?: ISearchResultOfPalTribe) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.results = [];
+            this.pagination = new PaginationResult();
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["results"])) {
+                this.results = [] as any;
+                for (let item of _data["results"])
+                    this.results!.push(PalTribe.fromJS(item));
+            }
+            this.pagination = _data["pagination"] ? PaginationResult.fromJS(_data["pagination"]) : new PaginationResult();
+        }
+    }
+
+    static fromJS(data: any): SearchResultOfPalTribe {
+        data = typeof data === 'object' ? data : {};
+        let result = new SearchResultOfPalTribe();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.results)) {
+            data["results"] = [];
+            for (let item of this.results)
+                data["results"].push(item.toJSON());
+        }
+        data["pagination"] = this.pagination ? this.pagination.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+/** The result of a search */
+export interface ISearchResultOfPalTribe {
+    /** The current page of results
+             */
+    results: PalTribe[];
+    /** The pagination information of the result
+             */
+    pagination: PaginationResult;
+}
+
+/** Tribe of pals. A tribe is a collection of pal variants that look the same but vary in statistics. For example, there might be a pal, its boss variant and its gym boss variant in the same tribe. There could also be variants of different elements with different spells that are meant to live in different biomes. */
+export class PalTribe implements IPalTribe {
+    /** The name of the tribe
+             */
+    name!: string;
+    /** The pals in the tribe
+             */
+    pals!: Pal[];
+
+    constructor(data?: IPalTribe) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.pals = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            if (Array.isArray(_data["pals"])) {
+                this.pals = [] as any;
+                for (let item of _data["pals"])
+                    this.pals!.push(Pal.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PalTribe {
+        data = typeof data === 'object' ? data : {};
+        let result = new PalTribe();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        if (Array.isArray(this.pals)) {
+            data["pals"] = [];
+            for (let item of this.pals)
+                data["pals"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+/** Tribe of pals. A tribe is a collection of pal variants that look the same but vary in statistics. For example, there might be a pal, its boss variant and its gym boss variant in the same tribe. There could also be variants of different elements with different spells that are meant to live in different biomes. */
+export interface IPalTribe {
+    /** The name of the tribe
+             */
+    name: string;
+    /** The pals in the tribe
+             */
+    pals: Pal[];
+}
+
 /** Pagination information of a search result */
 export class PaginationResult implements IPaginationResult {
     /** The current page number
@@ -1773,70 +2043,6 @@ export interface IPaginationResult {
     /** The total number of pages
              */
     totalPages: number;
-}
-
-export class ProblemDetails implements IProblemDetails {
-    type?: string | undefined;
-    title?: string | undefined;
-    status?: number | undefined;
-    detail?: string | undefined;
-    instance?: string | undefined;
-
-    [key: string]: any;
-
-    constructor(data?: IProblemDetails) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-            this.type = _data["type"];
-            this.title = _data["title"];
-            this.status = _data["status"];
-            this.detail = _data["detail"];
-            this.instance = _data["instance"];
-        }
-    }
-
-    static fromJS(data: any): ProblemDetails {
-        data = typeof data === 'object' ? data : {};
-        let result = new ProblemDetails();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        data["type"] = this.type;
-        data["title"] = this.title;
-        data["status"] = this.status;
-        data["detail"] = this.detail;
-        data["instance"] = this.instance;
-        return data;
-    }
-}
-
-export interface IProblemDetails {
-    type?: string | undefined;
-    title?: string | undefined;
-    status?: number | undefined;
-    detail?: string | undefined;
-    instance?: string | undefined;
-
-    [key: string]: any;
 }
 
 /** Filter parameters used to search pals */
