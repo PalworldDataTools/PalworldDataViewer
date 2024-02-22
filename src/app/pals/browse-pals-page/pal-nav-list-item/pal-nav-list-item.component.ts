@@ -42,7 +42,7 @@ export class PalNavListItemComponent {
   private update(tribe: PalTribe) {
     const allVariants = tribe.pals;
     const paldexIndexes = [...new Set(allVariants.filter((p) => p.identity.paldexIndex > 0).map((p) => p.identity.paldexIndex + p.identity.paldexIndexSuffix))];
-    const rarities = allVariants.map((v) => v.statistics.rarity);
+    const rarities = allVariants.map((v) => v.statistics.rarity).filter((r) => r > 0);
 
     this.name = tribe.name;
     this.paldexIndex = paldexIndexes.length === 0 ? '??' : paldexIndexes.join(', ');
