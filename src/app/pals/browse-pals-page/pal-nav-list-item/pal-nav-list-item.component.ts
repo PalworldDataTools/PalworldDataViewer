@@ -27,7 +27,8 @@ export class PalNavListItemComponent {
   protected _tribe: PalTribe = null!;
   protected icon?: SafeUrl;
   protected name: string = '';
-  protected paldexIndex: string = '';
+  protected paldexIndex: { index: number; suffix: string } = null!;
+  protected variantsPaldexIndexes: { index: number; suffix: string }[] = [];
   protected elements: [PalElement, PalElement?][] = [];
   protected rarityRange: [number, number] = [0, 0];
   protected hasNocturnalVariant: boolean = false;
@@ -41,11 +42,12 @@ export class PalNavListItemComponent {
 
   private update(tribe: PalTribe) {
     const allVariants = tribe.pals;
-    const paldexIndexes = [...new Set(allVariants.filter((p) => p.identity.paldexIndex > 0).map((p) => p.identity.paldexIndex + p.identity.paldexIndexSuffix))];
+    const paldexIndexes = allVariants.filter((p) => p.identity.paldexIndex > 0).map((p) => ({ index: p.identity.paldexIndex, suffix: p.identity.paldexIndexSuffix }));
     const rarities = allVariants.map((v) => v.statistics.rarity).filter((r) => r > 0);
 
     this.name = tribe.name;
-    this.paldexIndex = paldexIndexes.length === 0 ? '??' : paldexIndexes.join(', ');
+    this.paldexIndex = paldexIndexes.find((i) => !i.suffix) ?? paldexIndexes[0];
+    this.variantsPaldexIndexes = paldexIndexes.filter((i) => i != this.paldexIndex);
     this.elements = allVariants.map((v) => [v.element1, v.element2]);
     this.rarityRange = [Math.min(...rarities), Math.max(...rarities)];
     this.hasNocturnalVariant = allVariants.some((v) => v.isNocturnal);

@@ -10,7 +10,31 @@
   <div class="d-flex flex-column">
     <div class="d-flex align-items-center">
       <div>
-        <span class="fs-6">No.{{ paldexIndex }}</span>
+        <span class="fs-6">No.</span>
+        <span>{{ paldexIndex.index }}</span>
+
+        @if (paldexIndex.suffix) {
+          <span>{{ paldexIndex.suffix | lowercase }}</span>
+        }
+
+        @if (variantsPaldexIndexes.length > 0) {
+          <span class="text-muted">
+            <span> (</span>
+            @for (paldexIndex of variantsPaldexIndexes; track paldexIndex) {
+              @if ($index > 0) {
+                <span>, </span>
+              }
+
+              <span>{{ paldexIndex.index }}</span>
+
+              @if (paldexIndex.suffix) {
+                <span class="text-muted">{{ paldexIndex.suffix | lowercase }}</span>
+              }
+            }
+            <span>)</span>
+          </span>
+        }
+
         <span class="fs-4 pe-2"> {{ name }}</span>
       </div>
 
