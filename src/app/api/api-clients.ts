@@ -1084,6 +1084,89 @@ export class PalworldSteamApplicationApi {
     }
 }
 
+@Injectable()
+export class PalElementsLocalizationApi {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7020";
+    }
+
+    /**
+     * Get pal elements texts
+     * @param accept_Language (optional) The Accept-Language request HTTP header indicates the natural language and locale that the client prefers. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language.
+     * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
+     */
+    getPalElementsTexts(accept_Language: AcceptLanguage | null | undefined, accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<{ [key in keyof typeof PalElement]?: string; }> {
+        let url_ = this.baseUrl + "/v1/localization/pal-elements";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept-Language": accept_Language !== undefined && accept_Language !== null ? "" + accept_Language : "",
+                "Accept-Palworld-Version": accept_Palworld_Version !== undefined && accept_Palworld_Version !== null ? "" + accept_Palworld_Version : "",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPalElementsTexts(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPalElementsTexts(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<{ [key in keyof typeof PalElement]?: string; }>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<{ [key in keyof typeof PalElement]?: string; }>;
+        }));
+    }
+
+    protected processGetPalElementsTexts(response: HttpResponseBase): Observable<{ [key in keyof typeof PalElement]?: string; }> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200) {
+                result200 = {} as any;
+                for (let key in resultData200) {
+                    if (resultData200.hasOwnProperty(key))
+                        (<any>result200)![key] = resultData200[key] !== undefined ? resultData200[key] : <any>null;
+                }
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status === 404) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result404: any = null;
+            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result404 = ProblemDetails.fromJS(resultData404);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
 /** Pals are the main entities of Palworld. They are the creatures that can be captured and used to fight or work. */
 export class Pal implements IPal {
     /** The identity of the pal

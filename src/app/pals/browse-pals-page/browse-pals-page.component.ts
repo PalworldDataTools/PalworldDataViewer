@@ -33,7 +33,6 @@ export class BrowsePalsPageComponent implements OnInit {
       .pipe(
         debounceTime(250),
         switchMap((request) => {
-          // TODO: use request when search is implemented
           return this.search(request.filters, request.pagination);
         }),
       )

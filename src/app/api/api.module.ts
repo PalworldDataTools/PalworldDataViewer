@@ -1,9 +1,9 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { API_BASE_URL, PalsApi, PalworldApiApi } from './api-clients';
+import { API_BASE_URL, PalElementsLocalizationApi, PalsApi, PalworldApiApi } from './api-clients';
 import { environment } from '../../environments/environment';
 
 @NgModule({
-  providers: [PalsApi, PalworldApiApi],
+  providers: [PalsApi, PalworldApiApi, PalElementsLocalizationApi],
 })
 export class ApiModule {
   static forRoot(): ModuleWithProviders<ApiModule> {

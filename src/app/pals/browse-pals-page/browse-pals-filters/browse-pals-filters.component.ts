@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { getEnumValues } from '../../../shared/utils/enum-utils';
-import { IntRangeFilter, PalElement, PalsFilters, PalSize, PalsWorkSuitabilityFilters } from '../../../api/api-clients';
+import { IntRangeFilter, PalElement, PalElementsLocalizationApi, PalsFilters, PalSize, PalsWorkSuitabilityFilters } from '../../../api/api-clients';
 import { RadioRowControlComponent } from '../../../shared/radio-row-control/radio-row-control.component';
+import { LanguageService } from '../../../core-services/language.service';
+import { PalworldVersionService } from '../../../core-services/palworld-version.service';
 
 @Component({
   selector: 'app-browse-pals-filters',
@@ -69,10 +70,12 @@ export class BrowsePalsFiltersComponent implements OnInit {
     maxFarming: new FormControl<number | undefined>(undefined, { nonNullable: true }),
   });
 
-  constructor() {
-    this.elementTypes = getEnumValues<PalElement>(PalElement)
-      .filter((v) => v != PalElement.Unknown)
-      .map((elt) => ({ label: elt, value: elt }));
+  constructor(palworldVersionService: PalworldVersionService, languageService: LanguageService, palElementsLocalizationApi: PalElementsLocalizationApi) {
+    palElementsLocalizationApi.getPalElementsTexts(languageService.current, palworldVersionService.current).subscribe((names) => {
+      this.elementTypes = Object.entries(names)
+        .filter(([value, _]) => value !== PalElement.Unknown)
+        .map(([value, label]) => ({ label, value: value as PalElement }));
+    });
   }
 
   ngOnInit() {
