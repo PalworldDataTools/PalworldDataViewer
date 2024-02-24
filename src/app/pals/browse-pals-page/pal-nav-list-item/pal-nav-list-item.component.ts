@@ -3,7 +3,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { NgOptimizedImage } from '@angular/common';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
-import { PalElement, PalsApi, PalTribe } from '../../../api/api-clients';
+import { PalElement, PalIconSize, PalsApi, PalTribe } from '../../../api/api-clients';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { catchError, map, of } from 'rxjs';
 
@@ -56,7 +56,7 @@ export class PalNavListItemComponent {
 
     this.icon = undefined;
     this.palsApi
-      .getIcon(tribe.name)
+      .getIcon(tribe.name, PalIconSize.Small, undefined)
       .pipe(
         map((file) => file.data),
         catchError((err) => {

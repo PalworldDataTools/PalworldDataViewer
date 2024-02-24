@@ -111,6 +111,8 @@ export class BrowsePalsPageComponent implements OnInit {
       filters?.workSuitability?.farming?.toInclusive,
       pagination.pageNumber,
       pagination.pageSize,
+      undefined,
+      undefined,
     );
   }
 }
