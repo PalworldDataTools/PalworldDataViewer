@@ -52,24 +52,20 @@ export class BrowsePalsPageComponent implements OnInit {
   }
 
   nextPage() {
-    console.log(this.result, this.searchRequest);
-    const pageNumber = this.searchRequest.pagination.pageNumber ?? 1;
-    if (this.result?.pagination && pageNumber >= this.result.pagination.totalPages) {
+    this.goToPage((this.searchRequest.pagination.pageNumber ?? 1) + 1);
+  }
+
+  goToPage(pageNumber: number) {
+    if (this.result?.pagination && (pageNumber < 1 || pageNumber > this.result.pagination.totalPages)) {
       return;
     }
 
-    this.searchRequest.pagination.pageNumber = pageNumber + 1;
+    this.searchRequest.pagination.pageNumber = pageNumber;
     this.refresh();
   }
 
   previousPage() {
-    const pageNumber = this.searchRequest.pagination.pageNumber ?? 1;
-    if (pageNumber <= 1) {
-      return;
-    }
-
-    this.searchRequest.pagination.pageNumber = pageNumber - 1;
-    this.refresh();
+    this.goToPage((this.searchRequest.pagination.pageNumber ?? 1) - 1);
   }
 
   protected onFiltersChange(filters: PalsFilters) {

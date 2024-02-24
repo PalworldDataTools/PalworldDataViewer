@@ -26,7 +26,7 @@ export class PalNavListItemComponent {
     this.update(value);
   }
 
-  protected elementNames: { [element in keyof typeof PalElement]?: string } = null!;
+  protected elementNames: { [element in keyof typeof PalElement]?: string } = {};
   protected _tribe: PalTribe = null!;
   protected icon?: SafeUrl;
   protected name: string = '';
@@ -53,7 +53,7 @@ export class PalNavListItemComponent {
     const rarities = tribe.pals.map((v) => v.statistics.rarity).filter((r) => r > 0);
 
     this.name = tribe.localizedName ?? tribe.name;
-    this.paldexIndex = paldexIndexes.find((i) => !i.suffix) ?? paldexIndexes[0];
+    this.paldexIndex = paldexIndexes.find((i) => !i.suffix) ?? paldexIndexes[0] ?? { suffix: '?' };
     this.variantsPaldexIndexes = paldexIndexes.filter((i) => i != this.paldexIndex);
     this.elements = [firstPal.element1, firstPal.element2];
     this.rarityRange = [Math.min(...rarities), Math.max(...rarities)];

@@ -30,15 +30,29 @@
     <nav class="mt-4">
       <ul class="pagination align-items-center justify-content-center">
         <li class="page-item" [class.disabled]="result.pagination.pageNumber <= 1">
-          <a class="page-link user-select-none" (click)="previousPage()" role="button">Previous</a>
+          <a class="page-link user-select-none" (click)="previousPage()" role="button" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
         </li>
-        <li class="page-link">
-          {{ result.pagination.pageNumber }}
-          /
-          {{ result.pagination.totalPages }}
-        </li>
+        @if (result.pagination.totalPages <= 20) {
+          @for (page of [].constructor(result.pagination.totalPages); track page) {
+            <a
+              class="page-link"
+              [class.active]="$index + 1 == result.pagination.pageNumber"
+              (click)="goToPage($index + 1)"
+              role="button"
+              [attr.aria-label]="'Page ' + ($index + 1)"
+            >
+              {{ $index + 1 }}
+            </a>
+          }
+        } @else {
+          <li class="page-link">
+            {{ result.pagination.pageNumber }}
+            /
+            {{ result.pagination.totalPages }}
+          </li>
+        }
         <li class="page-item" [class.disabled]="result.pagination.pageNumber >= result.pagination.totalPages">
-          <a class="page-link user-select-none" (click)="nextPage()" role="button">Next</a>
+          <a class="page-link user-select-none" (click)="nextPage()" role="button" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a>
         </li>
       </ul>
     </nav>
