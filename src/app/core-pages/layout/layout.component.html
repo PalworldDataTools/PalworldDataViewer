@@ -55,7 +55,14 @@
 
 <ng-template #menuItem let-name="name" let-url="url">
   <li class="nav-item">
-    <a class="nav-link text-white" [routerLink]="url" routerLinkActive="active" (click)="isMenuCollapsed = true">
+    <a
+      class="nav-link border border-white border-2 border-top-0 border-start-0 border-end-0 text-white"
+      [routerLink]="url"
+      routerLinkActive="active"
+      #rla="routerLinkActive"
+      [class.border-bottom-0]="!rla.isActive"
+      (click)="isMenuCollapsed = true"
+    >
       {{ name }}
     </a>
   </li>
