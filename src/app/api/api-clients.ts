@@ -106,7 +106,7 @@ export class PalBreedingApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The name of the tribe that is the result of the breeding
      */
-    getParents(palName: string, accept_Language: AcceptLanguage2 | null | undefined, accept_Palworld_Version: AcceptPalworldVersion2 | null | undefined): Observable<PalCouple> {
+    getParents(palName: string, accept_Language: AcceptLanguage | null | undefined, accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<PalCouple> {
         let url_ = this.baseUrl + "/v1/pals/{palName}/parents";
         if (palName === undefined || palName === null)
             throw new Error("The parameter 'palName' must be defined.");
@@ -220,7 +220,7 @@ export class PalsApi {
      * @param accept_Language (optional) The Accept-Language request HTTP header indicates the natural language and locale that the client prefers. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language.
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      */
-    searchTribes(filter_Sizes: PalSize[] | null | undefined, filter_Elements: PalElement[] | null | undefined, filter_HasNocturnalVariant: boolean | null | undefined, filter_HasEdibleVariant: boolean | null | undefined, filter_HasPredatorVariant: boolean | null | undefined, filter_HasBossVariant: boolean | null | undefined, filter_HasGymBossVariant: boolean | null | undefined, filter_Rarity_FromInclusive: number | null | undefined, filter_Rarity_ToInclusive: number | null | undefined, filter_WorkSuitability_Kindling_FromInclusive: number | null | undefined, filter_WorkSuitability_Kindling_ToInclusive: number | null | undefined, filter_WorkSuitability_Watering_FromInclusive: number | null | undefined, filter_WorkSuitability_Watering_ToInclusive: number | null | undefined, filter_WorkSuitability_Planting_FromInclusive: number | null | undefined, filter_WorkSuitability_Planting_ToInclusive: number | null | undefined, filter_WorkSuitability_GeneratingElectricity_FromInclusive: number | null | undefined, filter_WorkSuitability_GeneratingElectricity_ToInclusive: number | null | undefined, filter_WorkSuitability_Handwork_FromInclusive: number | null | undefined, filter_WorkSuitability_Handwork_ToInclusive: number | null | undefined, filter_WorkSuitability_Gathering_FromInclusive: number | null | undefined, filter_WorkSuitability_Gathering_ToInclusive: number | null | undefined, filter_WorkSuitability_Lumbering_FromInclusive: number | null | undefined, filter_WorkSuitability_Lumbering_ToInclusive: number | null | undefined, filter_WorkSuitability_Mining_FromInclusive: number | null | undefined, filter_WorkSuitability_Mining_ToInclusive: number | null | undefined, filter_WorkSuitability_OilExtraction_FromInclusive: number | null | undefined, filter_WorkSuitability_OilExtraction_ToInclusive: number | null | undefined, filter_WorkSuitability_MedicineProduction_FromInclusive: number | null | undefined, filter_WorkSuitability_MedicineProduction_ToInclusive: number | null | undefined, filter_WorkSuitability_Cooling_FromInclusive: number | null | undefined, filter_WorkSuitability_Cooling_ToInclusive: number | null | undefined, filter_WorkSuitability_Transporting_FromInclusive: number | null | undefined, filter_WorkSuitability_Transporting_ToInclusive: number | null | undefined, filter_WorkSuitability_Farming_FromInclusive: number | null | undefined, filter_WorkSuitability_Farming_ToInclusive: number | null | undefined, pagination_PageNumber: number | null | undefined, pagination_PageSize: number | null | undefined, accept_Language: AcceptLanguage3 | null | undefined, accept_Palworld_Version: AcceptPalworldVersion3 | null | undefined): Observable<SearchResultOfPalTribe> {
+    searchTribes(filter_Sizes: PalSize[] | null | undefined, filter_Elements: PalElement[] | null | undefined, filter_HasNocturnalVariant: boolean | null | undefined, filter_HasEdibleVariant: boolean | null | undefined, filter_HasPredatorVariant: boolean | null | undefined, filter_HasBossVariant: boolean | null | undefined, filter_HasGymBossVariant: boolean | null | undefined, filter_Rarity_FromInclusive: number | null | undefined, filter_Rarity_ToInclusive: number | null | undefined, filter_WorkSuitability_Kindling_FromInclusive: number | null | undefined, filter_WorkSuitability_Kindling_ToInclusive: number | null | undefined, filter_WorkSuitability_Watering_FromInclusive: number | null | undefined, filter_WorkSuitability_Watering_ToInclusive: number | null | undefined, filter_WorkSuitability_Planting_FromInclusive: number | null | undefined, filter_WorkSuitability_Planting_ToInclusive: number | null | undefined, filter_WorkSuitability_GeneratingElectricity_FromInclusive: number | null | undefined, filter_WorkSuitability_GeneratingElectricity_ToInclusive: number | null | undefined, filter_WorkSuitability_Handwork_FromInclusive: number | null | undefined, filter_WorkSuitability_Handwork_ToInclusive: number | null | undefined, filter_WorkSuitability_Gathering_FromInclusive: number | null | undefined, filter_WorkSuitability_Gathering_ToInclusive: number | null | undefined, filter_WorkSuitability_Lumbering_FromInclusive: number | null | undefined, filter_WorkSuitability_Lumbering_ToInclusive: number | null | undefined, filter_WorkSuitability_Mining_FromInclusive: number | null | undefined, filter_WorkSuitability_Mining_ToInclusive: number | null | undefined, filter_WorkSuitability_OilExtraction_FromInclusive: number | null | undefined, filter_WorkSuitability_OilExtraction_ToInclusive: number | null | undefined, filter_WorkSuitability_MedicineProduction_FromInclusive: number | null | undefined, filter_WorkSuitability_MedicineProduction_ToInclusive: number | null | undefined, filter_WorkSuitability_Cooling_FromInclusive: number | null | undefined, filter_WorkSuitability_Cooling_ToInclusive: number | null | undefined, filter_WorkSuitability_Transporting_FromInclusive: number | null | undefined, filter_WorkSuitability_Transporting_ToInclusive: number | null | undefined, filter_WorkSuitability_Farming_FromInclusive: number | null | undefined, filter_WorkSuitability_Farming_ToInclusive: number | null | undefined, pagination_PageNumber: number | null | undefined, pagination_PageSize: number | null | undefined, accept_Language: AcceptLanguage | null | undefined, accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<SearchResultOfPalTribe> {
         let url_ = this.baseUrl + "/v1/pals?";
         if (filter_Sizes !== undefined && filter_Sizes !== null)
             filter_Sizes && filter_Sizes.forEach(item => { url_ += "Filter.Sizes=" + encodeURIComponent("" + item) + "&"; });
@@ -358,7 +358,7 @@ export class PalsApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The tribe of pals with the given name
      */
-    getTribe(tribeName: string, accept_Language: AcceptLanguage4 | null | undefined, accept_Palworld_Version: AcceptPalworldVersion4 | null | undefined): Observable<PalTribe> {
+    getTribe(tribeName: string, accept_Language: AcceptLanguage | null | undefined, accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<PalTribe> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}";
         if (tribeName === undefined || tribeName === null)
             throw new Error("The parameter 'tribeName' must be defined.");
@@ -425,7 +425,7 @@ export class PalsApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The icon of the given tribe
      */
-    getIcon(tribeName: string, size: PalIconSize | undefined, accept_Palworld_Version: AcceptPalworldVersion5 | null | undefined): Observable<FileResponse> {
+    getIcon(tribeName: string, size: PalIconSize | undefined, accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<FileResponse> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}/icon?";
         if (tribeName === undefined || tribeName === null)
             throw new Error("The parameter 'tribeName' must be defined.");
@@ -499,7 +499,7 @@ export class PalsApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The main pal of the requested tribe
      */
-    getPal(tribeName: string, accept_Language: AcceptLanguage5 | null | undefined, accept_Palworld_Version: AcceptPalworldVersion6 | null | undefined): Observable<Pal> {
+    getPal(tribeName: string, accept_Language: AcceptLanguage | null | undefined, accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<Pal> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}/main";
         if (tribeName === undefined || tribeName === null)
             throw new Error("The parameter 'tribeName' must be defined.");
@@ -566,7 +566,7 @@ export class PalsApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The boss pal of the requested tribe
      */
-    getBossPal(tribeName: string, accept_Language: AcceptLanguage6 | null | undefined, accept_Palworld_Version: AcceptPalworldVersion7 | null | undefined): Observable<Pal> {
+    getBossPal(tribeName: string, accept_Language: AcceptLanguage | null | undefined, accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<Pal> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}/boss";
         if (tribeName === undefined || tribeName === null)
             throw new Error("The parameter 'tribeName' must be defined.");
@@ -633,7 +633,7 @@ export class PalsApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The gym pal of the requested tribe
      */
-    getGymPal(tribeName: string, accept_Language: AcceptLanguage7 | null | undefined, accept_Palworld_Version: AcceptPalworldVersion8 | null | undefined): Observable<Pal> {
+    getGymPal(tribeName: string, accept_Language: AcceptLanguage | null | undefined, accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<Pal> {
         let url_ = this.baseUrl + "/v1/pals/{tribeName}/gym";
         if (tribeName === undefined || tribeName === null)
             throw new Error("The parameter 'tribeName' must be defined.");
@@ -767,7 +767,7 @@ export class PalworldApiApi {
      * Get available languages
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      */
-    getLanguages(accept_Palworld_Version: AcceptPalworldVersion9 | null | undefined): Observable<string[]> {
+    getLanguages(accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<string[]> {
         let url_ = this.baseUrl + "/v1/palworld/languages";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -840,7 +840,7 @@ export class PalworldSteamApplicationApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The ID of the steam application of the game
      */
-    getSteamApplicationId(accept_Palworld_Version: AcceptPalworldVersion10 | null | undefined): Observable<string> {
+    getSteamApplicationId(accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<string> {
         let url_ = this.baseUrl + "/v1/application/steam/id";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -902,7 +902,7 @@ export class PalworldSteamApplicationApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The name of the steam application of the game
      */
-    getSteamApplicationName(accept_Palworld_Version: AcceptPalworldVersion11 | null | undefined): Observable<string> {
+    getSteamApplicationName(accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<string> {
         let url_ = this.baseUrl + "/v1/application/steam/name";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -964,7 +964,7 @@ export class PalworldSteamApplicationApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The build id of the steam application of the game
      */
-    getSteamBuildId(accept_Palworld_Version: AcceptPalworldVersion12 | null | undefined): Observable<string> {
+    getSteamBuildId(accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<string> {
         let url_ = this.baseUrl + "/v1/application/steam/build-id";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1026,7 +1026,7 @@ export class PalworldSteamApplicationApi {
      * @param accept_Palworld_Version (optional) The version of Palworld to read data from.
      * @return The size of the steam application of the game
      */
-    getSteamApplicationSize(accept_Palworld_Version: AcceptPalworldVersion13 | null | undefined): Observable<number> {
+    getSteamApplicationSize(accept_Palworld_Version: AcceptPalworldVersion | null | undefined): Observable<number> {
         let url_ = this.baseUrl + "/v1/application/steam/size";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2532,6 +2532,7 @@ export interface IPaginationRequest {
     pageSize?: number | undefined;
 }
 
+/** Available languages */
 export enum AcceptLanguage {
     De = "de",
     En = "en",
@@ -2545,133 +2546,8 @@ export enum AcceptLanguage {
     ZhHant = "zh-Hant",
 }
 
+/** Available palworld versions */
 export enum AcceptPalworldVersion {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptLanguage2 {
-    De = "de",
-    En = "en",
-    Es = "es",
-    Fr = "fr",
-    It = "it",
-    Ko = "ko",
-    PtBR = "pt-BR",
-    Ru = "ru",
-    ZhHans = "zh-Hans",
-    ZhHant = "zh-Hant",
-}
-
-export enum AcceptPalworldVersion2 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptLanguage3 {
-    De = "de",
-    En = "en",
-    Es = "es",
-    Fr = "fr",
-    It = "it",
-    Ko = "ko",
-    PtBR = "pt-BR",
-    Ru = "ru",
-    ZhHans = "zh-Hans",
-    ZhHant = "zh-Hant",
-}
-
-export enum AcceptPalworldVersion3 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptLanguage4 {
-    De = "de",
-    En = "en",
-    Es = "es",
-    Fr = "fr",
-    It = "it",
-    Ko = "ko",
-    PtBR = "pt-BR",
-    Ru = "ru",
-    ZhHans = "zh-Hans",
-    ZhHant = "zh-Hant",
-}
-
-export enum AcceptPalworldVersion4 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptPalworldVersion5 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptLanguage5 {
-    De = "de",
-    En = "en",
-    Es = "es",
-    Fr = "fr",
-    It = "it",
-    Ko = "ko",
-    PtBR = "pt-BR",
-    Ru = "ru",
-    ZhHans = "zh-Hans",
-    ZhHant = "zh-Hant",
-}
-
-export enum AcceptPalworldVersion6 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptLanguage6 {
-    De = "de",
-    En = "en",
-    Es = "es",
-    Fr = "fr",
-    It = "it",
-    Ko = "ko",
-    PtBR = "pt-BR",
-    Ru = "ru",
-    ZhHans = "zh-Hans",
-    ZhHant = "zh-Hant",
-}
-
-export enum AcceptPalworldVersion7 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptLanguage7 {
-    De = "de",
-    En = "en",
-    Es = "es",
-    Fr = "fr",
-    It = "it",
-    Ko = "ko",
-    PtBR = "pt-BR",
-    Ru = "ru",
-    ZhHans = "zh-Hans",
-    ZhHant = "zh-Hant",
-}
-
-export enum AcceptPalworldVersion8 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptPalworldVersion9 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptPalworldVersion10 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptPalworldVersion11 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptPalworldVersion12 {
-    Steam13390747 = "steam-13390747",
-}
-
-export enum AcceptPalworldVersion13 {
     Steam13390747 = "steam-13390747",
 }
 
