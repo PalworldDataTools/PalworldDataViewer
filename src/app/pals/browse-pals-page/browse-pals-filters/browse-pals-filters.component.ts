@@ -1,10 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { IntRangeFilter, PalElement, PalElementsLocalizationApi, PalsFilters, PalSize, PalsWorkSuitabilityFilters } from '../../../api/api-clients';
+import { IntRangeFilter, PalElement, PalsFilters, PalSize, PalsWorkSuitabilityFilters } from '../../../api/api-clients';
 import { RadioRowControlComponent } from '../../../shared/radio-row-control/radio-row-control.component';
-import { LanguageService } from '../../../core-services/language.service';
-import { PalworldVersionService } from '../../../core-services/palworld-version.service';
+import { LocalizationService } from '../../../core-services/localization.service';
 
 @Component({
   selector: 'app-browse-pals-filters',
@@ -70,9 +69,9 @@ export class BrowsePalsFiltersComponent implements OnInit {
     maxFarming: new FormControl<number | undefined>(undefined, { nonNullable: true }),
   });
 
-  constructor(palworldVersionService: PalworldVersionService, languageService: LanguageService, palElementsLocalizationApi: PalElementsLocalizationApi) {
-    palElementsLocalizationApi.getPalElementsTexts(languageService.current, palworldVersionService.current).subscribe((names) => {
-      this.elementTypes = Object.entries(names)
+  constructor(localizationService: LocalizationService) {
+    localizationService.elements$.subscribe((elements) => {
+      this.elementTypes = Object.entries(elements)
         .filter(([value, _]) => value !== PalElement.Unknown)
         .map(([value, label]) => ({ label, value: value as PalElement }));
     });
