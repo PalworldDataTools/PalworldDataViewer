@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject, switchMap } from 'rxjs';
-import { AcceptLanguage, PalworldApiApi } from '../api/api-clients';
+import { AcceptLanguage, ApplicationApi } from '../api/api-clients';
 import { PalworldVersionService } from './palworld-version.service';
 import { UserConfigurationService } from './user-configuration.service';
 
@@ -48,7 +48,7 @@ export class LanguageService {
 
   constructor(
     private palworldVersionService: PalworldVersionService,
-    private palworldApi: PalworldApiApi,
+    private palworldApi: ApplicationApi,
     private userConfigurationService: UserConfigurationService,
   ) {}
 

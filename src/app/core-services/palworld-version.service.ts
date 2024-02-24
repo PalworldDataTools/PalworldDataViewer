@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { first, ignoreElements, Observable, ReplaySubject } from 'rxjs';
-import { AcceptPalworldVersion, PalworldApiApi } from '../api/api-clients';
+import { AcceptPalworldVersion, ApplicationApi } from '../api/api-clients';
 import { UserConfigurationService } from './user-configuration.service';
 
 @Injectable({
@@ -46,7 +46,7 @@ export class PalworldVersionService {
   }
 
   constructor(
-    private palworldApi: PalworldApiApi,
+    private palworldApi: ApplicationApi,
     private userConfigurationService: UserConfigurationService,
   ) {}
 
