@@ -11,5 +11,7 @@
     </div>
   </div>
 
-  <button class="btn btn-outline-secondary" (click)="clear()">Clear filters</button>
+  @if (form.dirty) {
+    <button class="btn btn-outline-secondary" (click)="clear()">Clear filters</button>
+  }
 </form>

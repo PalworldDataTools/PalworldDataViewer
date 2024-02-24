@@ -157,8 +157,8 @@ export class BrowsePalsFiltersComponent implements OnInit {
         const value = queryParams[filter.key];
         if (value) {
           const formattedValue = filter.formatter(value);
-          console.log(filter, value, formattedValue);
           this.form.get(filter.key)?.patchValue(formattedValue);
+          this.form.markAsDirty();
         }
       }
     });
@@ -166,6 +166,7 @@ export class BrowsePalsFiltersComponent implements OnInit {
 
   clear() {
     this.form.reset();
+    this.form.markAsPristine();
   }
 }
 

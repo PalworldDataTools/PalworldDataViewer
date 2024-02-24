@@ -8,11 +8,12 @@ import { BrowsePalsFiltersComponent } from './browse-pals-filters/browse-pals-fi
 import { IPaginationRequest, IPalsFilters, PalsApi, PalsFilters, SearchResultOfPalTribe } from '../../api/api-clients';
 import { PalworldVersionService } from '../../core-services/palworld-version.service';
 import { LanguageService } from '../../core-services/language.service';
+import { BrowsePalsPaginationComponent } from './browse-pals-pagination/browse-pals-pagination.component';
 
 @Component({
   selector: 'app-browse-pals-page',
   standalone: true,
-  imports: [SharedModule, NgOptimizedImage, RouterLink, PalNavListItemComponent, BrowsePalsFiltersComponent],
+  imports: [SharedModule, NgOptimizedImage, RouterLink, PalNavListItemComponent, BrowsePalsFiltersComponent, BrowsePalsPaginationComponent],
   templateUrl: './browse-pals-page.component.html',
 })
 export class BrowsePalsPageComponent implements OnInit {
@@ -51,10 +52,6 @@ export class BrowsePalsPageComponent implements OnInit {
     this.searchRequestSubject.next(this.searchRequest);
   }
 
-  nextPage() {
-    this.goToPage((this.searchRequest.pagination.pageNumber ?? 1) + 1);
-  }
-
   goToPage(pageNumber: number) {
     if (this.result?.pagination && (pageNumber < 1 || pageNumber > this.result.pagination.totalPages)) {
       return;
@@ -62,10 +59,6 @@ export class BrowsePalsPageComponent implements OnInit {
 
     this.searchRequest.pagination.pageNumber = pageNumber;
     this.refresh();
-  }
-
-  previousPage() {
-    this.goToPage((this.searchRequest.pagination.pageNumber ?? 1) - 1);
   }
 
   protected onFiltersChange(filters: PalsFilters) {

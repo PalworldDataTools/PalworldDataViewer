@@ -1,0 +1,19 @@
+<nav>
+  <ul class="pagination align-items-center justify-content-center">
+    <li class="page-item" [class.disabled]="page <= 1">
+      <a class="page-link user-select-none" (click)="previousPage()" role="button" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
+    </li>
+    @if (total <= 20) {
+      @for (x of [].constructor(total); track x) {
+        <a class="page-link" [class.active]="$index + 1 == page" (click)="goToPage($index + 1)" role="button" [attr.aria-label]="'Page ' + ($index + 1)">
+          {{ $index + 1 }}
+        </a>
+      }
+    } @else {
+      <li class="page-link">{{ page }}/{{ total }}</li>
+    }
+    <li class="page-item" [class.disabled]="page >= total">
+      <a class="page-link user-select-none" (click)="nextPage()" role="button" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a>
+    </li>
+  </ul>
+</nav>
