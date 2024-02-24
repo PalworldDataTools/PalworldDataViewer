@@ -8,7 +8,7 @@
   </div>
 
   <div class="d-flex flex-column">
-    <div class="d-flex align-items-center">
+    <div class="d-flex gap-2 align-items-center">
       <div>
         <span class="fs-6">No.</span>
         <span>{{ paldexIndex.index }}</span>
@@ -34,8 +34,17 @@
             <span>)</span>
           </span>
         }
+      </div>
 
-        <span class="fs-4 pe-2"> {{ name }}</span>
+      <div>
+        <span class="fs-4"> {{ name }}</span>
+      </div>
+
+      <div>
+        <span>{{ elementNames[elements[0]] }}</span>
+        @if (elements[1]) {
+          <span>/{{ elementNames[elements[1]] }}</span>
+        }
       </div>
 
       @if (hasNocturnalVariant) {
