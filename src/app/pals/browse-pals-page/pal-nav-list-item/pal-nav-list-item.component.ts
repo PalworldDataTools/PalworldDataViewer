@@ -6,6 +6,7 @@ import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { PalElement, PalIconSize, PalsApi, PalTribe } from '../../../api/api-clients';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { catchError, map, of } from 'rxjs';
+import { PalworldVersionService } from '../../../core-services/palworld-version.service';
 
 @Component({
   selector: 'app-pal-nav-list-item',
@@ -37,6 +38,7 @@ export class PalNavListItemComponent {
 
   constructor(
     private palsApi: PalsApi,
+    private palworldVersionService: PalworldVersionService,
     private sanitizer: DomSanitizer,
   ) {}
 
@@ -56,7 +58,7 @@ export class PalNavListItemComponent {
 
     this.icon = undefined;
     this.palsApi
-      .getIcon(tribe.name, PalIconSize.Small, undefined)
+      .getIcon(tribe.name, PalIconSize.Small, this.palworldVersionService.current)
       .pipe(
         map((file) => file.data),
         catchError((err) => {

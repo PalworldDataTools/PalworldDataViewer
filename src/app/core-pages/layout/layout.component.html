@@ -1,0 +1,62 @@
+<div class="h-100 d-flex flex-column">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-lg">
+      <a class="navbar-brand" routerLink="/home">
+        <img class="object-fit-contain" ngSrc="./assets/img/logo_white.png" alt="Logo" width="48" height="48" priority />
+      </a>
+
+      <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation" (click)="isMenuCollapsed = !isMenuCollapsed">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed">
+        <ul class="navbar-nav flex-grow-1 justify-content-center">
+          <div class="flex-grow-1"></div>
+
+          <ng-container [ngTemplateOutlet]="menuItem" [ngTemplateOutletContext]="{ name: 'Home', url: '/home' }"></ng-container>
+          <ng-container [ngTemplateOutlet]="menuItem" [ngTemplateOutletContext]="{ name: 'Pals', url: '/pals' }"></ng-container>
+
+          <div class="flex-grow-1"></div>
+
+          <div class="vr mx-lg-2 text-white"></div>
+
+          <div class="nav-item" ngbDropdown>
+            <button class="btn btn-link nav-link" id="palworld-languages-dropdown" ngbDropdownToggle>{{ languageService.current$ | async }}</button>
+            <div ngbDropdownMenu="palworld-languages-dropdown">
+              <div class="dropdown-header">Select version</div>
+              @for (language of languageService.all; track language) {
+                <button ngbDropdownItem [class.active]="language === languageService.current" (click)="changeLanguage(language)">{{ language }}</button>
+              }
+            </div>
+          </div>
+
+          <div class="vr mx-lg-2 text-white"></div>
+
+          <div class="nav-item" ngbDropdown>
+            <button class="btn btn-link nav-link" id="palworld-versions-dropdown" ngbDropdownToggle>{{ palworldVersionService.current$ | async }}</button>
+            <div ngbDropdownMenu="palworld-versions-dropdown">
+              <div class="dropdown-header">Select version</div>
+              @for (version of palworldVersionService.all; track version) {
+                <button ngbDropdownItem [class.active]="palworldVersionService.current === version" (click)="changeVersion(version)">{{ version }}</button>
+              }
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="flex-grow-1 overflow-auto py-5">
+    <div class="container">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
+
+<ng-template #menuItem let-name="name" let-url="url">
+  <li class="nav-item">
+    <a class="nav-link text-white" [routerLink]="url" routerLinkActive="active" (click)="isMenuCollapsed = true">
+      {{ name }}
+    </a>
+  </li>
+</ng-template>

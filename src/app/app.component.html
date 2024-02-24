@@ -1,34 +1,3 @@
-<div class="h-100 d-flex flex-column">
-  <header class="text-bg-dark">
-    <div class="container">
-      <div class="d-flex align-items-center">
-        <div class="px-4 position-relative">
-          <img class="object-fit-contain" ngSrc="./assets/img/logo_white.png" alt="Logo" width="48" height="48" priority />
-
-          <a class="stretched-link fw-bold font-monospace fs-4 text-white text-decoration-none" routerLink="/home"> </a>
-        </div>
-
-        <ul class="nav nav-underline px-5">
-          <ng-container [ngTemplateOutlet]="menuItem" [ngTemplateOutletContext]="{ name: 'Home', url: '/home' }"></ng-container>
-          <ng-container [ngTemplateOutlet]="menuItem" [ngTemplateOutletContext]="{ name: 'Pals', url: '/pals' }"></ng-container>
-        </ul>
-      </div>
-
-      <hr class="p-0 m-0" />
-    </div>
-  </header>
-
-  <div class="flex-grow-1 overflow-auto py-5">
-    <div class="container">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
-
-<ng-template #menuItem let-name="name" let-url="url">
-  <li class="nav-item">
-    <a class="nav-link text-white" [routerLink]="url" routerLinkActive="active">
-      {{ name }}
-    </a>
-  </li>
-</ng-template>
+<app-layout>
+  <router-outlet></router-outlet>
+</app-layout>

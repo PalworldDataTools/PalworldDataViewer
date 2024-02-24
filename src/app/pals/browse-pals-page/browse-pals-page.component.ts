@@ -6,6 +6,8 @@ import { RouterLink } from '@angular/router';
 import { PalNavListItemComponent } from './pal-nav-list-item/pal-nav-list-item.component';
 import { BrowsePalsFiltersComponent } from './browse-pals-filters/browse-pals-filters.component';
 import { IPaginationRequest, IPalsFilters, PalsApi, PalsFilters, SearchResultOfPalTribe } from '../../api/api-clients';
+import { PalworldVersionService } from '../../core-services/palworld-version.service';
+import { LanguageService } from '../../core-services/language.service';
 
 @Component({
   selector: 'app-browse-pals-page',
@@ -20,7 +22,11 @@ export class BrowsePalsPageComponent implements OnInit {
   private searchRequest: SearchRequest = { pagination: { pageNumber: 1, pageSize: 10 } };
   private searchRequestSubject = new Subject<SearchRequest>();
 
-  constructor(protected palsApi: PalsApi) {}
+  constructor(
+    private palworldVersionService: PalworldVersionService,
+    private languageService: LanguageService,
+    private palsApi: PalsApi,
+  ) {}
 
   ngOnInit() {
     this.searchRequestSubject
@@ -111,8 +117,8 @@ export class BrowsePalsPageComponent implements OnInit {
       filters?.workSuitability?.farming?.toInclusive,
       pagination.pageNumber,
       pagination.pageSize,
-      undefined,
-      undefined,
+      this.languageService.current,
+      this.palworldVersionService.current,
     );
   }
 }
