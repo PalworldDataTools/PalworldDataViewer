@@ -4,17 +4,12 @@
 
   <div class="row">
     <div class="col">
-      <app-radio-row-control
-        skin="input-group"
-        [formControl]="form.controls.hasNocturnalVariant"
-        label="Nocturnal"
-        [labelCols]="4"
-        [values]="ternary"
-        multiple
-      ></app-radio-row-control>
+      <app-radio-row-control skin="input-group" [formControl]="form.controls.hasNocturnalVariant" label="Nocturnal" [labelCols]="4" [values]="ternary"></app-radio-row-control>
     </div>
     <div class="col">
       <app-radio-row-control skin="input-group" [formControl]="form.controls.hasGymBossVariant" label="GYM" labelCols="4" [values]="ternary"></app-radio-row-control>
     </div>
   </div>
+
+  <button class="btn btn-outline-secondary" (click)="clear()">Clear filters</button>
 </form>

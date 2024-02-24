@@ -4,6 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IntRangeFilter, PalElement, PalsFilters, PalSize, PalsWorkSuitabilityFilters } from '../../../api/api-clients';
 import { RadioRowControlComponent } from '../../../shared/radio-row-control/radio-row-control.component';
 import { LocalizationService } from '../../../core-services/localization.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-browse-pals-filters',
@@ -69,7 +71,11 @@ export class BrowsePalsFiltersComponent implements OnInit {
     maxFarming: new FormControl<number | undefined>(undefined, { nonNullable: true }),
   });
 
-  constructor(localizationService: LocalizationService) {
+  constructor(
+    localizationService: LocalizationService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  ) {
     localizationService.elements$.subscribe((elements) => {
       this.elementTypes = Object.entries(elements)
         .filter(([value, _]) => value !== PalElement.Unknown)
@@ -78,7 +84,8 @@ export class BrowsePalsFiltersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form.valueChanges.subscribe((value) =>
+    this.form.valueChanges.subscribe((value) => {
+      this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: value, queryParamsHandling: 'merge' });
       this.filtersChange.emit(
         new PalsFilters({
           sizes: value.sizes,
@@ -105,7 +112,63 @@ export class BrowsePalsFiltersComponent implements OnInit {
             farming: new IntRangeFilter({ fromInclusive: value.minFarming, toInclusive: value.maxFarming }),
           }),
         }),
-      ),
-    );
+      );
+    });
+
+    this.activatedRoute.queryParams.pipe(first()).subscribe((queryParams) => {
+      const formattedFilterKeys = [
+        { key: 'sizes', formatter: parseStringArray },
+        { key: 'elementTypes', formatter: parseStringArray },
+        { key: 'rarity', formatter: parseNumber },
+        { key: 'hasNocturnalVariant', formatter: parseBoolean },
+        { key: 'hasEdibleVariant', formatter: parseBoolean },
+        { key: 'hasPredatorVariant', formatter: parseBoolean },
+        { key: 'hasBossVariant', formatter: parseBoolean },
+        { key: 'hasGymBossVariant', formatter: parseBoolean },
+        { key: 'minKindling', formatter: parseNumber },
+        { key: 'maxKindling', formatter: parseNumber },
+        { key: 'minWatering', formatter: parseNumber },
+        { key: 'maxWatering', formatter: parseNumber },
+        { key: 'minPlanting', formatter: parseNumber },
+        { key: 'maxPlanting', formatter: parseNumber },
+        { key: 'minGeneratingElectricity', formatter: parseNumber },
+        { key: 'maxGeneratingElectricity', formatter: parseNumber },
+        { key: 'minHandwork', formatter: parseNumber },
+        { key: 'maxHandwork', formatter: parseNumber },
+        { key: 'minGathering', formatter: parseNumber },
+        { key: 'maxGathering', formatter: parseNumber },
+        { key: 'minLumbering', formatter: parseNumber },
+        { key: 'maxLumbering', formatter: parseNumber },
+        { key: 'minMining', formatter: parseNumber },
+        { key: 'maxMining', formatter: parseNumber },
+        { key: 'minOilExtraction', formatter: parseNumber },
+        { key: 'maxOilExtraction', formatter: parseNumber },
+        { key: 'minMedicineProduction', formatter: parseNumber },
+        { key: 'maxMedicineProduction', formatter: parseNumber },
+        { key: 'minCooling', formatter: parseNumber },
+        { key: 'maxCooling', formatter: parseNumber },
+        { key: 'minTransporting', formatter: parseNumber },
+        { key: 'maxTransporting', formatter: parseNumber },
+        { key: 'minFarming', formatter: parseNumber },
+        { key: 'maxFarming', formatter: parseNumber },
+      ];
+
+      for (const filter of formattedFilterKeys) {
+        const value = queryParams[filter.key];
+        if (value) {
+          const formattedValue = filter.formatter(value);
+          console.log(filter, value, formattedValue);
+          this.form.get(filter.key)?.patchValue(formattedValue);
+        }
+      }
+    });
+  }
+
+  clear() {
+    this.form.reset();
   }
 }
+
+const parseBoolean = (value: string | string[]) => (Array.isArray(value) ? Boolean(value[0]) : Boolean(value));
+const parseNumber = (value: string | string[]) => (Array.isArray(value) ? Number(value[0]) : Number(value));
+const parseStringArray = (value: string | string[]) => (Array.isArray(value) ? value : [value]);
