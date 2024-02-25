@@ -54,25 +54,37 @@
 <ng-template #variantTab let-pal="pal">
   <div class="position-relative" style="width: 24px; height: 24px">
     @if (pal.isGymBoss) {
-      <svg-icon src="./assets/icons/tower.svg" [svgStyle]="{ 'width.px': 24, 'height.px': 24, fill: '#000000' }" ngbTooltip="GYM"></svg-icon>
+      <img ngSrc="./assets/icons/pal_tower.png" alt="Tower boss icon" width="24" height="24" />
     } @else if (pal.isBoss) {
-      <img ngSrc="./assets/icons/pal_boss.png" alt="Regular pal icon" width="30" height="24" />
+      <img ngSrc="./assets/icons/pal_boss.png" alt="Boss icon" width="30" height="24" />
     } @else {
-      <img ngSrc="./assets/icons/pal.png" alt="Regular pal icon" width="24" height="24" />
+      <img ngSrc="./assets/icons/pal.png" alt="Regular pal icon" width="21" height="24" />
     }
   </div>
 </ng-template>
 
 <ng-template #variantIdentity let-pal="pal">
-  <div class="h-100 d-flex flex-column">
-    <div>
-      @if (pal.isBoss) {
-        <span class="badge text-bg-secondary">BOSS</span>
-      }
+  <div class="h-100 d-flex flex-column gap-2">
+    <div class="d-flex gap-2">
+      <div class="flex-grow-1 d-flex align-items-center">
+        {{ pal.identity.localizedDescription }}
+      </div>
 
-      @if (pal.isGymBoss) {
-        <span class="badge text-bg-secondary">GYM</span>
-      }
+      <div class="d-flex gap-2 flex-column align-items-center justify-content-center" style="width: 64px">
+        @if (pal.isGymBoss) {
+          <img ngSrc="./assets/icons/pal_tower.png" alt="Tower boss icon" width="64" height="64" />
+          <span class="badge text-bg-secondary">GYM BOSS</span>
+        } @else if (pal.isBoss) {
+          <div class="d-flex align-items-center justify-content-center" style="width: 64px; height: 64px">
+            <img ngSrc="./assets/icons/pal_boss.png" alt="Boss icon" width="40" height="32" />
+          </div>
+          <span class="badge text-bg-secondary">BOSS</span>
+        } @else {
+          <div class="d-flex align-items-center justify-content-center" style="width: 64px; height: 64px">
+            <img ngSrc="./assets/icons/pal.png" alt="Regular pal icon" width="56" height="64" />
+          </div>
+        }
+      </div>
     </div>
   </div>
 </ng-template>

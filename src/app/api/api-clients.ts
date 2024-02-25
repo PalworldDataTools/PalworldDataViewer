@@ -1079,6 +1079,9 @@ export class PalIdentity implements IPalIdentity {
     /** The localized name of the pal
              */
     localizedName?: string | undefined;
+    /** The localized description of the pal
+             */
+    localizedDescription?: string | undefined;
 
     constructor(data?: IPalIdentity) {
         if (data) {
@@ -1096,6 +1099,7 @@ export class PalIdentity implements IPalIdentity {
             this.paldexIndexSuffix = _data["paldexIndexSuffix"];
             this.name = _data["name"];
             this.localizedName = _data["localizedName"];
+            this.localizedDescription = _data["localizedDescription"];
         }
     }
 
@@ -1113,6 +1117,7 @@ export class PalIdentity implements IPalIdentity {
         data["paldexIndexSuffix"] = this.paldexIndexSuffix;
         data["name"] = this.name;
         data["localizedName"] = this.localizedName;
+        data["localizedDescription"] = this.localizedDescription;
         return data;
     }
 }
@@ -1134,6 +1139,9 @@ export interface IPalIdentity {
     /** The localized name of the pal
              */
     localizedName?: string | undefined;
+    /** The localized description of the pal
+             */
+    localizedDescription?: string | undefined;
 }
 
 /** Elements that pals or skills can have */
