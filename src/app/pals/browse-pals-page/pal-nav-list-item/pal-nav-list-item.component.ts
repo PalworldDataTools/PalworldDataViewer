@@ -3,11 +3,10 @@ import { SharedModule } from '../../../shared/shared.module';
 import { NgOptimizedImage } from '@angular/common';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
-import { PalElement, PalIconSize, PalsApi, PalTribe } from '../../../api/api-clients';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { catchError, map, of } from 'rxjs';
-import { PalworldVersionService } from '../../../core-services/palworld-version.service';
+import { PalElement, PalIconSize, PalTribe } from '../../../api/api-clients';
+import { SafeUrl } from '@angular/platform-browser';
 import { LocalizationService } from '../../../core-services/localization.service';
+import { PalIconsService } from '../../../core-services/pal-icons.service';
 
 @Component({
   selector: 'app-pal-nav-list-item',
@@ -39,10 +38,8 @@ export class PalNavListItemComponent {
   protected hasGymBossVariant: boolean = false;
 
   constructor(
-    private palsApi: PalsApi,
-    private palworldVersionService: PalworldVersionService,
     private localizationService: LocalizationService,
-    private sanitizer: DomSanitizer,
+    private palIconsService: PalIconsService,
   ) {
     this.localizationService.elements$.subscribe((elements) => (this.elementNames = elements));
   }
@@ -61,27 +58,6 @@ export class PalNavListItemComponent {
     this.hasBossVariant = tribe.pals.some((v) => v.isBoss);
     this.hasGymBossVariant = tribe.pals.some((v) => v.isGymBoss);
 
-    this.loadIcon(tribe.name);
-  }
-
-  private loadIcon(name: string) {
-    this.icon = undefined;
-    this.palsApi
-      .getIcon(name, PalIconSize.Small, this.palworldVersionService.current)
-      .pipe(
-        map((file) => file.data),
-        catchError((err) => {
-          console.error(err);
-          return of(undefined);
-        }),
-      )
-      .subscribe((icon) => {
-        if (icon) {
-          const iconUrl = URL.createObjectURL(icon);
-          this.icon = this.sanitizer.bypassSecurityTrustUrl(iconUrl);
-        } else {
-          this.icon = undefined;
-        }
-      });
+    this.palIconsService.getIcon(tribe.name, PalIconSize.Small).subscribe((icon) => (this.icon = icon));
   }
 }
