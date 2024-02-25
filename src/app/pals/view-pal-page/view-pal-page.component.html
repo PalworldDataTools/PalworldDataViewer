@@ -42,6 +42,20 @@
         <ng-container [ngTemplateOutlet]="variantIdentity" [ngTemplateOutletContext]="{ pal: selectedVariant }"></ng-container>
       </div>
     </div>
+
+    @if (workSuitabilities && workSuitabilities.length > 0) {
+      <div class="card">
+        <div class="card-body">
+          <h4>Work</h4>
+
+          <div class="row">
+            @for (suitability of workSuitabilities; track suitability.name) {
+              <ng-container [ngTemplateOutlet]="workSuitability" [ngTemplateOutletContext]="suitability"></ng-container>
+            }
+          </div>
+        </div>
+      </div>
+    }
   </div>
 } @else {
   <div class="w-100 h-100 d-flex align-items-center justify-content-center">
@@ -85,6 +99,15 @@
           </div>
         }
       </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #workSuitability let-icon="icon" let-name="name" let-level="level">
+  <div class="col-2">
+    <div class="fw-semibold text-center d-flex gap-2 align-items-center" [class.grayscale]="level === 0">
+      <img [ngSrc]="icon" alt="{{ name }} icon" width="40" height="40" />
+      <div class="text-truncate">{{ name }} Lv.{{ level }}</div>
     </div>
   </div>
 </ng-template>
