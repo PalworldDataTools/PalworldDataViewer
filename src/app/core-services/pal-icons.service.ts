@@ -3,6 +3,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { PalIconSize, PalsApi } from '../api/api-clients';
 import { catchError, map, Observable, of, ReplaySubject } from 'rxjs';
 import { PalworldVersionService } from './palworld-version.service';
+import { CacheByName, CacheBySize } from './cache-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class PalIconsService {
     if (!Object.keys(this.cache[name]).includes(size)) {
       (this.cache[name] as any)[size] = new ReplaySubject<SafeUrl>(1);
       this.palsApi
-        .getIcon(name, PalIconSize.Small, this.palworldVersionService.current)
+        .getIcon(name, size, this.palworldVersionService.current)
         .pipe(
           map((file) => file.data),
           catchError((err) => {
@@ -43,6 +44,3 @@ export class PalIconsService {
     return this.cache[name][size]!;
   }
 }
-
-type CacheByName<T> = { [name: string]: T };
-type CacheBySize<T> = { [size in keyof typeof PalIconSize]?: T };

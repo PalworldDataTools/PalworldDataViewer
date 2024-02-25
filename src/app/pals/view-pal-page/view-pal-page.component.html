@@ -1,0 +1,78 @@
+@if (tribe) {
+  <div class="w-100 d-flex align-items-stretch gap-2">
+    <div class="border rounded-2 d-flex flex-column">
+      <img [src]="icon" alt="Pal icon" />
+      <hr class="m-0 p-0" />
+      <div class="d-flex fs-3">
+        <div class="px-2 d-flex align-items-center justify-content-center">
+          <span>{{ paldexIndex }}</span>
+          @if (paldexSuffix) {
+            <span>{{ paldexSuffix }}</span>
+          }
+        </div>
+        <div class="vr"></div>
+        <div class="px-2 d-flex align-items-center text-truncate">
+          {{ paldexName }}
+        </div>
+
+        <div class="flex-grow-1"></div>
+
+        @if (elements) {
+          <div class="px-2 d-flex align-items-center">
+            <app-pal-element-icon [element]="elements[0]"></app-pal-element-icon>
+
+            @if (elements[1]) {
+              <app-pal-element-icon [element]="elements[1]"></app-pal-element-icon>
+            }
+          </div>
+        }
+      </div>
+    </div>
+    <div class="flex-grow-1 d-flex flex-column">
+      <div class="nav nav-tabs">
+        @for (pal of tribe.pals; track pal.identity.name) {
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="pal.identity.name == selectedVariant?.identity?.name" (click)="selectVariant(pal)" role="button">
+              <ng-container [ngTemplateOutlet]="variantTab" [ngTemplateOutletContext]="{ pal: pal }"></ng-container>
+            </a>
+          </li>
+        }
+      </div>
+      <div class="p-4 flex-grow-1 border rounded-2 border-top-0 rounded-top-0">
+        <ng-container [ngTemplateOutlet]="variantIdentity" [ngTemplateOutletContext]="{ pal: selectedVariant }"></ng-container>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="w-100 h-100 d-flex align-items-center justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+}
+
+<ng-template #variantTab let-pal="pal">
+  <div class="position-relative" style="width: 24px; height: 24px">
+    @if (pal.isGymBoss) {
+      <svg-icon src="./assets/icons/tower.svg" [svgStyle]="{ 'width.px': 24, 'height.px': 24, fill: '#000000' }" ngbTooltip="GYM"></svg-icon>
+    } @else if (pal.isBoss) {
+      <img ngSrc="./assets/icons/pal_boss.png" alt="Regular pal icon" width="30" height="24" />
+    } @else {
+      <img ngSrc="./assets/icons/pal.png" alt="Regular pal icon" width="24" height="24" />
+    }
+  </div>
+</ng-template>
+
+<ng-template #variantIdentity let-pal="pal">
+  <div class="h-100 d-flex flex-column">
+    <div>
+      @if (pal.isBoss) {
+        <span class="badge text-bg-secondary">BOSS</span>
+      }
+
+      @if (pal.isGymBoss) {
+        <span class="badge text-bg-secondary">GYM</span>
+      }
+    </div>
+  </div>
+</ng-template>
