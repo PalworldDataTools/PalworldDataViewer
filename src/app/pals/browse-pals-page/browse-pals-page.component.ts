@@ -53,7 +53,7 @@ export class BrowsePalsPageComponent implements OnInit {
   }
 
   goToPage(pageNumber: number) {
-    if (this.result?.pagination && (pageNumber < 1 || pageNumber > this.result.pagination.totalPages)) {
+    if (this.searchRequest.pagination.pageNumber == pageNumber || (this.result?.pagination && (pageNumber < 1 || pageNumber > this.result.pagination.totalPages))) {
       return;
     }
 
